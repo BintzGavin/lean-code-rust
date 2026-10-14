@@ -153,3 +153,27 @@ fn failed_save_retains_buffer_dirty_state_and_last_saved_baseline() {
     assert!(!document.is_dirty());
     assert_eq!(fs::read(&fixture.file).unwrap(), b"retry");
 }
+
+#[test]
+fn atomic_save_failure_cleans_up_temp_file_and_leaves_target_intact() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+
+    // Simulate rename failure by replacing target with a directory
+    fs::remove_file(&fixture.file).unwrap();
+    fs::create_dir(&fixture.file).unwrap();
+
+    let result = document.save();
+    assert!(result.is_err());
+
+    // The directory we put there should still be intact
+    assert!(fixture.file.is_dir());
+
+    // There should be no temporary files left in the directory
+    let entries = fs::read_dir(&fixture.directory).unwrap();
+    for entry in entries {
+        let entry = entry.unwrap();
+        assert_eq!(entry.path(), fixture.file, "Expected only the target file/dir to exist, found {:?}", entry.path());
+    }
+}
