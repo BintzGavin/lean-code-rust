@@ -32,6 +32,14 @@
 - **Question**: None
 - **Resolution evidence**: None
 
+### extensions-003 — completed
+- **Result**: Extended `ExtensionManifest` to parse `activationEvents` and basic `contributes.commands`.
+- **Changed files**: `crates/extensions/src/manifest.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
 ### extensions-002 — completed
 - **Result**: Parsed VS Code extension manifest package.json.
 - **Changed files**: crates/extensions/Cargo.toml, crates/extensions/src/lib.rs, crates/extensions/src/manifest.rs

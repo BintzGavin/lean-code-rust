@@ -62,3 +62,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: N/A.
 
 ## 7. Result
+
+Extended `ExtensionManifest` to parse `activationEvents` and basic `contributes.commands`.
