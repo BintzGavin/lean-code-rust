@@ -39,6 +39,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully bootstrapped the extensions crate."
+  },
+  {
+    "id": "extensions-002",
+    "plan": ".sys/plans/extensions/extensions-002-parse-extension-manifest.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
