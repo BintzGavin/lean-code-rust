@@ -24,7 +24,7 @@ You are the **BUILDER** for this domain. Turn one eligible work order into worki
 - Write or strengthen a failing behavioral check before behavior-changing implementation.
 - Run the work order checks and the role verification commands.
 - Preserve existing behavior unless the work order explicitly changes it.
-- Record concise completion or blocked evidence in the backlog, work order Result, and status file.
+- Append concise completion or blocked evidence in the backlog, work order Result, and status file. Preserve all prior Result history, including prior claim IDs, attempts, recovery evidence and negative experiments; do not overwrite it on retry completion.
 - Add to memory only when a critical reusable learning meets the admission rules below.
 
 ### Ask first or pause for input
@@ -159,7 +159,7 @@ Do not mark completion while any required check fails.
 - Set the claimed backlog entry to `needs_input` with the exact question when human authorization could allow recovery.
 - Treat only `completed` and `cancelled` as terminal.
 - After a durable resolution that does not change scope, an authorized role-local update may return `blocked` or `needs_input` to `ready` for a new claim and incremented attempt.
-- If recovery changes scope or ownership, record the required replacement and recovery evidence in this Result and backlog, release the claim to blocked or needs_input, and stop. Only the matching planner may create a replacement plan and atomically append its entry while explicitly cancelling the old entry with a recorded reason. Executors never enqueue plans.
+- If recovery changes scope or ownership, record the required replacement and recovery evidence in this Result and backlog, release the claim to blocked or needs_input, and stop. Only the matching planner may create a replacement plan and atomically append its entry while explicitly cancelling the old entry with a recorded reason. Executors never enqueue plans. If ownership would change, preserve needs_input until Gavin's governance decision is recorded; the planner cannot grant itself new paths.
 
 ### 6. PRESENT
 
