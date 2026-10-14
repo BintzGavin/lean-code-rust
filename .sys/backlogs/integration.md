@@ -31,5 +31,14 @@ This file is the authoritative execution ledger for `integration`. The matching 
 The following JSON block is the sole entry data; do not duplicate lifecycle state in prose. Each entry has id, plan, state, claim, attempt and result. An empty array is valid and requires no changes. Preserve entries as history.
 
 ```json
-[]
+[
+  {
+    "id": "integration-001",
+    "plan": ".sys/plans/integration/integration-001-workspace-setup.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
+  }
+]
 ```
