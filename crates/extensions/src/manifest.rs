@@ -1,6 +1,17 @@
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionCommand {
+    pub command: String,
+    pub title: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionContributes {
+    pub commands: Option<Vec<ExtensionCommand>>,
+}
+
 /// Represents a VS Code extension manifest (`package.json`).
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionManifest {
@@ -9,6 +20,9 @@ pub struct ExtensionManifest {
     pub version: String,
     pub engines: HashMap<String, String>,
     pub main: Option<String>,
+    #[serde(rename = "activationEvents")]
+    pub activation_events: Option<Vec<String>>,
+    pub contributes: Option<ExtensionContributes>,
 }
 
 impl ExtensionManifest {
@@ -31,7 +45,18 @@ mod tests {
             "engines": {
                 "vscode": "^1.60.0"
             },
-            "main": "./out/extension.js"
+            "main": "./out/extension.js",
+            "activationEvents": [
+                "onCommand:extension.helloWorld"
+            ],
+            "contributes": {
+                "commands": [
+                    {
+                        "command": "extension.helloWorld",
+                        "title": "Hello World"
+                    }
+                ]
+            }
         }"#;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
@@ -40,6 +65,16 @@ mod tests {
         assert_eq!(manifest.version, "1.0.0");
         assert_eq!(manifest.engines.get("vscode").unwrap(), "^1.60.0");
         assert_eq!(manifest.main, Some("./out/extension.js".to_string()));
+
+        let activation_events = manifest.activation_events.unwrap();
+        assert_eq!(activation_events.len(), 1);
+        assert_eq!(activation_events[0], "onCommand:extension.helloWorld");
+
+        let contributes = manifest.contributes.unwrap();
+        let commands = contributes.commands.unwrap();
+        assert_eq!(commands.len(), 1);
+        assert_eq!(commands[0].command, "extension.helloWorld");
+        assert_eq!(commands[0].title, "Hello World");
     }
 
     #[test]
@@ -59,6 +94,8 @@ mod tests {
         assert_eq!(manifest.version, "1.0.0");
         assert_eq!(manifest.engines.get("vscode").unwrap(), "^1.60.0");
         assert_eq!(manifest.main, None);
+        assert_eq!(manifest.activation_events, None);
+        assert_eq!(manifest.contributes, None);
     }
 
     #[test]
