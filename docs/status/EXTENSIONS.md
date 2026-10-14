@@ -10,7 +10,7 @@
 
 ## Current state
 
-No work order has been completed yet.
+
 
 ## Evidence entry format
 
@@ -23,3 +23,11 @@ No work order has been completed yet.
 - **Question**: [Exact human question for `needs_input`, or “None”]
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
+
+### extensions-001 — completed
+- **Result**: Successfully bootstrapped `extensions` crate.
+- **Changed files**: `crates/extensions/Cargo.toml`, `crates/extensions/src/lib.rs`
+- **Checks**: `cargo check --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
