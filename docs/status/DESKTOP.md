@@ -23,3 +23,11 @@ No work order has been completed yet.
 - **Question**: [Exact human question for `needs_input`, or “None”]
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
+
+### desktop-001 — blocked
+- **Result**: Planner blocked.
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: Existing `ready` work order `desktop-001` must be completed by the executor before the planner can select new work.
+- **Question**: None
+- **Resolution evidence**: None
