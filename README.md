@@ -20,4 +20,6 @@ cargo fmt --manifest-path crates/editor-core/Cargo.toml --check
 CARGO_BUILD_JOBS=1 cargo run --manifest-path crates/editor-core/Cargo.toml --example edit_roundtrip --offline --locked
 ```
 
-No remote, publication, installed scheduler, GUI, extension host or release artifact is implied by this scaffold. Remote visibility remains a user decision.
+Public repository publication does not install a scheduler or establish a GUI, extension host or release artifact. Existing VS Code extension compatibility remains required and unimplemented.
+
+No project license has been designated. The Rust crate remains `publish = false`; this bootstrap does not assign an open-source license to the repository or include third-party extension packages. See [publication review and provenance](docs/decisions/publication-review.md).
