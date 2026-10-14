@@ -1,11 +1,12 @@
 //! A small UTF-8 document buffer with explicit save and close decisions.
 //!
-//! This crate uses ordinary filesystem writes, not atomic or crash-safe saves.
+//! This crate uses a temporary file and atomic rename for saves.
 //! See the crate README for the contract and its limits.
 
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicU64, Ordering};
 
 /// The caller may release a clean document, or retain a cancelled dirty one.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -58,11 +59,34 @@ impl Document {
 
     /// Write current UTF-8 bytes and update the saved snapshot only on success.
     ///
-    /// On failure the buffer and saved snapshot remain unchanged. The target
-    /// file may already have been truncated or partly written; this is not an
-    /// atomic save and does not guarantee crash durability or preserve metadata.
+    /// Saves are performed by writing to a temporary file in the same directory
+    /// and then atomically renaming it to the target path. On failure before or
+    /// during the rename, the original target file and the document buffer
+    /// remain unchanged, and the temporary file is deleted. This does not
+    /// guarantee crash durability or preserve metadata.
     pub fn save(&mut self) -> io::Result<()> {
-        fs::write(&self.path, self.text.as_bytes())?;
+        static NEXT_TEMP_ID: AtomicU64 = AtomicU64::new(0);
+        let parent = self.path.parent().unwrap_or_else(|| Path::new(""));
+        let file_name = self.path.file_name().unwrap_or_default();
+
+        let temp_name = format!(
+            ".{}.{}-{}.tmp",
+            file_name.to_string_lossy(),
+            std::process::id(),
+            NEXT_TEMP_ID.fetch_add(1, Ordering::Relaxed)
+        );
+        let temp_path = parent.join(temp_name);
+
+        if let Err(e) = fs::write(&temp_path, self.text.as_bytes()) {
+            let _ = fs::remove_file(&temp_path);
+            return Err(e);
+        }
+
+        if let Err(e) = fs::rename(&temp_path, &self.path) {
+            let _ = fs::remove_file(&temp_path);
+            return Err(e);
+        }
+
         self.persisted_text.clone_from(&self.text);
         Ok(())
     }
