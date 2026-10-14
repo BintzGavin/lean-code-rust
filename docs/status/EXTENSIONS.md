@@ -31,3 +31,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-002 — completed
+- **Result**: Parsed VS Code extension manifest package.json.
+- **Changed files**: crates/extensions/Cargo.toml, crates/extensions/src/lib.rs, crates/extensions/src/manifest.rs
+- **Checks**: cargo test, check_scaffold.py
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

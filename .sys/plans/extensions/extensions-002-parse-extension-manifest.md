@@ -59,3 +59,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: N/A.
 
 ## 7. Result
+Parsed VS Code extension manifest package.json.
