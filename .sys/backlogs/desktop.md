@@ -39,6 +39,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed successfully. Scaffolded desktop crate."
+  },
+  {
+    "id": "desktop-002",
+    "plan": ".sys/plans/desktop/desktop-002-native-window.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
