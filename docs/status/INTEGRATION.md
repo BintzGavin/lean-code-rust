@@ -30,3 +30,11 @@ No work order has been completed yet.
 - **Question**: [Exact human question for `needs_input`, or “None”]
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
+
+### integration-001 — blocked
+- **Result**: Planner paused
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: The role-local backlog already contains a `ready` entry (integration-001).
+- **Question**: None
+- **Resolution evidence**: None
