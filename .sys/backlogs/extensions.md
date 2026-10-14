@@ -35,10 +35,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-001",
     "plan": ".sys/plans/extensions/extensions-001-bootstrap-crate.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Successfully bootstrapped the extensions crate."
   }
 ]
 ```
