@@ -47,6 +47,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed VS Code extension manifest package.json."
+  },
+  {
+    "id": "extensions-003",
+    "plan": ".sys/plans/extensions/extensions-003-parse-extension-contributions.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
