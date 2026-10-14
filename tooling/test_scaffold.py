@@ -85,6 +85,63 @@ class ScaffoldContracts(unittest.TestCase):
         self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['create'].append('crates/editor-core/../../escape.rs'))
         self.expect('write outside product ownership')
 
+    def test_product_boundary_cannot_expand_authority(self):
+        self.edit('.sys/black-hole/role-map.md', lambda d: d['editor-core']['product'].append('spec/'))
+        self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['create'].append('spec/unauthorized.md'))
+        self.expect('not an exclusive product-owned boundary')
+
+    def test_internal_symlink_cannot_escape_role(self):
+        directory = self.root/'crates/editor-core'
+        directory.mkdir(parents=True, exist_ok=True)
+        (directory/'alias').symlink_to(self.root/'spec', target_is_directory=True)
+        self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['create'].append('crates/editor-core/alias/unauthorized.md'))
+        self.expect('write traverses symlink')
+
+    def test_directory_inventory_rejected(self):
+        self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['create'].append('crates/editor-core/nested/'))
+        self.expect('inventory must name an exact file')
+
+    def test_false_completed_rejected(self):
+        self.edit('.sys/backlogs/editor-core.md', lambda d: d[0].update(state='completed',claim='none',attempt=0,result='none'))
+        self.expect('completed without attempted verification evidence')
+
+    def add_dependency(self, state='blocked', owner='quality'):
+        source = self.root/'.sys/plans/editor-core/editor-core-001-document-roundtrip.md'
+        target = self.root/'.sys/plans/quality/quality-001-reference.md'
+        target.write_text(source.read_text())
+        self.edit(target.relative_to(self.root), lambda d: d.update(id='QUALITY-001',role='quality',create=['tests/reference/probe.py'],modify=[],dependencies=[]))
+        self.edit('.sys/backlogs/quality.md', lambda d: d.append({'id':'QUALITY-001','plan':str(target.relative_to(self.root)),'state':state,'claim':'none','attempt':1,'result':'Reference launch unavailable; rerun the isolated GUI probe when an authorized launch path exists.'}))
+        self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['dependencies'].append({'role':owner,'plan':str(target.relative_to(self.root)),'unblock':'python3 tests/reference/probe.py'}))
+        return target
+
+    def test_ready_with_unresolved_dependency_rejected(self):
+        self.add_dependency()
+        self.edit('.sys/backlogs/editor-core.md', lambda d: d[0].update(state='ready',claim='none'))
+        self.expect('executable work has unresolved dependency')
+
+    def test_realistic_blocked_dependency_and_durable_recovery(self):
+        self.add_dependency()
+        self.edit('.sys/backlogs/editor-core.md', lambda d: d[0].update(state='blocked',claim='none',result='QUALITY-001 owns missing reference evidence. Resume after that plan completes and python3 tests/reference/probe.py succeeds.'))
+        self.assertEqual([],validate(self.root))
+        self.edit('.sys/backlogs/quality.md',lambda d:d[0].update(state='completed',result='Synthetic fixture: probe passed; this test does not claim real reference observation.'))
+        self.edit('.sys/backlogs/editor-core.md',lambda d:d[0].update(state='ready',result='Synthetic resolution evidence recorded and prerequisite command checked.'))
+        self.assertEqual([],validate(self.root))
+
+    def test_dependency_owner_mismatch_rejected(self):
+        self.add_dependency(state='completed',owner='desktop')
+        self.expect('dependency owner mismatch')
+
+    def test_cancelled_dependency_is_not_satisfied(self):
+        self.add_dependency(state='cancelled')
+        self.edit('.sys/backlogs/editor-core.md',lambda d:d[0].update(state='ready',claim='none'))
+        self.expect('executable work has unresolved dependency')
+
+    def test_cycle_rejected_even_when_both_blocked(self):
+        target=self.add_dependency()
+        self.edit('.sys/backlogs/editor-core.md',lambda d:d[0].update(state='blocked',claim='none',result='Waiting on QUALITY-001'))
+        self.edit(target.relative_to(self.root),lambda d:d['dependencies'].append({'role':'editor-core','plan':'.sys/plans/editor-core/editor-core-001-document-roundtrip.md','unblock':'cargo test'}))
+        self.expect('dependency cycle')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -29,6 +29,15 @@ def overlap(a, b):
     return a.rstrip('/') == b.rstrip('/') or a.endswith('/') and b.startswith(a) or b.endswith('/') and a.startswith(b)
 
 
+def symlink_component(root, path):
+    candidate = root
+    for component in PurePosixPath(path).parts:
+        candidate = candidate / component
+        if candidate.is_symlink():
+            return True
+    return False
+
+
 def validate(root, selected=None):
     """Return errors; this function has no writes or subprocess calls."""
     root = Path(root)
@@ -48,6 +57,15 @@ def validate(root, selected=None):
             for p in paths:
                 if not safe_path(p):
                     errors.append(f'{role}: unsafe owned path {p}')
+                elif symlink_component(root, p):
+                    errors.append(f'{role}: owned path contains symlink {p}')
+            product = data['product']
+            if not isinstance(product, list):
+                raise ValueError(f'{role}: product must be a list')
+            state_paths = [f'.sys/plans/{role}/', f'.sys/backlogs/{role}.md', f'.sys/memory/{role}.md', f'docs/status/{role.upper()}.md']
+            for p in product:
+                if not safe_path(p) or p not in paths or any(overlap(p, state) for state in state_paths):
+                    errors.append(f'{role}: product path is not an exclusive product-owned boundary: {p}')
             expected = [f'.sys/plans/{role}/', f'.sys/backlogs/{role}.md', f'.sys/memory/{role}.md', f'docs/status/{role.upper()}.md']
             for p in expected:
                 if not owns(paths, p):
@@ -102,6 +120,10 @@ def validate(root, selected=None):
                     errors.append(f'{e["id"]}: inactive claim must be none')
                 if state in {'blocked', 'needs_input'} and e['result'] in {'', 'none'}:
                     errors.append(f'{e["id"]}: missing recovery evidence/question')
+                if state == 'completed' and (e['attempt'] < 1 or e['result'] in {'', 'none'}):
+                    errors.append(f'{e["id"]}: completed without attempted verification evidence')
+                if state == 'cancelled' and e['result'] in {'', 'none'}:
+                    errors.append(f'{e["id"]}: cancellation lacks explicit reason')
                 path = e['plan']
                 if not safe_path(path) or not path.startswith(f'.sys/plans/{role}/'):
                     errors.append(f'{e["id"]}: plan outside owner namespace')
@@ -117,8 +139,10 @@ def validate(root, selected=None):
                 for p in writes:
                     if not safe_path(p) or not owns(data['product'], p):
                         errors.append(f'{path}: write outside product ownership: {p}')
-                    elif (root/p).is_symlink() or not (root/p).resolve().is_relative_to(root.resolve()):
-                        errors.append(f'{path}: write resolves outside repository: {p}')
+                    elif p.endswith('/') or (root/p).is_dir():
+                        errors.append(f'{path}: inventory must name an exact file: {p}')
+                    elif symlink_component(root, p) or not (root/p).resolve().is_relative_to(root.resolve()):
+                        errors.append(f'{path}: write traverses symlink or escapes repository: {p}')
                 if len(writes) != len(set(writes)):
                     errors.append(f'{path}: duplicate write inventory')
                 if set(writes) & set(plan['read_only']):

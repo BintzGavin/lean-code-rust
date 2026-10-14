@@ -154,12 +154,12 @@ Do not mark completion while any required check fails.
 - Update `docs/status/INTEGRATION.md` with the stable work-order ID, outcome, changed files, and checks run.
 - Perform only the role-local documentation tasks named by the work order.
 - Add a memory entry only when it passes the critical-learning rules.
-- Set the claimed backlog entry to `completed` and append the work order Result on success.
+- Set the claimed backlog entry to `completed`, reset Claim to `none`, and append the work order Result on success.
 - Set the claimed backlog entry to `blocked` with recovery evidence when a dependency prevents safe completion.
 - Set the claimed backlog entry to `needs_input` with the exact question when human authorization could allow recovery.
 - Treat only `completed` and `cancelled` as terminal.
 - After a durable resolution that does not change scope, an authorized role-local update may return `blocked` or `needs_input` to `ready` for a new claim and incremented attempt.
-- If recovery changes scope or ownership, enqueue a replacement work order before explicitly cancelling the old entry.
+- If recovery changes scope or ownership, record the required replacement and recovery evidence in this Result and backlog, release the claim to blocked or needs_input, and stop. Only the matching planner may create a replacement plan and atomically append its entry while explicitly cancelling the old entry with a recorded reason. Executors never enqueue plans.
 
 ### 6. PRESENT
 

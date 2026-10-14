@@ -125,7 +125,8 @@ Other roles own these product paths:
 - Inspect the declared Reality paths and existing patterns.
 - Read current status, critical memory, the authoritative backlog, and existing work orders.
 - If the backlog contains `blocked` or `needs_input` work, look for new durable resolution evidence before hunting for another gap.
-- When resolution evidence exists, perform a recovery review, update only that entry and its work order as permitted, then stop without stacking new work.
+- When resolution evidence exists, perform a recovery review and update only that existing entry as permitted. Never rewrite a frozen ready plan. If scope must change, a planner may atomically create one replacement plan, append its entry and explicitly cancel the old entry with a reason and replacement reference; do not leave two nonterminal entries. Then stop without stacking unrelated work.
+- An interrupted in_progress claim requires durable platform/session evidence that its exact prior invocation stopped, plus inspection of its committed and uncommitted changes. Elapsed time alone is insufficient. Record that evidence in the backlog Result, preserve partial work, and return the same scope to ready with Claim none; the next executor increments Attempt. If termination or scope is uncertain, preserve the claim and request human input without product edits.
 - List evidence-backed gaps; discard anything outside the role boundary.
 
 ### 2. SELECT
