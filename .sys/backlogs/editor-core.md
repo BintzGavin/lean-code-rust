@@ -35,9 +35,9 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-001",
     "plan": ".sys/plans/editor-core/editor-core-001-document-roundtrip.md",
-    "state": "ready",
-    "claim": "none",
-    "attempt": 0,
+    "state": "in_progress",
+    "claim": "editor-core-001-independent-rust-core-20261014-attempt-1",
+    "attempt": 1,
     "result": "none"
   }
 ]
