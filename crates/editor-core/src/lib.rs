@@ -3,8 +3,8 @@
 //! This crate uses a temporary file and atomic rename for saves.
 //! See the crate README for the contract and its limits.
 
-use std::fs;
-use std::io;
+use std::fs::{self, File};
+use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -62,8 +62,9 @@ impl Document {
     /// Saves are performed by writing to a temporary file in the same directory
     /// and then atomically renaming it to the target path. On failure before or
     /// during the rename, the original target file and the document buffer
-    /// remain unchanged, and the temporary file is deleted. This does not
-    /// guarantee crash durability or preserve metadata.
+    /// remain unchanged, and the temporary file is deleted. The data is
+    /// synchronized to stable storage before rename to ensure crash durability.
+    /// Permission and metadata preservation are not promised.
     pub fn save(&mut self) -> io::Result<()> {
         static NEXT_TEMP_ID: AtomicU64 = AtomicU64::new(0);
         let parent = self.path.parent().unwrap_or_else(|| Path::new(""));
@@ -77,10 +78,24 @@ impl Document {
         );
         let temp_path = parent.join(temp_name);
 
-        if let Err(e) = fs::write(&temp_path, self.text.as_bytes()) {
+        let mut file = match File::create(&temp_path) {
+            Ok(f) => f,
+            Err(e) => return Err(e),
+        };
+
+        if let Err(e) = file.write_all(self.text.as_bytes()) {
+            drop(file);
             let _ = fs::remove_file(&temp_path);
             return Err(e);
         }
+
+        if let Err(e) = file.sync_data() {
+            drop(file);
+            let _ = fs::remove_file(&temp_path);
+            return Err(e);
+        }
+
+        drop(file);
 
         if let Err(e) = fs::rename(&temp_path, &self.path) {
             let _ = fs::remove_file(&temp_path);

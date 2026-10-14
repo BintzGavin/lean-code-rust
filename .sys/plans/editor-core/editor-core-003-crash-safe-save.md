@@ -63,3 +63,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: N/A
 
 ## 7. Result
+
+Implemented crash-safe save via `File::create`, `write_all`, `sync_data`, and explicit drop before rename. Updated README docs. All tests and checks passed.

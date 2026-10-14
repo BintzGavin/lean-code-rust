@@ -38,8 +38,8 @@ new synthetic directories; no personal input files or network are needed.
 
 - Saves use a temporary file and atomic rename. Failure preserves the in-memory
   buffer and saved snapshot, and leaves the original file unchanged. Saves are
-  not crash-safe or synchronized to stable storage. Permission and metadata
-  preservation are not promised.
+  synchronized to stable storage (crash-safe) and handle cross-platform file locks properly.
+  Permission and metadata preservation are not promised.
 - Only valid UTF-8 is supported. Bytes within valid UTF-8, including newlines
   and a UTF-8 BOM if present, are not normalized. There is no encoding detection.
 - There is no external-change detection, locking, conflict handling or symlink

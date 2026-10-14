@@ -174,6 +174,11 @@ fn atomic_save_failure_cleans_up_temp_file_and_leaves_target_intact() {
     let entries = fs::read_dir(&fixture.directory).unwrap();
     for entry in entries {
         let entry = entry.unwrap();
-        assert_eq!(entry.path(), fixture.file, "Expected only the target file/dir to exist, found {:?}", entry.path());
+        assert_eq!(
+            entry.path(),
+            fixture.file,
+            "Expected only the target file/dir to exist, found {:?}",
+            entry.path()
+        );
     }
 }
