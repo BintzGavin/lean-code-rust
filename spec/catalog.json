@@ -1,0 +1,2798 @@
+{
+  "schema_version": 1,
+  "baseline": "V-0001",
+  "fixture": "F-0001",
+  "behaviors": [
+    {
+      "id": "B-0001",
+      "area": "Edit and save",
+      "actor": "individual local developer",
+      "goal": "Edit local text and preserve intended bytes",
+      "claim": "Edit local text and preserve intended bytes",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0001",
+        "S-0002"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0002",
+      "area": "Folder navigation",
+      "actor": "individual local developer",
+      "goal": "Open a folder and find its files",
+      "claim": "Open a folder and find its files",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0003",
+        "S-0004"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0003",
+      "area": "Search",
+      "actor": "individual local developer",
+      "goal": "Find and replace text within a file and workspace",
+      "claim": "Find and replace text within a file and workspace",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0005",
+        "S-0006"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0004",
+      "area": "Tabs and splits",
+      "actor": "individual local developer",
+      "goal": "Keep multiple documents usable across editor groups",
+      "claim": "Keep multiple documents usable across editor groups",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0007",
+        "S-0008"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0005",
+      "area": "Palette, settings and keybindings",
+      "actor": "individual local developer",
+      "goal": "Invoke commands and persist explicit preferences",
+      "claim": "Invoke commands and persist explicit preferences",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0009",
+        "S-0010",
+        "S-0045",
+        "S-0046"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0006",
+      "area": "Themes and snippets",
+      "actor": "individual local developer",
+      "goal": "Customize presentation and insert a snippet",
+      "claim": "Customize presentation and insert a snippet",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0011",
+        "S-0012",
+        "S-0047",
+        "S-0048"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0007",
+      "area": "Git",
+      "actor": "individual local developer",
+      "goal": "Inspect and commit local changes through source control",
+      "claim": "Inspect and commit local changes through source control",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0013",
+        "S-0014"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0008",
+      "area": "Terminal",
+      "actor": "individual local developer",
+      "goal": "Run and interrupt a local process",
+      "claim": "Run and interrupt a local process",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0015",
+        "S-0016"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0009",
+      "area": "Tasks",
+      "actor": "individual local developer",
+      "goal": "Run and cancel a user-configured local task",
+      "claim": "Run and cancel a user-configured local task",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0017",
+        "S-0018"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0010",
+      "area": "Debug, diagnostics, output and problems",
+      "actor": "individual local developer",
+      "goal": "Inspect program execution and reported issues",
+      "claim": "Inspect program execution and reported issues",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0019",
+        "S-0020"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0011",
+      "area": "VSIX lifecycle",
+      "actor": "individual local developer",
+      "goal": "Manage ordinary local extension packages",
+      "claim": "Manage ordinary local extension packages",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0021",
+        "S-0022",
+        "S-0059",
+        "S-0060"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0012",
+      "area": "Extension API boundary",
+      "actor": "individual local developer",
+      "goal": "Support commands, tree views, storage and subprocesses",
+      "claim": "Support commands, tree views, storage and subprocesses",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0023",
+        "S-0024",
+        "S-0041",
+        "S-0042",
+        "S-0043",
+        "S-0044",
+        "S-0049",
+        "S-0050",
+        "S-0051",
+        "S-0052"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0013",
+      "area": "Webviews",
+      "actor": "individual local developer",
+      "goal": "Display isolated extension HTML and exchange messages",
+      "claim": "Display isolated extension HTML and exchange messages",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0025",
+        "S-0026",
+        "S-0053",
+        "S-0054"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0014",
+      "area": "Language and debug protocols",
+      "actor": "individual local developer",
+      "goal": "Interoperate through public LSP and DAP surfaces",
+      "claim": "Interoperate through public LSP and DAP surfaces",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0027",
+        "S-0028",
+        "S-0055",
+        "S-0056",
+        "S-0057",
+        "S-0058"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0015",
+      "area": "Workspace trust and isolation",
+      "actor": "individual local developer",
+      "goal": "Keep untrusted project actions under user control",
+      "claim": "Keep untrusted project actions under user control",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0029",
+        "S-0030",
+        "S-0061",
+        "S-0062"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0016",
+      "area": "Excluded capabilities",
+      "actor": "individual local developer",
+      "goal": "Omit excluded first-alpha surfaces and fail unsupported APIs honestly",
+      "claim": "Omit excluded first-alpha surfaces and fail unsupported APIs honestly",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0031",
+        "S-0032",
+        "S-0063",
+        "S-0064"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0017",
+      "area": "Network",
+      "actor": "individual local developer",
+      "goal": "Separate idle editor traffic from user-invoked operations",
+      "claim": "Separate idle editor traffic from user-invoked operations",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0033",
+        "S-0034"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0018",
+      "area": "Performance and artifact",
+      "actor": "individual local developer",
+      "goal": "Measure startup, settled resource use and shipping size",
+      "claim": "Measure startup, settled resource use and shipping size",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0035",
+        "S-0036"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0019",
+      "area": "Interruption and recovery",
+      "actor": "individual local developer",
+      "goal": "Handle unsaved work and external changes visibly",
+      "claim": "Handle unsaved work and external changes visibly",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0037",
+        "S-0038"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    },
+    {
+      "id": "B-0020",
+      "area": "Accessibility and controlled updates",
+      "actor": "individual local developer",
+      "goal": "Use essential flows without a pointer and control updates",
+      "claim": "Use essential flows without a pointer and control updates",
+      "claim_kind": "requested future behavior, not verified existing behavior",
+      "preconditions": "Identified build and disposable clean profile; scenario-specific setup",
+      "actions": "See scenario records",
+      "intermediate_outcome": "unknown until observed",
+      "final_outcome": "unknown until observed",
+      "side_effects_and_invariants": "Record file, process, network, settings and extension-state effects; do not infer absence",
+      "scenario_ids": [
+        "S-0039",
+        "S-0040"
+      ],
+      "evidence_ids": [
+        "E-0001"
+      ],
+      "confidence": "Requirement is explicit; runtime behavior and reachability unverified",
+      "unresolved_qualifications": [
+        "U-0001",
+        "U-0002"
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "S-0001",
+      "behavior_ids": [
+        "B-0001"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open alpha.txt, replace cedar with maple, save, close and reopen."
+      ],
+      "observation_points": "Capture initial text, dirty state, post-save bytes and reopened text.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Edit local text and preserve intended bytes",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt after folder setup. Verify autosave is disabled through supported settings, or record the attempt inconclusive if a dirty state cannot be established."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0002",
+      "behavior_ids": [
+        "B-0001"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Edit alpha.txt, undo, redo, then save."
+      ],
+      "observation_points": "Capture each buffer value, selection, dirty state and final disk bytes.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Edit local text and preserve intended bytes",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt and establish its original text; no earlier scenario state is retained."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0003",
+      "behavior_ids": [
+        "B-0002"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open the fixture folder; expand nested; open nested/beta.txt."
+      ],
+      "observation_points": "Capture visible hierarchy, file identity and editor content.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Open a folder and find its files",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Begin with the fixture folder not yet open in this disposable profile."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0004",
+      "behavior_ids": [
+        "B-0002"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Use quick open to find beta.txt, cancel once, then choose it."
+      ],
+      "observation_points": "Capture query results, cancellation focus and selected document.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Open a folder and find its files",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open the fixture folder and alpha.txt; place keyboard focus in its editor."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0005",
+      "behavior_ids": [
+        "B-0003"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Search workspace for cedar using the default literal search."
+      ],
+      "observation_points": "Capture every match, file/line association, ordering and default filters.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Find and replace text within a file and workspace",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open the fixture folder; ensure all supplied files are present and no search filters have been changed."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0006",
+      "behavior_ids": [
+        "B-0003"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Replace cedar with maple in alpha.txt; cancel a second replacement."
+      ],
+      "observation_points": "Capture selection, replacement scope, save behavior and unaffected files.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Find and replace text within a file and workspace",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt at original bytes; establish supported literal file-search/replacement controls before applying changes."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0007",
+      "behavior_ids": [
+        "B-0004"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open alpha.txt and nested/beta.txt; create a split; select each."
+      ],
+      "observation_points": "Capture tab order, active group, focus and content.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Keep multiple documents usable across editor groups",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open the fixture folder; no editor groups are assumed."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0008",
+      "behavior_ids": [
+        "B-0004"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Modify alpha.txt in one group and view it in the other; close one view."
+      ],
+      "observation_points": "Capture shared or independent buffer effects and close consequences.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Keep multiple documents usable across editor groups",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt and nested/beta.txt; create two groups through the supported UI and display alpha.txt in both. Record whether this setup is supported; otherwise stop as setup unavailable."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0009",
+      "behavior_ids": [
+        "B-0005"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open the command palette, search for a save command and invoke it on a dirty file."
+      ],
+      "observation_points": "Capture command label, selection, saved bytes and focus return.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Invoke commands and persist explicit preferences",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt, replace cedar with maple without saving, verify buffer differs from disk, and focus the editor."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0010",
+      "behavior_ids": [
+        "B-0005"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Change one visible editor preference and one keybinding in the clean profile; restart."
+      ],
+      "observation_points": "Record chosen names/values, conflicts, persistence and working shortcut; identities require first observation.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Invoke commands and persist explicit preferences",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open settings/keybindings through supported UI. First identify and record one available preference and one unassigned shortcut; do not guess identifiers."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0011",
+      "behavior_ids": [
+        "B-0006"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Select a second available built-in theme, then restore the original."
+      ],
+      "observation_points": "Record exact theme names, readable states and settings effects; available themes unknown.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Customize presentation and insert a snippet",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Record the current theme and identify a second available built-in theme; absence is setup unavailable."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0012",
+      "behavior_ids": [
+        "B-0006"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Create a user snippet with literal text maple and invoke it in an empty text file."
+      ],
+      "observation_points": "Capture snippet definition surface, trigger, inserted bytes, cursor/placeholder behavior.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Customize presentation and insert a snippet",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open a new empty text document and identify the supported user-snippet creation surface; no previously installed snippet is assumed."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0013",
+      "behavior_ids": [
+        "B-0007"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "In a disposable copy initialized with a local Git commit, edit alpha.txt and open Source Control."
+      ],
+      "observation_points": "Capture changed-file status, diff, staging state and UI refresh.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Inspect and commit local changes through source control",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Create a disposable workspace copy, initialize a local Git repository and initial commit with an explicitly synthetic local identity only for that repository; verify clean status before editing alpha.txt. Exact setup commands must be recorded in the run."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0014",
+      "behavior_ids": [
+        "B-0007"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Stage alpha.txt, commit with message fixture change; inspect history/status."
+      ],
+      "observation_points": "Capture commit outcome and remaining changes; missing identity and hooks need separate future cells.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Inspect and commit local changes through source control",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Independently initialize and commit the disposable fixture repository as in S-0013 setup, edit cedar to maple in alpha.txt, save, verify one unstaged change. Do not rely on S-0013 having run."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0015",
+      "behavior_ids": [
+        "B-0008"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open an integrated terminal and run printf with the literal output cedar."
+      ],
+      "observation_points": "Capture shell, working directory, output, focus and process exit.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Run and interrupt a local process",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open fixture folder and establish the supported terminal creation action; record shell and working directory."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0016",
+      "behavior_ids": [
+        "B-0008"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Run a disposable waiting process in terminal, interrupt using keyboard, then type a new command."
+      ],
+      "observation_points": "Capture interrupt effect, retained output, prompt recovery and orphan-process check.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Run and interrupt a local process",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open a fresh integrated terminal in the fixture folder. Choose and record a local waiting command whose process identity and cleanup can be checked; no prior terminal state is assumed."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0017",
+      "behavior_ids": [
+        "B-0009"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Configure a task through the supported task surface that prints cedar and exits0; run it."
+      ],
+      "observation_points": "Capture task selection, output, exit indication and terminal lifecycle; schema/defaults need observation.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Run and cancel a user-configured local task",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Author a disposable task using the identified public schema that prints cedar and exits0; record exact configuration before running. Schema is currently unknown."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0018",
+      "behavior_ids": [
+        "B-0009"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Run a disposable long task, cancel through task UI, then run the print task."
+      ],
+      "observation_points": "Capture cancellation, child-process disposition and retry behavior.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Run and cancel a user-configured local task",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Independently define both a bounded waiting task and the print task in the disposable workspace using the established public schema; record child identity/cleanup and a timeout before starting."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0019",
+      "behavior_ids": [
+        "B-0010"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Use an explicitly selected local debugger fixture; set a breakpoint, start, step and inspect one variable."
+      ],
+      "observation_points": "Capture state transitions, variable values and stop outcome; fixture is not yet selected.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Inspect program execution and reported issues",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Select and supply a named/versioned local debugger and synthetic program with a known variable/breakpoint. Missing fixture blocks setup."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0020",
+      "behavior_ids": [
+        "B-0010"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Use a language fixture that reports one known error, correct it, and inspect Problems and Output."
+      ],
+      "observation_points": "Capture location, severity, label, update timing and cleared state; fixture is not yet selected.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Inspect program execution and reported issues",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Select and supply a language fixture with exact erroneous/corrected input and a known diagnostic oracle. Missing fixture blocks setup."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0021",
+      "behavior_ids": [
+        "B-0011"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Install an approved local VSIX in the clean profile, enable it and invoke its named command."
+      ],
+      "observation_points": "Capture package/version, activation, command output and requested restart; approved fixture absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Manage ordinary local extension packages",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply an approved named/versioned local VSIX and exact command identifier; verify it is not installed in the disposable profile."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0022",
+      "behavior_ids": [
+        "B-0011"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Disable, reenable, update using a second local version, then uninstall that VSIX and restart."
+      ],
+      "observation_points": "Capture availability and persistence at each boundary; exact storage-retention policy unknown.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Manage ordinary local extension packages",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply two approved versions of the same local VSIX, install/enable version1 in this fresh profile, and verify its named command before beginning disable/update/uninstall. Do not inherit S-0021 state."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0023",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Install an independently authored fixture that exposes one command, tree item and stored counter; invoke then restart."
+      ],
+      "observation_points": "Capture public inputs, counter value, tree ordering and persisted state; fixture not yet authored.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Support commands, tree views, storage and subprocesses",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Independently supply and install a synthetic extension with a known public command/tree/counter interface; initial counter value and reset procedure must be documented."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0024",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Invoke a fixture command that starts an explicitly requested local child process, then disable the extension."
+      ],
+      "observation_points": "Capture output, errors, child lifecycle and host/UI responsiveness; no retention or termination oracle established.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Support commands, tree views, storage and subprocesses",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Independently install the synthetic child-process extension and specify command, process identity, timeout and safe cleanup; do not inherit S-0023 state."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0025",
+      "behavior_ids": [
+        "B-0013"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open a fixture webview containing a button and counter; click once; hide and restore it."
+      ],
+      "observation_points": "Capture message response, state persistence, focus and visible content; fixture not yet authored.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Display isolated extension HTML and exchange messages",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply/install a synthetic webview fixture with a named open command and known initial counter; no earlier extension state is assumed."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0026",
+      "behavior_ids": [
+        "B-0013"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Ask the fixture webview to access a file outside explicitly allowed local resources."
+      ],
+      "observation_points": "Capture actual denial or success, user-visible response and file-access effect; fixture and denial oracle absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Display isolated extension HTML and exchange messages",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Independently supply/install a synthetic webview fixture with declared allowed resources and an outside disposable test file containing a marker; record both paths and requested action."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0027",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Connect an independently specified language fixture; request completion and definition in synthetic text."
+      ],
+      "observation_points": "Capture chosen protocol versions, input/output locations and cancellation behavior; fixture absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Interoperate through public LSP and DAP surfaces",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply language fixture, public protocol version and exact synthetic completion/definition input; no user language server or private project is used."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0028",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Disconnect a debug adapter during a paused fixture session, then restart the session."
+      ],
+      "observation_points": "Capture error/status, state cleanup and retry; adapter and exact outcome absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Interoperate through public LSP and DAP surfaces",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply independent debug adapter/program fixture, start a session and reach a recorded paused breakpoint through supported controls before disconnecting."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0029",
+      "behavior_ids": [
+        "B-0015"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Open a fresh untrusted fixture folder containing a task and an activation candidate; decline trust."
+      ],
+      "observation_points": "Capture offered choice, available/disabled actions and actual child/network side effects; absence needs observation.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Keep untrusted project actions under user control",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply a disposable untrusted folder with a harmless bounded task and a synthetic activation candidate; record exact fixture and verify this profile has no stored trust for it."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0030",
+      "behavior_ids": [
+        "B-0015"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Grant trust explicitly to the same fixture, run the task, revoke trust and reopen."
+      ],
+      "observation_points": "Capture allowed execution and trust persistence/revocation; exact restart policy unknown.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Keep untrusted project actions under user control",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Independently recreate the S-0029 untrusted-folder/task fixture in a fresh profile, verify no prior trust and decline trust once through the UI. Continue only if that state is established; no prior scenario state is inherited."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0031",
+      "behavior_ids": [
+        "B-0016"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Inventory palette, menus and default UI for AI, telemetry prompts, accounts, sync and non-core surfaces."
+      ],
+      "observation_points": "Record exact presence/absence per surface; inventory alone does not prove no hidden/background execution.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Omit excluded first-alpha surfaces and fail unsupported APIs honestly",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Use the default clean profile and record installed built-ins/configuration before inventory; no absence assumption is permitted."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0032",
+      "behavior_ids": [
+        "B-0016"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Invoke a deliberately excluded API through an independently authored compatibility fixture."
+      ],
+      "observation_points": "Capture exact result/error and prove no excluded service starts; API identities and expected failures not yet selected.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Omit excluded first-alpha surfaces and fail unsupported APIs honestly",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003"
+      ],
+      "setup_instructions": [
+        "Supply/install a synthetic extension naming the specific excluded public API and safe invocation; define a way to observe related processes/services before the call. Missing API/fixture blocks setup."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0033",
+      "behavior_ids": [
+        "B-0017"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Launch clean profile offline-safe fixture with no optional extensions; settle60s and observe five minutes."
+      ],
+      "observation_points": "Capture process-attributed requests, connection attempts, measurement coverage and explicit exclusions.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Separate idle editor traffic from user-invoked operations",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Identify all product processes and an authorized observation tool that attributes local network activity without exposing unrelated traffic; establish no user-invoked extension activity."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0034",
+      "behavior_ids": [
+        "B-0017"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Invoke one approved extension-owned network action against a local synthetic endpoint; return to idle."
+      ],
+      "observation_points": "Capture request ownership, explicit trigger and subsequent idle behavior; endpoint fixture absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Separate idle editor traffic from user-invoked operations",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Supply/install a synthetic extension that calls an authorized loopback endpoint only on a named explicit action; start that disposable endpoint and establish attribution/reset before invoking."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0035",
+      "behavior_ids": [
+        "B-0018"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Measure20warm and5cold launches to accepted typed character on a clean profile and fixed fixture."
+      ],
+      "observation_points": "Capture raw times and preparation; compare only matching identified builds; no launch runs yet.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Measure startup, settled resource use and shipping size",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Supply identified original/reference executables, isolated profiles and an approved warm/cold measurement protocol; exclude overlapping resource-heavy work. Missing build/protocol blocks setup."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0036",
+      "behavior_ids": [
+        "B-0018"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Measure process-tree private memory at60s, CPU across five settled minutes and signed bundle bytes."
+      ],
+      "observation_points": "Capture all processes, sampling tools/units and artifact identity; signed artifact absent.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Measure startup, settled resource use and shipping size",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Supply identified signed artifact, a complete process-tree/private-memory collection method, CPU sample interval and settling procedure; missing artifact/method blocks setup."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0037",
+      "behavior_ids": [
+        "B-0019"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Change alpha.txt without saving, close its view, choose cancel if offered, then save/reopen."
+      ],
+      "observation_points": "Capture exact prompt/options, retained buffer, disk bytes, focus and recovery; see interaction-cases.md.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Handle unsaved work and external changes visibly",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Follow F-0001 reset; open alpha.txt and establish the exact dirty-buffer/disk precondition in interaction-cases.md."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0038",
+      "behavior_ids": [
+        "B-0019"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "While alpha.txt has unsaved changes, replace its disk contents externally in the disposable fixture; attempt save."
+      ],
+      "observation_points": "Capture conflict notification, offered choices and both versions; never assume autosave or conflict resolution.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Handle unsaved work and external changes visibly",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Open alpha.txt, disable autosave through a verified setting, edit cedar to maple without saving and assert disk remains original; use only the disposable copy for the external write."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0039",
+      "behavior_ids": [
+        "B-0020"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "Use keyboard only to open the fixture, edit/save, search, switch tabs and return focus."
+      ],
+      "observation_points": "Capture complete focus order, accessible role/name/state; screen-reader coverage remains separate.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Use essential flows without a pointer and control updates",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Reset clean profile/fixture, identify keyboard entry to folder opening, record initial focus and available accessibility inspection method; do not inherit previous shortcuts."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0040",
+      "behavior_ids": [
+        "B-0020"
+      ],
+      "baseline": "V-0001",
+      "variant": "first-target macOS arm64, clean profile, single local workspace; additional named setup below",
+      "fixture": "F-0001 unless explicitly requiring a missing integration fixture",
+      "pre_state": "Reset a disposable fixture copy and clean application profile; verify original file hashes before starting. No identified runnable Lean build is available.",
+      "actions": [
+        "With a clean offline profile inspect update settings; request an update check and cancel without installing."
+      ],
+      "observation_points": "Capture explicit action, network attempt and visible failure/cancel behavior; do not install or alter live app.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Use essential flows without a pointer and control updates",
+      "comparison": "Retain exact file bytes, ordered UI/protocol observations and errors. Do not score parity until a current-product oracle exists. Timing requires separately agreed conditions.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0001",
+        "E-0002"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002"
+      ],
+      "setup_instructions": [
+        "Use a disposable offline profile with current application version recorded. Inspect only and cancel before any download/install confirmation; if the UI cannot separate inspection from installation, stop as blocked."
+      ],
+      "state_dependency": "Independent scenario; do not inherit state from another scenario. Reproduce any referenced setup explicitly."
+    },
+    {
+      "id": "S-0041",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0001",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0001 with a main entry point, named activation command, fs/path read of alpha.txt and separate deliberate-failure command; record all fixture bytes and no personal files."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Invoke activation command and read the synthetic file; record activation count, result and disposal when disabled."
+      ],
+      "observation_points": "Host error channels, returned values, subscriptions, subsequent responsiveness and exact process state.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0042",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0001",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0001 with a main entry point, named activation command, fs/path read of alpha.txt and separate deliberate-failure command; record all fixture bytes and no personal files."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Invoke the deliberately throwing activation path in a fresh profile, then the independent control command."
+      ],
+      "observation_points": "Host error channels, returned values, subscriptions, subsequent responsiveness and exact process state.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0043",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0002",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0002; create F-0001 copy and a separate deliberately missing/permission-denied disposable target; record public API calls, ranges and cancellation token source."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Open alpha.txt, apply one edit, save and collect ordered document events and file bytes."
+      ],
+      "observation_points": "URI/range units, event payloads/order, disk/buffer states, error shapes and cancellation effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0044",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0002",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0002; create F-0001 copy and a separate deliberately missing/permission-denied disposable target; record public API calls, ranges and cancellation token source."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Invoke the denied/missing-file path and cancel a pending request; inspect all data afterward."
+      ],
+      "observation_points": "URI/range units, event payloads/order, disk/buffer states, error shapes and cancellation effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0045",
+      "behavior_ids": [
+        "B-0005"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0003",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0003 contributing a named command, setting and keybinding with explicit context; define distinct argument values and user/workspace settings."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Invoke the command programmatically, from palette and keybinding with recorded inputs."
+      ],
+      "observation_points": "Argument/result shapes, visibility versus invocation, precedence, change events, persistence and errors.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0046",
+      "behavior_ids": [
+        "B-0005"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0003",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0003 contributing a named command, setting and keybinding with explicit context; define distinct argument values and user/workspace settings."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Change configuration and context, reload, repeat invocation and inspect persisted settings."
+      ],
+      "observation_points": "Argument/result shapes, visibility versus invocation, precedence, change events, persistence and errors.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0047",
+      "behavior_ids": [
+        "B-0006"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0004",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0004 with authored theme/token rules, tiny language grammar/configuration and snippet; supply exact synthetic text and initial selection."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Select the theme, open the language file and expand the snippet using supported controls."
+      ],
+      "observation_points": "Token scopes/styles, selected theme, snippet text/cursor, language controls and fallback/restoration; exact visuals unobserved.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0048",
+      "behavior_ids": [
+        "B-0006"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0004",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0004 with authored theme/token rules, tiny language grammar/configuration and snippet; supply exact synthetic text and initial selection."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Disable then re-enable the contribution package; reopen and inspect presentation and language behavior."
+      ],
+      "observation_points": "Token scopes/styles, selected theme, snippet text/cursor, language controls and fallback/restoration; exact visuals unobserved.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0049",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0005",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0005 with named view, two stable synthetic item IDs, refresh action and item command; start with no selection and record item order."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Expand and select an item, invoke its command, update data and trigger refresh."
+      ],
+      "observation_points": "Item identities/order, command arguments, selection/reveal events, errors and disposal effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0050",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0005",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0005 with named view, two stable synthetic item IDs, refresh action and item command; start with no selection and record item order.",
+        "Before removal, expand the tree, select a named stable item ID, and verify the selected-item event and visible selection. Only then remove that item; stop as setup unavailable if selection cannot be established."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Remove the selected item, dispose and recreate the view, then inspect focus and selection."
+      ],
+      "observation_points": "Item identities/order, command arguments, selection/reveal events, errors and disposal effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0051",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0006",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0006 in fresh profile, create two disposable workspaces, synthetic nonsecret marker for secret-storage API and a bounded local child command; record process identity and cleanup."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Write distinct workspace/global values and synthetic secret; explicitly invoke the bounded child."
+      ],
+      "observation_points": "Exact values/scopes, storage/secret API outcomes, cwd/environment assumptions, stdout/stderr/exit and process cleanup.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0052",
+      "behavior_ids": [
+        "B-0012"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0006",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0006 in fresh profile, create two disposable workspaces, synthetic nonsecret marker for secret-storage API and a bounded local child command; record process identity and cleanup.",
+        "Within this independent case, write and read back distinct known workspace/global values and the synthetic secret marker. Start a bounded child whose timeout spans the planned restart; record PID, output and cleanup method. Only then restart/switch workspace and inspect those established values/process."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Restart and switch workspace, read values, disable extension and inspect child-process disposition."
+      ],
+      "observation_points": "Exact values/scopes, storage/secret API outcomes, cwd/environment assumptions, stdout/stderr/exit and process cleanup.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0053",
+      "behavior_ids": [
+        "B-0013"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0007",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0007 with explicit script/resource settings, numbered JSON messages, allowed local resource and outside disposable marker file; no copied HTML assets."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Open panel, exchange numbered messages in both directions, hide/reveal and inspect state."
+      ],
+      "observation_points": "Payloads/order, acknowledgment/error semantics, visibility state, disposal timing, accessible content and actual denied/read side effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0054",
+      "behavior_ids": [
+        "B-0013"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0007",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Install independent X-0007 with explicit script/resource settings, numbered JSON messages, allowed local resource and outside disposable marker file; no copied HTML assets.",
+        "Open a live panel and verify its named view and message receiver before any action. Keep the outside-resource probe entirely within the live-panel phase; capture it before the separate send/dispose phase."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "While the panel is live, attempt outside-resource access and capture its response/effect. Then send a controllably delayed message, verify it is pending, dispose that panel and record delivery/error/disposal observations; do not try to invoke a disposed panel."
+      ],
+      "observation_points": "Payloads/order, acknowledgment/error semantics, visibility state, disposal timing, accessible content and actual denied/read side effects.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0055",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0008",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0008 VSIX client and deterministic local language server, exact protocol version/capabilities, synthetic text and known server transcripts; neither is supplied yet."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Activate through the extension; request completion/definition and produce then clear one diagnostic."
+      ],
+      "observation_points": "Protocol and editor-visible locations, diagnostics, completion values, cancellation responses, errors and process lifecycle.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0056",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0008",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0008 VSIX client and deterministic local language server, exact protocol version/capabilities, synthetic text and known server transcripts; neither is supplied yet.",
+        "Activate the extension, establish and record server connection/negotiation, and issue a controllably delayed request. Confirm the request is pending before cancellation; then disconnect and use the documented restart path."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Cancel a pending request, disconnect server and restart via the extension-supported path."
+      ],
+      "observation_points": "Protocol and editor-visible locations, diagnostics, completion values, cancellation responses, errors and process lifecycle.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0057",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0009",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0009 debug extension/adapter and prebuilt synthetic target with fixed variable values; pin DAP capabilities and session setup; no build authorized this pass."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Start from contributed debug configuration, hit breakpoint, step, inspect variable/output and stop."
+      ],
+      "observation_points": "Ordered DAP/editor states, breakpoints, variable/output values, cancellation/errors and child cleanup.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0058",
+      "behavior_ids": [
+        "B-0014"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0009",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0009 debug extension/adapter and prebuilt synthetic target with fixed variable values; pin DAP capabilities and session setup; no build authorized this pass.",
+        "Start a debug session through the contributed configuration, set the known breakpoint, run to it and verify the paused state and known variable. Only then disconnect the adapter. If paused state is not achieved, stop as setup unavailable."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Disconnect while paused, capture failure, then start an independent fresh session."
+      ],
+      "observation_points": "Ordered DAP/editor states, breakpoints, variable/output values, cancellation/errors and child cleanup.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0059",
+      "behavior_ids": [
+        "B-0011"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0010",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0010 v1/v2 packages, exact manifests/dependencies/hashes plus invalid and engine-incompatible variants; use fresh isolated profile with no package present."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Install v1 and invoke; update to v2; disable/re-enable; uninstall and restart."
+      ],
+      "observation_points": "Installation/activation/version states, contributions, settings/storage retention, precise failures and partial-install cleanup; no expected messages invented.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0060",
+      "behavior_ids": [
+        "B-0011"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0010",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0010 v1/v2 packages, exact manifests/dependencies/hashes plus invalid and engine-incompatible variants; use fresh isolated profile with no package present."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "In separate fresh profile attempt invalid then incompatible/dependency-missing package; retry with valid v1."
+      ],
+      "observation_points": "Installation/activation/version states, contributions, settings/storage retention, precise failures and partial-install cleanup; no expected messages invented.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0061",
+      "behavior_ids": [
+        "B-0015"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0011",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0011 with declared untrusted-workspace support and harmless task/activation marker; create untrusted fixture and establish separate host fault-control method in disposable profile only."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Open untrusted folder, decline then explicitly grant trust and invoke the controlled action."
+      ],
+      "observation_points": "Trust choices, actual activation/process/network effects, crash scope, retained text and recovery; do not infer Node sandboxing from trust UI.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0062",
+      "behavior_ids": [
+        "B-0015"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0011",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0011 with declared untrusted-workspace support and harmless task/activation marker; create untrusted fixture and establish separate host fault-control method in disposable profile only."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "In independent setup make alpha.txt dirty and trigger only the fixture extension-host fault; inspect editor buffer and recovery."
+      ],
+      "observation_points": "Trust choices, actual activation/process/network effects, crash scope, retained text and recovery; do not infer Node sandboxing from trust UI.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0063",
+      "behavior_ids": [
+        "B-0016"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0012",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0012 naming one explicitly excluded public capability and a non-excluded stable control API; establish exact exclusion decision and observation method before any call."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "Invoke excluded capability and record response, UI and process/network effects without treating invented errors as baseline."
+      ],
+      "observation_points": "Exact exception/result, supported-path output, registered services/processes/network and exclusion-versus-compatibility contradictions.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    },
+    {
+      "id": "S-0064",
+      "behavior_ids": [
+        "B-0016"
+      ],
+      "baseline": "V-0001",
+      "variant": "macOS arm64; exact stable1.133.0 public contract/fixture version pending; independent clean profile for each case",
+      "fixture": "X-0012",
+      "pre_state": "Missing independently authored/pinned VSIX fixture and runnable identified reference. No state is inherited from another scenario.",
+      "setup_instructions": [
+        "Supply independent X-0012 naming one explicitly excluded public capability and a non-excluded stable control API; establish exact exclusion decision and observation method before any call."
+      ],
+      "state_dependency": "Independent case: recreate complete setup; do not carry state from earlier scenario.",
+      "actions": [
+        "In separate fresh setup invoke the supported control; verify ordinary result and whether excluded services start."
+      ],
+      "observation_points": "Exact exception/result, supported-path output, registered services/processes/network and exclusion-versus-compatibility contradictions.",
+      "expected_current_result": null,
+      "oracle_status": "unknown",
+      "requested_target": "Existing VS Code extension compatibility is mandatory; establish this public boundary without copying original implementation.",
+      "comparison": "Capture exact bytes/values/ordered events/errors and relevant side effects. Current reference oracle must be observed before parity; fixture success is not universal VSIX compatibility.",
+      "execution_status": "blocked",
+      "actual_result": null,
+      "evidence_ids": [
+        "E-0007",
+        "E-0008"
+      ],
+      "remaining_questions": [
+        "U-0001",
+        "U-0002",
+        "U-0003",
+        "U-0011"
+      ]
+    }
+  ],
+  "coverage": {
+    "behavior_areas": 20,
+    "scenario_cells": 64,
+    "directly_observed": 0,
+    "product_tests": 0,
+    "model_executions": 0,
+    "blocked": 64
+  },
+  "extension_fixture_families": [
+    {
+      "id": "X-0001",
+      "area": "Node host lifecycle",
+      "scenario_ids": [
+        "S-0041",
+        "S-0042"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0002",
+      "area": "Document and workspace",
+      "scenario_ids": [
+        "S-0043",
+        "S-0044"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0003",
+      "area": "Commands settings and keybindings",
+      "scenario_ids": [
+        "S-0045",
+        "S-0046"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0004",
+      "area": "Themes grammars and snippets",
+      "scenario_ids": [
+        "S-0047",
+        "S-0048"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0005",
+      "area": "Tree views",
+      "scenario_ids": [
+        "S-0049",
+        "S-0050"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0006",
+      "area": "Storage and child process",
+      "scenario_ids": [
+        "S-0051",
+        "S-0052"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0007",
+      "area": "Webview message and resource boundary",
+      "scenario_ids": [
+        "S-0053",
+        "S-0054"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0008",
+      "area": "Language server through extension",
+      "scenario_ids": [
+        "S-0055",
+        "S-0056"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0009",
+      "area": "Debug adapter through extension",
+      "scenario_ids": [
+        "S-0057",
+        "S-0058"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0010",
+      "area": "VSIX package lifecycle",
+      "scenario_ids": [
+        "S-0059",
+        "S-0060"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0011",
+      "area": "Trust and host fault",
+      "scenario_ids": [
+        "S-0061",
+        "S-0062"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    },
+    {
+      "id": "X-0012",
+      "area": "Excluded and supported boundary",
+      "scenario_ids": [
+        "S-0063",
+        "S-0064"
+      ],
+      "status": "proposed_not_authored_or_installed"
+    }
+  ],
+  "requirement_decisions": [
+    {
+      "id": "D-0003",
+      "evidence": "E-0007",
+      "requirement": "Existing VS Code extension compatibility is mandatory; no LSP/DAP-only scope substitution."
+    }
+  ],
+  "reference_runs": [
+    {
+      "id": "R-0002",
+      "baseline": "V-0002",
+      "evidence_ids": [
+        "E-0011",
+        "E-0012"
+      ],
+      "reference_variants": [
+        {
+          "scenario_id": "S-0001",
+          "status": "blocked_before_product_launch",
+          "actual_result": null
+        },
+        {
+          "scenario_id": "S-0037",
+          "status": "blocked_before_product_launch",
+          "actual_result": null
+        }
+      ],
+      "observed_reference_variants": 0,
+      "declared_reference_variants": 2,
+      "does_not_change_lean_coverage": true
+    }
+  ]
+}

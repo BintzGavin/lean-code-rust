@@ -1,0 +1,23 @@
+# Lean Code Rust
+
+An independent Rust editor exploration with repository-owned Black Hole Architecture. The desired product is in [VISION.md](VISION.md); ownership and cadence in [.sys/black-hole/role-map.md](.sys/black-hole/role-map.md). Existing VS Code extension compatibility is a hard requirement, not yet implemented.
+
+The initial work order targets a small document editing core. This repository is not yet a desktop editor. The [independent behavior package](spec/README.md) contains 64 unobserved scenarios; it is not a parity oracle. See [historical BHA choices](docs/decisions/historical-bha.md) and [reference limitation](docs/decisions/reference-checkpoint.md).
+
+Run lightweight checks:
+
+```sh
+python3 tooling/check_scaffold.py
+python3 -m unittest discover -s tooling -p 'test_*.py'
+python3 spec/checks/check_package.py
+```
+
+After the core work order is complete:
+
+```sh
+CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/editor-core/Cargo.toml --offline --locked
+cargo fmt --manifest-path crates/editor-core/Cargo.toml --check
+cargo run --manifest-path crates/editor-core/Cargo.toml --example edit_roundtrip --offline --locked
+```
+
+No remote, publication, installed scheduler, GUI, extension host or release artifact is implied by this scaffold. Remote visibility remains a user decision.

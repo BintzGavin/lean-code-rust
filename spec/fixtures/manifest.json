@@ -1,0 +1,22 @@
+{
+  "alpha.txt": {
+    "bytes": 15,
+    "sha256": "f095d071c7ccf31f4550fe348c29144b6999ffef09d6ace03d633e03d52503ac",
+    "purpose": "Independent synthetic text; not copied from any product"
+  },
+  "nested/beta.txt": {
+    "bytes": 12,
+    "sha256": "8fec78c356ca90cbb1cc61f177e64d148c630e0fff3d6881a0e3595a0780256b",
+    "purpose": "Independent synthetic text; not copied from any product"
+  },
+  "crlf.txt": {
+    "bytes": 17,
+    "sha256": "63875d2b8c406723d0c15ea12c06fadb6b61bc1582d530ebb16565254eccac9a",
+    "purpose": "Independent synthetic text; not copied from any product"
+  },
+  "unicode.txt": {
+    "bytes": 11,
+    "sha256": "d87b97623853be28a8c34c43a0f22ac1b6161efa4b3f377f6f744543e7849096",
+    "purpose": "Independent synthetic text; not copied from any product"
+  }
+}
