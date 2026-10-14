@@ -62,4 +62,10 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Cross-role needs**: None.
 - **Blocked when**: The crates fail to build together in a workspace due to unforeseen conflicting requirements.
 
+
 ## 7. Result
+
+- **State**: completed
+- **Changed files**: `Cargo.toml`, `rust-toolchain.toml`
+- **Checks**: `cargo tree`, `cargo build --workspace`, `python3 tooling/check_scaffold.py --role integration`
+- **Evidence**: Workspace successfully established.
