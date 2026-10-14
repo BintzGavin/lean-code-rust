@@ -39,6 +39,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Eight integration tests passed after recorded E0432 red check; synthetic roundtrip example, fmt, scaffold, 21 tooling tests and spec validation passed. See work-order Result."
+  },
+  {
+    "id": "EDITOR-CORE-002",
+    "plan": ".sys/plans/editor-core/editor-core-002-atomic-save.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
