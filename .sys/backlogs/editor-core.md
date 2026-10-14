@@ -51,10 +51,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-003",
     "plan": ".sys/plans/editor-core/editor-core-003-crash-safe-save.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented crash-safe save via `File::create`, `write_all`, `sync_data`, and explicit drop before rename. Updated README docs. All tests and checks passed."
   }
 ]
 ```
