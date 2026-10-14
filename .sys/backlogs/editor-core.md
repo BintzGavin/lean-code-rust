@@ -43,10 +43,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-002",
     "plan": ".sys/plans/editor-core/editor-core-002-atomic-save.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented atomic saves using temporary files and rename, preventing data truncation. Addressed symlink vulnerabilities using OpenOptions and added a fallback for read-only temp directory permissions."
   }
 ]
 ```

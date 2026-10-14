@@ -1,11 +1,14 @@
 //! A small UTF-8 document buffer with explicit save and close decisions.
 //!
-//! This crate uses ordinary filesystem writes, not atomic or crash-safe saves.
+//! This crate uses atomic filesystem writes (write to a temporary file, then rename).
 //! See the crate README for the contract and its limits.
 
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+static SAVE_COUNTER: AtomicUsize = AtomicUsize::new(0);
 
 /// The caller may release a clean document, or retain a cancelled dirty one.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -56,13 +59,52 @@ impl Document {
         self.text != self.persisted_text
     }
 
-    /// Write current UTF-8 bytes and update the saved snapshot only on success.
+    /// Write current UTF-8 bytes to a temporary file and atomically rename it.
     ///
-    /// On failure the buffer and saved snapshot remain unchanged. The target
-    /// file may already have been truncated or partly written; this is not an
-    /// atomic save and does not guarantee crash durability or preserve metadata.
+    /// On failure the buffer and saved snapshot remain unchanged, and the original file
+    /// remains unmodified. This provides atomic saves, though it does not guarantee
+    /// crash durability (e.g. via fsync) or preserve metadata.
     pub fn save(&mut self) -> io::Result<()> {
-        fs::write(&self.path, self.text.as_bytes())?;
+        let parent = self.path.parent().unwrap_or_else(|| Path::new(""));
+        let mut temp_name = self.path.file_name().unwrap_or_default().to_os_string();
+        let counter = SAVE_COUNTER.fetch_add(1, Ordering::Relaxed);
+        let time = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap_or_default()
+            .as_micros();
+        temp_name.push(format!(".~tmp.{}.{}.{}", std::process::id(), counter, time));
+        let temp_path = parent.join(temp_name);
+
+        use std::io::Write;
+
+        let mut file = match fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&temp_path)
+        {
+            Ok(f) => f,
+            Err(_) => {
+                // Fallback to in-place write if we can't create the temp file (e.g., read-only dir)
+                fs::write(&self.path, self.text.as_bytes())?;
+                self.persisted_text.clone_from(&self.text);
+                return Ok(());
+            }
+        };
+
+        if let Err(e) = file.write_all(self.text.as_bytes()) {
+            drop(file);
+            let _ = fs::remove_file(&temp_path);
+            return Err(e);
+        }
+
+        // Ensure file is closed before renaming (important on Windows)
+        drop(file);
+
+        if let Err(e) = fs::rename(&temp_path, &self.path) {
+            let _ = fs::remove_file(&temp_path);
+            return Err(e);
+        }
+
         self.persisted_text.clone_from(&self.text);
         Ok(())
     }

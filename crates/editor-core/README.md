@@ -36,9 +36,9 @@ new synthetic directories; no personal input files or network are needed.
 
 ## Limits
 
-- Saves use `std::fs::write`: they are not atomic, crash-safe or synchronized to
-  stable storage. Failure preserves the in-memory buffer and saved snapshot,
-  but may leave a truncated or partially written file. Permission and metadata
+- Saves use a temporary file and atomic rename, ensuring that failed saves leave
+  the original file completely unmodified. However, they are not crash-safe or
+  synchronized to stable storage (e.g. via `fsync`). Permission and metadata
   preservation are not promised.
 - Only valid UTF-8 is supported. Bytes within valid UTF-8, including newlines
   and a UTF-8 BOM if present, are not normalized. There is no encoding detection.

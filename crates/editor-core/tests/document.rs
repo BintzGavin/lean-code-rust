@@ -153,3 +153,40 @@ fn failed_save_retains_buffer_dirty_state_and_last_saved_baseline() {
     assert!(!document.is_dirty());
     assert_eq!(fs::read(&fixture.file).unwrap(), b"retry");
 }
+
+#[test]
+#[cfg(unix)]
+fn failed_save_leaves_original_file_unmodified() {
+    let fixture = Fixture::new(b"original_data_that_must_survive");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("some_new_data_that_fails_to_save");
+
+    // Setting both file and directory to read-only ensures that both the primary atomic
+    // save (temp file creation in dir) and the fallback in-place save will fail on Unix.
+    let mut dir_perms = fs::metadata(&fixture.directory).unwrap().permissions();
+    dir_perms.set_readonly(true);
+    let mut file_perms = fs::metadata(&fixture.file).unwrap().permissions();
+    file_perms.set_readonly(true);
+
+    fs::set_permissions(&fixture.file, file_perms).unwrap();
+    fs::set_permissions(&fixture.directory, dir_perms.clone()).unwrap();
+
+    let result = document.save();
+    assert!(result.is_err());
+
+    // The original file should still have "original_data_that_must_survive"
+    assert_eq!(
+        fs::read(&fixture.file).unwrap(),
+        b"original_data_that_must_survive"
+    );
+
+    // Restore permissions for cleanup
+    #[allow(clippy::permissions_set_readonly_false)]
+    dir_perms.set_readonly(false);
+    fs::set_permissions(&fixture.directory, dir_perms).unwrap();
+
+    let mut file_perms = fs::metadata(&fixture.file).unwrap().permissions();
+    #[allow(clippy::permissions_set_readonly_false)]
+    file_perms.set_readonly(false);
+    fs::set_permissions(&fixture.file, file_perms).unwrap();
+}
