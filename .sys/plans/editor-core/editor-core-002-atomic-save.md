@@ -64,3 +64,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: Target file directory cannot be written to to create temp files (expected to fail the save, but original file must still be intact).
 
 ## 7. Result
+Implemented atomic save using a temporary file in the same directory and `std::fs::rename`. Added a test to verify that a failed rename leaves the original file completely intact and deletes the temp file. All tests and verification commands passed. Updated `README.md` and `lib.rs` docs to reflect the new behavior.
