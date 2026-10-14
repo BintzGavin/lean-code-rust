@@ -43,10 +43,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-002",
     "plan": ".sys/plans/editor-core/editor-core-002-atomic-save.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented atomic save via temp file and atomic rename. Verified target is preserved on failure. All tests and checks passed."
   }
 ]
 ```
