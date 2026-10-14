@@ -17,7 +17,7 @@
 
 ## Current state
 
-No work order has been completed yet.
+Work orders have been completed.
 
 ## Evidence entry format
 
@@ -31,10 +31,10 @@ No work order has been completed yet.
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
 
-### integration-001 — blocked
-- **Result**: Planner paused
-- **Changed files**: None
-- **Checks**: None
-- **Dependency**: The role-local backlog already contains a `ready` entry (integration-001).
+### integration-001 — completed
+- **Result**: Defined Cargo workspace in repository root and configured stable toolchain.
+- **Changed files**: `Cargo.toml`, `rust-toolchain.toml`
+- **Checks**: `cargo tree` (success), `cargo build --workspace` (success), `python3 tooling/check_scaffold.py --role integration` (success)
+- **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
