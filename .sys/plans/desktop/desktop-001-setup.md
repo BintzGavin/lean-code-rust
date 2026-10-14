@@ -61,3 +61,8 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: Cargo is unable to initialize a package in the `crates/desktop` directory.
 
 ## 7. Result
+
+
+- **Outcome**: Completed successfully. The `desktop` crate was scaffolded.
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`.
+- **Checks**: Ran `cargo check`, `cargo run`, and `python3 tooling/check_scaffold.py --role desktop`. All passed.
