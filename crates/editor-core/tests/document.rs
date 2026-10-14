@@ -1,0 +1,155 @@
+use lean_editor_core::{CloseOutcome, Document};
+use std::fs;
+use std::io;
+use std::path::PathBuf;
+use std::sync::atomic::{AtomicU64, Ordering};
+
+static NEXT_FIXTURE: AtomicU64 = AtomicU64::new(0);
+
+struct Fixture {
+    directory: PathBuf,
+    file: PathBuf,
+}
+
+impl Fixture {
+    fn new(bytes: &[u8]) -> Self {
+        let directory = loop {
+            let candidate = std::env::temp_dir().join(format!(
+                "lean-editor-core-test-{}-{}",
+                std::process::id(),
+                NEXT_FIXTURE.fetch_add(1, Ordering::Relaxed)
+            ));
+            match fs::create_dir(&candidate) {
+                Ok(()) => break candidate,
+                Err(error) if error.kind() == io::ErrorKind::AlreadyExists => continue,
+                Err(error) => panic!("create synthetic fixture: {error}"),
+            }
+        };
+        let fixture = Self {
+            file: directory.join("document.txt"),
+            directory,
+        };
+        fs::write(&fixture.file, bytes).unwrap();
+        fixture
+    }
+}
+
+impl Drop for Fixture {
+    fn drop(&mut self) {
+        // Only these two owned paths are removed; never recursively delete a tree.
+        let _ = fs::remove_file(&self.file);
+        let _ = fs::remove_dir(&self.file);
+        let _ = fs::remove_dir(&self.directory);
+    }
+}
+
+#[test]
+fn open_preserves_path_and_text_and_starts_clean() {
+    let fixture = Fixture::new(b"cedar\nline two\n");
+    let document = Document::open(&fixture.file).unwrap();
+    assert_eq!(document.path(), fixture.file);
+    assert_eq!(document.text(), "cedar\nline two\n");
+    assert!(!document.is_dirty());
+    assert_eq!(document.request_close(), CloseOutcome::Closed);
+}
+
+#[test]
+fn unsaved_edit_changes_only_the_buffer_and_cancel_preserves_it() {
+    let fixture = Fixture::new(b"cedar\nline two\n");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("maple\nline two\n");
+    assert!(document.is_dirty());
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"cedar\nline two\n");
+    assert_eq!(document.request_close(), CloseOutcome::Cancelled);
+    assert_eq!(document.text(), "maple\nline two\n");
+    assert!(document.is_dirty());
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"cedar\nline two\n");
+}
+
+#[test]
+fn save_clears_dirty_and_reopen_observes_exact_saved_bytes() {
+    let fixture = Fixture::new(b"cedar\nline two\n");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("maple\nline two\n");
+    document.save().unwrap();
+    assert!(!document.is_dirty());
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"maple\nline two\n");
+    assert_eq!(document.request_close(), CloseOutcome::Closed);
+    drop(document);
+    let reopened = Document::open(&fixture.file).unwrap();
+    assert_eq!(reopened.text(), "maple\nline two\n");
+    assert!(!reopened.is_dirty());
+}
+
+#[test]
+fn restoring_the_last_saved_text_clears_dirty_without_writing() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("edit");
+    document.replace_text("original");
+    assert!(!document.is_dirty());
+    document.replace_text("saved");
+    document.save().unwrap();
+    document.replace_text("original");
+    assert!(document.is_dirty());
+    document.replace_text("saved");
+    assert!(!document.is_dirty());
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"saved");
+}
+
+#[test]
+fn unicode_and_mixed_newlines_roundtrip_without_normalization() {
+    let original = "café\r\n東京\n🦀\r\n";
+    let edited = "naïve\r\n🌲\n終わり";
+    let fixture = Fixture::new(original.as_bytes());
+    let mut document = Document::open(&fixture.file).unwrap();
+    assert_eq!(document.text().as_bytes(), original.as_bytes());
+    document.replace_text(edited);
+    document.save().unwrap();
+    assert_eq!(fs::read(&fixture.file).unwrap(), edited.as_bytes());
+    assert_eq!(Document::open(&fixture.file).unwrap().text(), edited);
+}
+
+#[test]
+fn empty_content_can_be_saved_and_reopened() {
+    let fixture = Fixture::new(b"content");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("");
+    assert!(document.is_dirty());
+    document.save().unwrap();
+    assert!(!document.is_dirty());
+    assert!(fs::read(&fixture.file).unwrap().is_empty());
+    assert_eq!(Document::open(&fixture.file).unwrap().text(), "");
+}
+
+#[test]
+fn missing_file_and_invalid_utf8_return_errors() {
+    let fixture = Fixture::new(&[0xff, 0xfe, 0x80]);
+    let invalid = Document::open(&fixture.file).unwrap_err();
+    assert_eq!(invalid.kind(), io::ErrorKind::InvalidData);
+    assert_eq!(fs::read(&fixture.file).unwrap(), [0xff, 0xfe, 0x80]);
+    let missing = Document::open(fixture.directory.join("missing.txt")).unwrap_err();
+    assert_eq!(missing.kind(), io::ErrorKind::NotFound);
+}
+
+#[test]
+fn failed_save_retains_buffer_dirty_state_and_last_saved_baseline() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+    // A directory cannot be written as a file, regardless of permissions/root.
+    fs::remove_file(&fixture.file).unwrap();
+    fs::create_dir(&fixture.file).unwrap();
+    assert!(document.save().is_err());
+    assert_eq!(document.text(), "unsaved");
+    assert_eq!(document.path(), fixture.file);
+    assert!(document.is_dirty());
+    assert_eq!(document.request_close(), CloseOutcome::Cancelled);
+    document.replace_text("original");
+    assert!(!document.is_dirty());
+    document.replace_text("retry");
+    fs::remove_dir(&fixture.file).unwrap();
+    document.save().unwrap();
+    assert!(!document.is_dirty());
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"retry");
+}

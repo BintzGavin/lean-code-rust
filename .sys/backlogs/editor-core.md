@@ -35,10 +35,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-001",
     "plan": ".sys/plans/editor-core/editor-core-001-document-roundtrip.md",
-    "state": "in_progress",
-    "claim": "editor-core-001-independent-rust-core-20261014-attempt-1",
+    "state": "completed",
+    "claim": "none",
     "attempt": 1,
-    "result": "none"
+    "result": "Eight integration tests passed after recorded E0432 red check; synthetic roundtrip example, fmt, scaffold, 21 tooling tests and spec validation passed. See work-order Result."
   }
 ]
 ```
