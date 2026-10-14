@@ -24,10 +24,10 @@ No work order has been completed yet.
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
 
-### desktop-001 — blocked
-- **Result**: Planner blocked.
-- **Changed files**: None
-- **Checks**: None
-- **Dependency**: Existing `ready` work order `desktop-001` must be completed by the executor before the planner can select new work.
+### desktop-001 — completed
+- **Result**: Completed successfully. Scaffolded desktop crate.
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo run --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`
+- **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
