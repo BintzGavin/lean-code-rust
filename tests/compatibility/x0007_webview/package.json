@@ -1,0 +1,19 @@
+{
+  "name": "x0007-webview",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0007.showWebview"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0007.showWebview",
+        "title": "Show X0007 Webview"
+      }
+    ]
+  }
+}
