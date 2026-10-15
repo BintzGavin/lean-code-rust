@@ -79,6 +79,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented basic linear undo/redo history in Document. replace_text pushes to undo stack, undo() and redo() navigate history. All tests passed."
+  },
+  {
+    "id": "EDITOR-CORE-007",
+    "plan": ".sys/plans/editor-core/editor-core-007-save-as.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
