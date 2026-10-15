@@ -141,14 +141,10 @@ impl Document {
         );
         let temp_path = parent.join(temp_name);
 
-        let mut file = match OpenOptions::new()
+        let mut file = OpenOptions::new()
             .write(true)
             .create_new(true)
-            .open(&temp_path)
-        {
-            Ok(f) => f,
-            Err(e) => return Err(e),
-        };
+            .open(&temp_path)?;
 
         if let Err(e) = file.write_all(self.text.as_bytes()) {
             drop(file);
@@ -180,13 +176,13 @@ impl Document {
     /// This is a decision API, not a UI or lifetime manager. The caller retains
     /// the document on `Cancelled` and may drop it on `Closed`. To close edited
     /// content, save successfully and request close again.
-
+    ///
     /// Check if the file on disk has been modified since it was last opened or saved.
     pub fn has_external_changes(&self) -> io::Result<bool> {
         let current_modified = fs::metadata(&self.path)?.modified()?;
         Ok(self
             .modified_time
-            .map_or(false, |time| current_modified != time))
+            .is_some_and(|time| current_modified != time))
     }
 
     /// Reload the document from disk, updating the text, persisted text, and modified time.
