@@ -55,6 +55,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed implementation of X-0003 Commands/settings/keys fixture. Verified successfully."
+  },
+  {
+    "id": "quality-004",
+    "plan": ".sys/plans/quality/quality-004-x0004-theme-grammar-snippet.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
