@@ -51,3 +51,11 @@ Work orders have been completed.
 - **Result**: Completed: Consolidated repository validation commands into `tooling/validate_repo.sh` and updated README.
 - **Files**: `tooling/validate_repo.sh`, `README.md`
 - **Checks**: `bash tooling/validate_repo.sh`, `python3 tooling/check_scaffold.py --role integration`
+
+### INTEGRATION-PLANNER — blocked
+- **Result**: Blocked and paused.
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: Existing `ready` entry (`integration-004`) in backlog.
+- **Question**: None
+- **Resolution evidence**: None
