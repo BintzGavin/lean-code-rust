@@ -125,6 +125,18 @@ impl Document {
             .map_or(false, |time| current_modified != time))
     }
 
+    /// Reload the document from disk, updating the text, persisted text, and modified time.
+    /// Returns an error if the file does not exist or contains invalid UTF-8, leaving the
+    /// document unchanged.
+    pub fn reload(&mut self) -> io::Result<()> {
+        let text = fs::read_to_string(&self.path)?;
+        let modified_time = fs::metadata(&self.path)?.modified().ok();
+        self.text.clone_from(&text);
+        self.persisted_text = text;
+        self.modified_time = modified_time;
+        Ok(())
+    }
+
     pub fn request_close(&self) -> CloseOutcome {
         if self.is_dirty() {
             CloseOutcome::Cancelled

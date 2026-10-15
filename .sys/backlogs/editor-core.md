@@ -67,11 +67,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-005",
     "plan": ".sys/plans/editor-core/editor-core-005-document-reload.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Added reload method to Document, updated tests and README. All checks passed."
   }
 ]
-
 ```
