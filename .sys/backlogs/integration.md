@@ -71,6 +71,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Updated build_release.sh to report artifact size."
+  },
+  {
+    "id": "integration-006",
+    "plan": ".sys/plans/integration/integration-006-release-profile.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
