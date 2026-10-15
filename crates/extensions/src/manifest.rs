@@ -18,10 +18,19 @@ pub struct ExtensionKeybinding {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionMenuItem {
+    pub command: String,
+    pub when: Option<String>,
+    pub group: Option<String>,
+    pub alt: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
     pub keybindings: Option<Vec<ExtensionKeybinding>>,
+    pub menus: Option<HashMap<String, Vec<ExtensionMenuItem>>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -89,7 +98,15 @@ mod tests {
                         "mac": "cmd+f1",
                         "when": "editorTextFocus"
                     }
-                ]
+                ],
+                "menus": {
+                    "commandPalette": [
+                        {
+                            "command": "extension.helloWorld",
+                            "when": "editorTextFocus"
+                        }
+                    ]
+                }
             },
             "extensionDependencies": [
                 "some.dependency"
@@ -126,6 +143,15 @@ mod tests {
         assert_eq!(keybindings[0].mac, Some("cmd+f1".to_string()));
         assert_eq!(keybindings[0].when, Some("editorTextFocus".to_string()));
         assert_eq!(keybindings[0].linux, None);
+
+        let menus = contributes.menus.unwrap();
+        assert_eq!(menus.len(), 1);
+        let palette_menus = menus.get("commandPalette").unwrap();
+        assert_eq!(palette_menus.len(), 1);
+        assert_eq!(palette_menus[0].command, "extension.helloWorld");
+        assert_eq!(palette_menus[0].when, Some("editorTextFocus".to_string()));
+        assert_eq!(palette_menus[0].group, None);
+        assert_eq!(palette_menus[0].alt, None);
 
         let dependencies = manifest.extension_dependencies.unwrap();
         assert_eq!(dependencies.len(), 1);
