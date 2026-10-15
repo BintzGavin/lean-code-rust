@@ -249,7 +249,7 @@ fn failed_reload_leaves_document_intact() {
     assert_eq!(document.text(), "unsaved");
 
     // Attempt to reload invalid UTF-8
-    fs::write(&fixture.file, &[0xff, 0xfe, 0x80]).unwrap();
+    fs::write(&fixture.file, [0xff, 0xfe, 0x80]).unwrap();
     let err = document.reload().unwrap_err();
     assert_eq!(err.kind(), io::ErrorKind::InvalidData);
 
