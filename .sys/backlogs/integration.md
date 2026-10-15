@@ -51,10 +51,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-003",
     "plan": ".sys/plans/integration/integration-003-repository-validation.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Consolidated repository validation commands into `tooling/validate_repo.sh` and updated README."
   }
 ]
 ```

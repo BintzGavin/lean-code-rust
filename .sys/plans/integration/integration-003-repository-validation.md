@@ -71,3 +71,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: Any of the underlying test or validation commands fail on `main`.
 
 ## 7. Result
+Completed: Consolidated validation commands into `tooling/validate_repo.sh` and updated README.

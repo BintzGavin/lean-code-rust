@@ -46,3 +46,8 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-003 — completed
+- **Result**: Completed: Consolidated repository validation commands into `tooling/validate_repo.sh` and updated README.
+- **Files**: `tooling/validate_repo.sh`, `README.md`
+- **Checks**: `bash tooling/validate_repo.sh`, `python3 tooling/check_scaffold.py --role integration`
