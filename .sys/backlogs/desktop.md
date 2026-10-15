@@ -63,6 +63,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added lean-editor-core dependency and integrated Document loading into App state."
+  },
+  {
+    "id": "desktop-005",
+    "plan": ".sys/plans/desktop/desktop-005-document-save.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
