@@ -47,6 +47,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added winit dependency and initialized native window with event loop."
+  },
+  {
+    "id": "desktop-003",
+    "plan": ".sys/plans/desktop/desktop-003-keyboard-input.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
