@@ -77,3 +77,14 @@
 - **Dependency**: Existing ready entry extensions-007 in .sys/backlogs/extensions.md
 - **Question**: None
 - **Resolution evidence**: None
+
+
+### extensions-007 — Parse contributes.themes, languages, grammars, snippets
+**State**: completed
+**Result**: Parsed themes, languages, grammars, and snippets from VS Code extension manifest package.json.
+**Changed files**:
+- `crates/extensions/src/manifest.rs`
+**Checks**:
+- `cargo test --manifest-path crates/extensions/Cargo.toml`
+- `python3 tooling/check_scaffold.py --role extensions`
+- `bash tooling/validate_repo.sh`
