@@ -6,3 +6,4 @@ echo "Assembling artifacts..."
 mkdir -p dist
 cp target/release/desktop dist/
 echo "Done."
+du -h dist/desktop
