@@ -55,6 +55,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Consolidated repository validation commands into `tooling/validate_repo.sh` and updated README."
+  },
+  {
+    "id": "integration-004",
+    "plan": ".sys/plans/integration/integration-004-workspace-validation.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
