@@ -95,6 +95,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented edit_range method to Document. Verified substring replacement, out of bounds panics, and integration with undo/redo stack. Updated README. All tests passed."
+  },
+  {
+    "id": "EDITOR-CORE-009",
+    "plan": ".sys/plans/editor-core/editor-core-009-prevent-external-overwrite.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
