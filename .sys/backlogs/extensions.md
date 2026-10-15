@@ -83,10 +83,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-007",
     "plan": ".sys/plans/extensions/extensions-007-parse-contributes-theme-grammar-snippets.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed themes, languages, grammars, and snippets from VS Code extension manifest package.json."
   }
 ]
 ```
