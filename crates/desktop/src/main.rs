@@ -1,3 +1,5 @@
+use lean_editor_core::Document;
+use std::env;
 use winit::{
     application::ApplicationHandler,
     event::{ElementState, KeyEvent, WindowEvent},
@@ -9,6 +11,7 @@ use winit::{
 #[derive(Default)]
 struct App {
     window: Option<Window>,
+    document: Option<Document>,
 }
 
 impl ApplicationHandler for App {
@@ -51,6 +54,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     event_loop.set_control_flow(ControlFlow::Wait);
 
     let mut app = App::default();
+
+    let args: Vec<String> = env::args().collect();
+    if args.len() > 1 {
+        match Document::open(&args[1]) {
+            Ok(doc) => app.document = Some(doc),
+            Err(e) => eprintln!("Failed to load document: {}", e),
+        }
+    }
+
     event_loop.run_app(&mut app)?;
 
     Ok(())
