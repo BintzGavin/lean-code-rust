@@ -23,6 +23,10 @@ pub struct ExtensionManifest {
     #[serde(rename = "activationEvents")]
     pub activation_events: Option<Vec<String>>,
     pub contributes: Option<ExtensionContributes>,
+    #[serde(rename = "extensionDependencies")]
+    pub extension_dependencies: Option<Vec<String>>,
+    #[serde(rename = "extensionPack")]
+    pub extension_pack: Option<Vec<String>>,
 }
 
 impl ExtensionManifest {
@@ -56,7 +60,14 @@ mod tests {
                         "title": "Hello World"
                     }
                 ]
-            }
+            },
+            "extensionDependencies": [
+                "some.dependency"
+            ],
+            "extensionPack": [
+                "some.pack1",
+                "some.pack2"
+            ]
         }"#;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
@@ -75,6 +86,15 @@ mod tests {
         assert_eq!(commands.len(), 1);
         assert_eq!(commands[0].command, "extension.helloWorld");
         assert_eq!(commands[0].title, "Hello World");
+
+        let dependencies = manifest.extension_dependencies.unwrap();
+        assert_eq!(dependencies.len(), 1);
+        assert_eq!(dependencies[0], "some.dependency");
+
+        let pack = manifest.extension_pack.unwrap();
+        assert_eq!(pack.len(), 2);
+        assert_eq!(pack[0], "some.pack1");
+        assert_eq!(pack[1], "some.pack2");
     }
 
     #[test]
@@ -96,6 +116,8 @@ mod tests {
         assert_eq!(manifest.main, None);
         assert_eq!(manifest.activation_events, None);
         assert_eq!(manifest.contributes, None);
+        assert_eq!(manifest.extension_dependencies, None);
+        assert_eq!(manifest.extension_pack, None);
     }
 
     #[test]
