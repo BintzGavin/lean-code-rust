@@ -35,10 +35,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-001",
     "plan": ".sys/plans/quality/quality-001-x0001-node-host-lifecycle.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": []
+    "attempt": 1,
+    "result": "Completed implementation of X-0001 Node host lifecycle fixture. Verified successfully."
   }
 ]
 ```
