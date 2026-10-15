@@ -55,6 +55,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented crash-safe save via `File::create`, `write_all`, `sync_data`, and explicit drop before rename. Updated README docs. All tests and checks passed."
+  },
+  {
+    "id": "EDITOR-CORE-004",
+    "plan": ".sys/plans/editor-core/editor-core-004-external-change-detection.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
