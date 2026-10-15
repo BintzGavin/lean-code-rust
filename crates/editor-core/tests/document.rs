@@ -211,3 +211,49 @@ fn external_change_detection() {
     fs::remove_file(&fixture.file).unwrap();
     assert!(document.has_external_changes().is_err());
 }
+
+#[test]
+fn reload_updates_buffer_and_clears_dirty_from_external_changes() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    // Modify file on disk externally
+    fs::write(&fixture.file, b"external edit").unwrap();
+
+    // Reload the document
+    document.reload().unwrap();
+
+    // Check that buffer is updated
+    assert_eq!(document.text(), "external edit");
+
+    // Should be clean
+    assert!(!document.is_dirty());
+
+    // Should not have external changes relative to the reloaded time
+    assert!(!document.has_external_changes().unwrap());
+}
+
+#[test]
+fn reload_preserves_buffer_on_missing_file_or_invalid_utf8() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+
+    // Invalid UTF-8
+    fs::write(&fixture.file, &[0xff, 0xfe, 0x80]).unwrap();
+    let err = document.reload().unwrap_err();
+    assert_eq!(err.kind(), io::ErrorKind::InvalidData);
+
+    // Buffer unchanged
+    assert_eq!(document.text(), "unsaved");
+    assert!(document.is_dirty());
+
+    // Missing file
+    fs::remove_file(&fixture.file).unwrap();
+    let err = document.reload().unwrap_err();
+    assert_eq!(err.kind(), io::ErrorKind::NotFound);
+
+    // Buffer unchanged
+    assert_eq!(document.text(), "unsaved");
+    assert!(document.is_dirty());
+}
