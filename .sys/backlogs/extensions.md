@@ -63,6 +63,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Extended ExtensionManifest to parse extensionDependencies and extensionPack."
+  },
+  {
+    "id": "extensions-005",
+    "plan": ".sys/plans/extensions/extensions-005-parse-contributes-configuration-keybindings.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
