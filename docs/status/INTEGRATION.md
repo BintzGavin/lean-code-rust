@@ -59,3 +59,10 @@ Work orders have been completed.
 - **Dependency**: Existing `ready` entry (`integration-004`) in backlog.
 - **Question**: None
 - **Resolution evidence**: None
+### integration-004 — completed
+- **Result:** Successfully updated `tooling/validate_repo.sh` to run tests and format checks on the entire workspace.
+- **Changed files:** `tooling/validate_repo.sh`
+- **Checks:** `bash tooling/validate_repo.sh`
+- **Dependency:** None
+- **Question:** None
+- **Resolution:** Validated workspace successfully.
