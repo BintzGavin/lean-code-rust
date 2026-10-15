@@ -43,10 +43,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-002",
     "plan": ".sys/plans/integration/integration-002-release-packaging.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed: Established initial packaging framework by creating a release build script and documentation."
   }
 ]
 ```
