@@ -79,6 +79,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added parsing for contributes.menus"
+  },
+  {
+    "id": "extensions-007",
+    "plan": ".sys/plans/extensions/extensions-007-parse-contributes-theme-grammar-snippets.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
