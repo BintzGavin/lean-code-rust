@@ -71,6 +71,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added reload method to Document, updated tests and README. All checks passed."
+  },
+  {
+    "id": "EDITOR-CORE-006",
+    "plan": ".sys/plans/editor-core/editor-core-006-undo-redo.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
