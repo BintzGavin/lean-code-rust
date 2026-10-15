@@ -55,6 +55,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed successfully. Keyboard events are properly routed to close the window on Escape."
+  },
+  {
+    "id": "desktop-004",
+    "plan": ".sys/plans/desktop/desktop-004-editor-core-integration.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
