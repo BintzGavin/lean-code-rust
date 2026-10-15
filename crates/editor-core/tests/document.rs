@@ -257,3 +257,66 @@ fn failed_reload_leaves_document_intact() {
     assert!(document.is_dirty());
     assert_eq!(document.text(), "unsaved");
 }
+
+#[test]
+fn undo_and_redo_restore_text() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    document.replace_text("edit 1");
+    document.replace_text("edit 2");
+    assert_eq!(document.text(), "edit 2");
+    assert!(document.is_dirty());
+
+    assert!(document.undo());
+    assert_eq!(document.text(), "edit 1");
+    assert!(document.is_dirty());
+
+    assert!(document.undo());
+    assert_eq!(document.text(), "original");
+    assert!(!document.is_dirty());
+
+    assert!(!document.undo()); // empty history
+    assert_eq!(document.text(), "original");
+
+    assert!(document.redo());
+    assert_eq!(document.text(), "edit 1");
+    assert!(document.is_dirty());
+
+    assert!(document.redo());
+    assert_eq!(document.text(), "edit 2");
+
+    assert!(!document.redo()); // empty redo history
+}
+
+#[test]
+fn new_edit_clears_redo_history() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    document.replace_text("edit 1");
+    document.replace_text("edit 2");
+    document.undo();
+    assert_eq!(document.text(), "edit 1");
+
+    document.replace_text("edit 3");
+    assert!(!document.redo()); // redo is cleared
+    assert_eq!(document.text(), "edit 3");
+
+    document.undo();
+    assert_eq!(document.text(), "edit 1");
+}
+
+#[test]
+fn reload_clears_undo_and_redo_history() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    document.replace_text("edit 1");
+    document.undo();
+    document.redo();
+
+    document.reload().unwrap();
+    assert!(!document.undo());
+    assert!(!document.redo());
+}

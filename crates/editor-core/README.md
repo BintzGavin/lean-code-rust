@@ -48,8 +48,8 @@ new synthetic directories; no personal input files or network are needed.
   is available via `has_external_changes()`. Relative paths require
   the process working directory to stay unchanged.
 - The whole text and saved snapshot are stored in memory; replacement and dirty
-  comparison are whole-document operations. There is no undo, incremental edit,
-  autosave, recovery journal or large-file optimization.
+  comparison are whole-document operations. There is basic linear undo/redo,
+  but no incremental edit, autosave, recovery journal or large-file optimization.
 - Interrupted processes can leave synthetic temp files; normal example cleanup
   is checked, and error cleanup is best effort.
 - Passing these synthetic tests establishes neither VS Code parity nor a
