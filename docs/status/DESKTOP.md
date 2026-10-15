@@ -87,3 +87,15 @@ No work order has been completed yet.
 - **Dependency**: `desktop-006` must be resolved before new planning can proceed.
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-006
+**State:** completed
+**Result:** Wired Cmd/Ctrl+Z for undo, and Cmd/Ctrl+Shift+Z or Cmd/Ctrl+Y for redo in desktop app.
+**Changed Files:**
+- `crates/desktop/src/main.rs`
+**Checks:**
+- `cargo check --manifest-path crates/desktop/Cargo.toml`
+- `cargo test --manifest-path crates/desktop/Cargo.toml`
+**Dependency:** none
+**Question:** none
+**Resolution:** none
