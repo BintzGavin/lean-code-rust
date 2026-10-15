@@ -91,10 +91,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-008",
     "plan": ".sys/plans/editor-core/editor-core-008-incremental-edit.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Implemented edit_range method to Document. Verified substring replacement, out of bounds panics, and integration with undo/redo stack. Updated README. All tests passed."
   }
 ]
 ```
