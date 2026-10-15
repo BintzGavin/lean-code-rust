@@ -1,0 +1,26 @@
+{
+  "name": "x0002-document-workspace",
+  "displayName": "X-0002 Document/Workspace Fixture",
+  "description": "Fixture for observing document and workspace APIs.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0002.editSave",
+    "onCommand:x0002.cancelEdit"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0002.editSave",
+        "title": "X-0002: Successful Edit and Save"
+      },
+      {
+        "command": "x0002.cancelEdit",
+        "title": "X-0002: Denied Edit and Cancellation"
+      }
+    ]
+  }
+}

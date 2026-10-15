@@ -12,6 +12,15 @@
 
 ## Current state
 
+### quality-002 — completed
+- **Result**: Completed implementation of X-0002 Document/workspace fixture. Verified successfully.
+- **Changed files**: tests/compatibility/x0002_document_workspace/package.json, tests/compatibility/x0002_document_workspace/extension.js, tests/compatibility/x0002_document_workspace/test.sh
+- **Checks**: bash tests/compatibility/x0002_document_workspace/test.sh (Success), python3 tooling/check_scaffold.py --role quality (Success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
+
 ### quality-001 — completed
 - **Result**: Implemented X-0001 Node host lifecycle fixture
 - **Changed files**: tests/compatibility/x0001_node_host/package.json, tests/compatibility/x0001_node_host/extension.js, tests/compatibility/x0001_node_host/synthetic.txt, tests/compatibility/x0001_node_host/test.sh
@@ -32,10 +41,3 @@
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
 
-### QUALITY-PLANNER — blocked
-- **Result**: Blocked and paused
-- **Changed files**: None
-- **Checks**: None
-- **Dependency**: A ready entry exists in .sys/backlogs/quality.md
-- **Question**: None
-- **Resolution evidence**: None
