@@ -51,10 +51,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-003",
     "plan": ".sys/plans/desktop/desktop-003-keyboard-input.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed successfully. Keyboard events are properly routed to close the window on Escape."
   }
 ]
 ```

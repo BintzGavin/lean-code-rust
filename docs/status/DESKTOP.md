@@ -47,3 +47,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-003 — completed
+- **Result**: Completed successfully. Keyboard events are properly routed to close the window on Escape.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
