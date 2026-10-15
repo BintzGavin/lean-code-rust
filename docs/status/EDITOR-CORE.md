@@ -38,3 +38,11 @@
 
 ### EDITOR-CORE-PLANNER — blocked
 - **Result**: Planning is blocked because the backlog already contains a ready entry (EDITOR-CORE-007).
+
+
+### EDITOR-CORE-009 — completed
+**Result:** Modified `save_as` to check for external changes and return `io::ErrorKind::AlreadyExists` if concurrent changes are detected. Added `force_save_for_testing` to allow internal save tests to bypass external check. Updated README and tests.
+**Changed files:** `crates/editor-core/src/lib.rs`, `crates/editor-core/tests/document.rs`, `crates/editor-core/README.md`
+**Checks:** `CARGO_BUILD_JOBS=1 cargo test --workspace`, `cargo fmt --all --check`
+**Dependency:** None
+**Question:** None

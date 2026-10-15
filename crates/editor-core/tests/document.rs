@@ -140,7 +140,7 @@ fn failed_save_retains_buffer_dirty_state_and_last_saved_baseline() {
     // A directory cannot be written as a file, regardless of permissions/root.
     fs::remove_file(&fixture.file).unwrap();
     fs::create_dir(&fixture.file).unwrap();
-    assert!(document.save().is_err());
+    assert!(document.force_save_for_testing().is_err());
     assert_eq!(document.text(), "unsaved");
     assert_eq!(document.path(), fixture.file);
     assert!(document.is_dirty());
@@ -149,7 +149,7 @@ fn failed_save_retains_buffer_dirty_state_and_last_saved_baseline() {
     assert!(!document.is_dirty());
     document.replace_text("retry");
     fs::remove_dir(&fixture.file).unwrap();
-    document.save().unwrap();
+    document.force_save_for_testing().unwrap();
     assert!(!document.is_dirty());
     assert_eq!(fs::read(&fixture.file).unwrap(), b"retry");
 }
@@ -164,7 +164,7 @@ fn atomic_save_failure_cleans_up_temp_file_and_leaves_target_intact() {
     fs::remove_file(&fixture.file).unwrap();
     fs::create_dir(&fixture.file).unwrap();
 
-    let result = document.save();
+    let result = document.force_save_for_testing();
     assert!(result.is_err());
 
     // The directory we put there should still be intact
@@ -201,6 +201,12 @@ fn external_change_detection() {
     assert!(document.has_external_changes().unwrap());
 
     // Save document
+    document.replace_text("saved");
+    let err = document.save().unwrap_err();
+    assert_eq!(err.kind(), io::ErrorKind::AlreadyExists);
+
+    // We need to reload to continue with external delete test to not have dirty state issues.
+    document.reload().unwrap();
     document.replace_text("saved");
     document.save().unwrap();
 
@@ -347,7 +353,7 @@ fn save_as_failure_retains_original_path_and_dirty_state() {
     let new_path = fixture.directory.join("new_dir");
     fs::create_dir(&new_path).unwrap(); // Target is a directory, rename will fail
 
-    assert!(document.save_as(&new_path).is_err());
+    assert!(document.force_save_as_for_testing(&new_path).is_err());
 
     assert!(document.is_dirty());
     assert_eq!(document.path(), fixture.file);
@@ -412,4 +418,24 @@ fn edit_range_integrates_with_undo_redo() {
 
     assert!(document.redo());
     assert_eq!(document.text(), "01abc56789");
+}
+
+#[test]
+fn save_as_to_different_path_succeeds_even_with_external_changes_on_original() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+
+    // Modify the original file externally
+    let time = std::time::SystemTime::now() + std::time::Duration::from_secs(2);
+    filetime::set_file_mtime(&fixture.file, filetime::FileTime::from_system_time(time)).unwrap();
+    assert!(document.has_external_changes().unwrap());
+
+    let new_path = fixture.directory.join("new_file.txt");
+    // save_as should succeed because we are saving to a DIFFERENT path
+    document.save_as(&new_path).unwrap();
+
+    assert!(!document.is_dirty());
+    assert_eq!(document.path(), new_path);
+    assert_eq!(fs::read(&new_path).unwrap(), b"unsaved");
 }
