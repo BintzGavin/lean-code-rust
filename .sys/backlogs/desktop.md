@@ -71,6 +71,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed successfully. Added save document shortcut to App."
+  },
+  {
+    "id": "desktop-006",
+    "plan": ".sys/plans/desktop/desktop-006-undo-redo.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
