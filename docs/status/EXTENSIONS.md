@@ -69,3 +69,11 @@
 **Changed files:** crates/extensions/src/manifest.rs
 **Checks:** `cargo test --manifest-path crates/extensions/Cargo.toml`
 **Dependencies:** none
+
+### EXTENSIONS-PLANNER — blocked
+- **Result**: Blocked from planning due to existing ready work order.
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: Existing ready entry extensions-007 in .sys/backlogs/extensions.md
+- **Question**: None
+- **Resolution evidence**: None
