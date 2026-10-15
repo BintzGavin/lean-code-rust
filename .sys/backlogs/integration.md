@@ -63,6 +63,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Updated tooling/validate_repo.sh to run cargo commands on the entire workspace."
+  },
+  {
+    "id": "integration-005",
+    "plan": ".sys/plans/integration/integration-005-artifact-size-reporting.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
