@@ -82,3 +82,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-007 — completed
+- **Result**: Created measure_memory.sh script to measure desktop memory usage.
+- **Changed files**: `tooling/measure_memory.sh`
+- **Checks**: `bash tooling/measure_memory.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
