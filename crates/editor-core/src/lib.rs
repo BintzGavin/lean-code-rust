@@ -3,7 +3,7 @@
 //! This crate uses a temporary file and atomic rename for saves.
 //! See the crate README for the contract and its limits.
 
-use std::fs::{self, File};
+use std::fs::{self, OpenOptions};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -75,8 +75,10 @@ impl Document {
     /// Saves are performed by writing to a temporary file in the same directory
     /// and then atomically renaming it to the target path. On failure before or
     /// during the rename, the original target file and the document buffer
-    /// remain unchanged, and the temporary file is deleted. The data is
-    /// synchronized to stable storage before rename to ensure crash durability.
+    /// remain unchanged, and any temporary file created by this save is deleted.
+    /// An existing temporary path causes an error without changing that entry.
+    /// The data is synchronized to stable storage before rename to ensure crash
+    /// durability.
     /// Permission and metadata preservation are not promised.
     pub fn save(&mut self) -> io::Result<()> {
         static NEXT_TEMP_ID: AtomicU64 = AtomicU64::new(0);
@@ -91,7 +93,11 @@ impl Document {
         );
         let temp_path = parent.join(temp_name);
 
-        let mut file = match File::create(&temp_path) {
+        let mut file = match OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(&temp_path)
+        {
             Ok(f) => f,
             Err(e) => return Err(e),
         };
