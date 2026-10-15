@@ -14,7 +14,18 @@ class ScaffoldContracts(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)/'repo'
         source = Path(__file__).resolve().parents[1]
+        self.source = source
         shutil.copytree(source, self.root, ignore=shutil.ignore_patterns('.git', 'target', '__pycache__'))
+        # Contract fixtures must not inherit live queued work or dependencies.
+        initial_plan = '.sys/plans/editor-core/editor-core-001-document-roundtrip.md'
+        for p in (self.root/'.sys/plans').rglob('*.md'):
+            if str(p.relative_to(self.root)) != initial_plan:
+                p.unlink()
+        def retain_initial(data):
+            data[:] = [e for e in data if e['plan'] == initial_plan]
+        for p in (self.root/'.sys/backlogs').glob('*.md'):
+            self.edit(p.relative_to(self.root), retain_initial)
+        self.edit(initial_plan, lambda d: d.update(dependencies=[]))
 
     def tearDown(self):
         self.temp.cleanup()
@@ -31,7 +42,10 @@ class ScaffoldContracts(unittest.TestCase):
     def fingerprint(self):
         return {str(p.relative_to(self.root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in self.root.rglob('*') if p.is_file()}
 
-    def test_real_scaffold_and_checker_is_read_only(self):
+    def test_current_repository_scaffold_is_valid(self):
+        self.assertEqual([], validate(self.source))
+
+    def test_scaffold_checker_is_read_only(self):
         before = self.fingerprint()
         self.assertEqual([], validate(self.root))
         self.assertEqual(before, self.fingerprint())
@@ -72,6 +86,17 @@ class ScaffoldContracts(unittest.TestCase):
     def test_blocked_with_recovery_evidence_is_preserved(self):
         self.edit('.sys/backlogs/editor-core.md', lambda d: d[0].update(state='blocked',claim='none',result='Resource limit: resume after memory_pressure reports at least 40% free and rerun the named core checks.'))
         self.assertEqual([], validate(self.root))
+
+    def test_stacked_nonterminal_work_is_rejected(self):
+        source = self.root/'.sys/plans/editor-core/editor-core-001-document-roundtrip.md'
+        target = source.with_name('editor-core-second.md')
+        target.write_text(source.read_text())
+        self.edit(target.relative_to(self.root), lambda d: d.update(id='EDITOR-CORE-SECOND'))
+        def stack(data):
+            data[0].update(state='ready',claim='none')
+            data.append(dict(data[0],id='EDITOR-CORE-SECOND',plan=str(target.relative_to(self.root))))
+        self.edit('.sys/backlogs/editor-core.md',stack)
+        self.expect('stacked nonterminal work')
 
     def test_readonly_write_conflict(self):
         self.edit('.sys/plans/editor-core/editor-core-001-document-roundtrip.md', lambda d: d['read_only'].append(d['create'][0]))
