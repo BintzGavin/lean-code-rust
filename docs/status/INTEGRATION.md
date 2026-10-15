@@ -66,3 +66,11 @@ Work orders have been completed.
 - **Dependency:** None
 - **Question:** None
 - **Resolution:** Validated workspace successfully.
+
+### integration-005 — completed
+- **Result**: Updated build_release.sh to report artifact size.
+- **Changed files**: `packaging/build_release.sh`
+- **Checks**: `bash packaging/build_release.sh` (success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
