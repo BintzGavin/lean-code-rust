@@ -7,7 +7,8 @@ and read-only specification without existing editor source.
 `Document::open(path)` retains the supplied path and exact UTF-8 text.
 `replace_text` updates only the buffer. `is_dirty` compares it with the text
 from the last successful open/save. `save` writes the current bytes and updates
-that snapshot only after success. `reload` updates the buffer from disk,
+that snapshot only after success. `save_as` writes to a new path, updating the
+document's path and snapshot on success. `reload` updates the buffer from disk,
 replacing the saved snapshot and clearing dirty state. Restoring the saved text
 clears dirty state. Invalid UTF-8 and filesystem failures return `std::io::Error`.
 

@@ -83,10 +83,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-007",
     "plan": ".sys/plans/editor-core/editor-core-007-save-as.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Implemented save_as method on Document to save to a new path and update internal state. Modified save method to delegate to save_as. Added success and failure tests. Updated README. All tests and checks passed."
   }
 ]
 ```
