@@ -79,6 +79,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Reduced desktop binary size by adding optimized release profile."
+  },
+  {
+    "id": "integration-007",
+    "plan": ".sys/plans/integration/integration-007-measure-memory.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
