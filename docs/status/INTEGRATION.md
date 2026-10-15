@@ -74,3 +74,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-006 — completed
+- **Result**: Reduced desktop binary size by adding optimized release profile.
+- **Changed files**: `Cargo.toml`
+- **Checks**: `bash packaging/build_release.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
