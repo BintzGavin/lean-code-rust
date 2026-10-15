@@ -39,3 +39,11 @@ No work order has been completed yet.
 - **Dependency**: `desktop-002` must be resolved before new planning can proceed.
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-002 — completed
+- **Result**: Added winit dependency and initialized native window with event loop.
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
