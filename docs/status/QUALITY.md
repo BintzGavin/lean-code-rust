@@ -25,3 +25,11 @@ No work order has been completed yet.
 - **Question**: [Exact human question for `needs_input`, or “None”]
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
+
+### QUALITY-PLANNER — blocked
+- **Result**: Blocked and paused
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: A ready entry exists in .sys/backlogs/quality.md
+- **Question**: None
+- **Resolution evidence**: None
