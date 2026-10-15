@@ -63,3 +63,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: N/A
 
 ## 7. Result
+
+Added modified_time to Document and implemented has_external_changes method. Added test and updated README. All checks passed.

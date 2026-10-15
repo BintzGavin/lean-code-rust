@@ -59,10 +59,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-004",
     "plan": ".sys/plans/editor-core/editor-core-004-external-change-detection.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Added modified_time to Document and implemented has_external_changes method. Added test and updated README. All checks passed."
   }
 ]
 ```

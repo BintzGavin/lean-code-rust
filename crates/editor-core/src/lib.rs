@@ -7,6 +7,7 @@ use std::fs::{self, File};
 use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicU64, Ordering};
+use std::time::SystemTime;
 
 /// The caller may release a clean document, or retain a cancelled dirty one.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -21,6 +22,7 @@ pub struct Document {
     path: PathBuf,
     text: String,
     persisted_text: String,
+    modified_time: Option<SystemTime>,
 }
 
 impl Document {
@@ -31,10 +33,12 @@ impl Document {
     pub fn open(path: impl AsRef<Path>) -> io::Result<Self> {
         let path = path.as_ref().to_path_buf();
         let text = fs::read_to_string(&path)?;
+        let modified_time = fs::metadata(&path)?.modified().ok();
         Ok(Self {
             path,
             persisted_text: text.clone(),
             text,
+            modified_time,
         })
     }
 
@@ -103,6 +107,7 @@ impl Document {
         }
 
         self.persisted_text.clone_from(&self.text);
+        self.modified_time = fs::metadata(&self.path).and_then(|m| m.modified()).ok();
         Ok(())
     }
 
@@ -111,6 +116,15 @@ impl Document {
     /// This is a decision API, not a UI or lifetime manager. The caller retains
     /// the document on `Cancelled` and may drop it on `Closed`. To close edited
     /// content, save successfully and request close again.
+
+    /// Check if the file on disk has been modified since it was last opened or saved.
+    pub fn has_external_changes(&self) -> io::Result<bool> {
+        let current_modified = fs::metadata(&self.path)?.modified()?;
+        Ok(self
+            .modified_time
+            .map_or(false, |time| current_modified != time))
+    }
+
     pub fn request_close(&self) -> CloseOutcome {
         if self.is_dirty() {
             CloseOutcome::Cancelled

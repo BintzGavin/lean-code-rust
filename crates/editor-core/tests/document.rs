@@ -182,3 +182,32 @@ fn atomic_save_failure_cleans_up_temp_file_and_leaves_target_intact() {
         );
     }
 }
+
+#[test]
+fn external_change_detection() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    // Initially no changes
+    assert!(!document.has_external_changes().unwrap());
+
+    // Modify the file externally
+    // we need to set the modified time manually sometimes because tests are fast
+    // and mtime resolution is low on some OSes
+    let time = std::time::SystemTime::now() + std::time::Duration::from_secs(2);
+    filetime::set_file_mtime(&fixture.file, filetime::FileTime::from_system_time(time)).unwrap();
+
+    // Now it should detect changes
+    assert!(document.has_external_changes().unwrap());
+
+    // Save document
+    document.replace_text("saved");
+    document.save().unwrap();
+
+    // Should no longer have external changes
+    assert!(!document.has_external_changes().unwrap());
+
+    // External delete should result in an error
+    fs::remove_file(&fixture.file).unwrap();
+    assert!(document.has_external_changes().is_err());
+}
