@@ -58,6 +58,43 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
+                        physical_key: PhysicalKey::Code(KeyCode::KeyZ),
+                        ..
+                    },
+                ..
+            } => {
+                let cmd_or_ctrl = self.modifiers.control_key() || self.modifiers.super_key();
+                let shift = self.modifiers.shift_key();
+
+                if cmd_or_ctrl {
+                    if let Some(doc) = &mut self.document {
+                        if shift {
+                            doc.redo();
+                        } else {
+                            doc.undo();
+                        }
+                    }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        physical_key: PhysicalKey::Code(KeyCode::KeyY),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.control_key() || self.modifiers.super_key() {
+                    if let Some(doc) = &mut self.document {
+                        doc.redo();
+                    }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
                         logical_key: Key::Named(NamedKey::Escape),
                         ..
                     },
