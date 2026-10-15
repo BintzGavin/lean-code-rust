@@ -4,7 +4,7 @@ use winit::{
     application::ApplicationHandler,
     event::{ElementState, KeyEvent, WindowEvent},
     event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
-    keyboard::{Key, NamedKey},
+    keyboard::{Key, KeyCode, ModifiersState, NamedKey, PhysicalKey},
     window::{Window, WindowId},
 };
 
@@ -12,6 +12,7 @@ use winit::{
 struct App {
     window: Option<Window>,
     document: Option<Document>,
+    modifiers: ModifiersState,
 }
 
 impl ApplicationHandler for App {
@@ -32,6 +33,26 @@ impl ApplicationHandler for App {
         match event {
             WindowEvent::CloseRequested => {
                 event_loop.exit();
+            }
+            WindowEvent::ModifiersChanged(modifiers) => {
+                self.modifiers = modifiers.state();
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        physical_key: PhysicalKey::Code(KeyCode::KeyS),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.control_key() || self.modifiers.super_key() {
+                    if let Some(doc) = &mut self.document {
+                        if let Err(e) = doc.save() {
+                            eprintln!("Failed to save document: {}", e);
+                        }
+                    }
+                }
             }
             WindowEvent::KeyboardInput {
                 event:
