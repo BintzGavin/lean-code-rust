@@ -42,8 +42,9 @@ new synthetic directories; no personal input files or network are needed.
   Permission and metadata preservation are not promised.
 - Only valid UTF-8 is supported. Bytes within valid UTF-8, including newlines
   and a UTF-8 BOM if present, are not normalized. There is no encoding detection.
-- There is no external-change detection, locking, conflict handling or symlink
-  isolation. Saves can overwrite concurrent changes. Relative paths require
+- There is no locking, conflict handling or symlink
+  isolation. Saves can overwrite concurrent changes. External change detection
+  is available via `has_external_changes()`. Relative paths require
   the process working directory to stay unchanged.
 - The whole text and saved snapshot are stored in memory; replacement and dirty
   comparison are whole-document operations. There is no undo, incremental edit,
