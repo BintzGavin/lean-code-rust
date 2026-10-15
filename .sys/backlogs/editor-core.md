@@ -63,6 +63,15 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added modified_time to Document and implemented has_external_changes method. Added test and updated README. All checks passed."
+  },
+  {
+    "id": "EDITOR-CORE-005",
+    "plan": ".sys/plans/editor-core/editor-core-005-document-reload.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
+
 ```
