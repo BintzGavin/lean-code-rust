@@ -18,3 +18,8 @@
 **Result:** Added reload method to Document, updated tests and README. All checks passed.
 **Changed files:** crates/editor-core/src/lib.rs, crates/editor-core/tests/document.rs, crates/editor-core/README.md
 **Checks:** Cargo test, fmt, example edit_roundtrip, check_scaffold.
+
+### EDITOR-CORE-006 — completed
+- **Result**: Implemented basic linear undo/redo history in `Document`. `replace_text` pushes to undo stack, `undo()` and `redo()` navigate history. All tests passed.
+- **Changed**: `crates/editor-core/src/lib.rs`, `crates/editor-core/tests/document.rs`, `crates/editor-core/README.md`
+- **Checks**: `CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/editor-core/Cargo.toml`, `cargo fmt --manifest-path crates/editor-core/Cargo.toml --check`, `python3 tooling/check_scaffold.py --role editor-core`

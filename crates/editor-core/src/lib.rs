@@ -23,6 +23,8 @@ pub struct Document {
     text: String,
     persisted_text: String,
     modified_time: Option<SystemTime>,
+    undo_stack: Vec<String>,
+    redo_stack: Vec<String>,
 }
 
 impl Document {
@@ -39,6 +41,8 @@ impl Document {
             persisted_text: text.clone(),
             text,
             modified_time,
+            undo_stack: Vec::new(),
+            redo_stack: Vec::new(),
         })
     }
 
@@ -52,7 +56,12 @@ impl Document {
 
     /// Replace only the buffer. No filesystem operations occur here.
     pub fn replace_text(&mut self, text: impl Into<String>) {
-        self.text = text.into();
+        let new_text = text.into();
+        if self.text != new_text {
+            self.undo_stack.push(self.text.clone());
+            self.redo_stack.clear();
+            self.text = new_text;
+        }
     }
 
     /// Compare the buffer with the last successful open/save snapshot.
@@ -134,7 +143,29 @@ impl Document {
         self.text.clone_from(&text);
         self.persisted_text = text;
         self.modified_time = modified_time;
+        self.undo_stack.clear();
+        self.redo_stack.clear();
         Ok(())
+    }
+
+    pub fn undo(&mut self) -> bool {
+        if let Some(prev) = self.undo_stack.pop() {
+            self.redo_stack.push(self.text.clone());
+            self.text = prev;
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn redo(&mut self) -> bool {
+        if let Some(next) = self.redo_stack.pop() {
+            self.undo_stack.push(self.text.clone());
+            self.text = next;
+            true
+        } else {
+            false
+        }
     }
 
     pub fn request_close(&self) -> CloseOutcome {
