@@ -5,7 +5,7 @@ scoped EDITOR-CORE-001 contract, implemented from this repository's work order
 and read-only specification without existing editor source.
 
 `Document::open(path)` retains the supplied path and exact UTF-8 text.
-`replace_text` updates only the buffer. `is_dirty` compares it with the text
+`replace_text` updates only the buffer. `edit_range` replaces a specific character range. Both update the buffer and the undo history. `is_dirty` compares it with the text
 from the last successful open/save. `save` writes the current bytes and updates
 that snapshot only after success. `save_as` writes to a new path, updating the
 document's path and snapshot on success. `reload` updates the buffer from disk,
