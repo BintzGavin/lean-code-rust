@@ -355,3 +355,61 @@ fn save_as_failure_retains_original_path_and_dirty_state() {
     // Original file remains unchanged
     assert_eq!(fs::read(&fixture.file).unwrap(), b"original");
 }
+
+#[test]
+fn edit_range_replaces_substring() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.edit_range(2, 5, "abc");
+    assert_eq!(document.text(), "01abc56789");
+    assert!(document.is_dirty());
+}
+
+#[test]
+fn edit_range_inserts_text() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.edit_range(5, 5, "abc");
+    assert_eq!(document.text(), "01234abc56789");
+    assert!(document.is_dirty());
+}
+
+#[test]
+fn edit_range_deletes_text() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.edit_range(2, 5, "");
+    assert_eq!(document.text(), "0156789");
+    assert!(document.is_dirty());
+}
+
+#[test]
+#[should_panic(expected = "start_char must be <= end_char")]
+fn edit_range_panics_if_start_greater_than_end() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.edit_range(5, 2, "abc");
+}
+
+#[test]
+#[should_panic(expected = "end_char out of bounds")]
+fn edit_range_panics_if_out_of_bounds() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.edit_range(0, 11, "abc");
+}
+
+#[test]
+fn edit_range_integrates_with_undo_redo() {
+    let fixture = Fixture::new(b"0123456789");
+    let mut document = Document::open(&fixture.file).unwrap();
+
+    document.edit_range(2, 5, "abc");
+    assert_eq!(document.text(), "01abc56789");
+
+    assert!(document.undo());
+    assert_eq!(document.text(), "0123456789");
+
+    assert!(document.redo());
+    assert_eq!(document.text(), "01abc56789");
+}

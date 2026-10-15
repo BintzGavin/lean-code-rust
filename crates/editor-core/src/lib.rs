@@ -54,6 +54,39 @@ impl Document {
         &self.text
     }
 
+    /// Replace the text between `start_char` and `end_char` (0-indexed character offsets) with `new_text`.
+    /// Panics if the indices are out of bounds or if `start_char > end_char`.
+    pub fn edit_range(&mut self, start_char: usize, end_char: usize, new_text: &str) {
+        assert!(start_char <= end_char, "start_char must be <= end_char");
+
+        let char_count = self.text.chars().count();
+        assert!(end_char <= char_count, "end_char out of bounds");
+
+        let byte_start = self
+            .text
+            .char_indices()
+            .nth(start_char)
+            .map(|(i, _)| i)
+            .unwrap_or(self.text.len());
+        let byte_end = self
+            .text
+            .char_indices()
+            .nth(end_char)
+            .map(|(i, _)| i)
+            .unwrap_or(self.text.len());
+
+        let mut next_text = String::with_capacity(self.text.len() + new_text.len());
+        next_text.push_str(&self.text[..byte_start]);
+        next_text.push_str(new_text);
+        next_text.push_str(&self.text[byte_end..]);
+
+        if self.text != next_text {
+            self.undo_stack.push(self.text.clone());
+            self.redo_stack.clear();
+            self.text = next_text;
+        }
+    }
+
     /// Replace only the buffer. No filesystem operations occur here.
     pub fn replace_text(&mut self, text: impl Into<String>) {
         let new_text = text.into();
