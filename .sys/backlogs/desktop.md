@@ -79,6 +79,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Wired Cmd/Ctrl+Z for undo, and Cmd/Ctrl+Shift+Z or Cmd/Ctrl+Y for redo in desktop app."
+  },
+  {
+    "id": "desktop-007",
+    "plan": ".sys/plans/desktop/desktop-007-prevent-dirty-close.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
