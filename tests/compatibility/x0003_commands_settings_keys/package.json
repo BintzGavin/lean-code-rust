@@ -1,0 +1,44 @@
+{
+  "name": "x0003-commands-settings-keys",
+  "displayName": "X-0003 Commands/Settings/Keys Fixture",
+  "description": "Fixture for observing command registration, configuration schema, and keybinding context.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0003.invokeCommand",
+    "onCommand:x0003.testConfiguration"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0003.invokeCommand",
+        "title": "X-0003: Invoke Command with Args"
+      },
+      {
+        "command": "x0003.testConfiguration",
+        "title": "X-0003: Test Configuration Update"
+      }
+    ],
+    "configuration": {
+      "title": "X-0003 Settings",
+      "properties": {
+        "x0003.testSetting": {
+          "type": "string",
+          "default": "default",
+          "description": "A test setting for X-0003"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "x0003.invokeCommand",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "when": "x0003Context == true"
+      }
+    ]
+  }
+}
