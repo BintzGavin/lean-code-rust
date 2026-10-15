@@ -38,3 +38,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-002 — completed
+- **Result**: Established initial packaging framework by creating a release build script and documentation.
+- **Changed files**: `packaging/build_release.sh`, `docs/release/README.md`, `.gitignore`
+- **Checks**: `bash packaging/build_release.sh` (success), `python3 tooling/check_scaffold.py --role integration` (success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
