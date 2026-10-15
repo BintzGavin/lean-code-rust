@@ -25,12 +25,47 @@ pub struct ExtensionMenuItem {
     pub alt: Option<String>,
 }
 
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionTheme {
+    pub label: Option<String>,
+    #[serde(rename = "uiTheme")]
+    pub ui_theme: Option<String>,
+    pub path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionLanguage {
+    pub id: String,
+    pub aliases: Option<Vec<String>>,
+    pub extensions: Option<Vec<String>>,
+    pub configuration: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionGrammar {
+    pub language: Option<String>,
+    #[serde(rename = "scopeName")]
+    pub scope_name: Option<String>,
+    pub path: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionSnippet {
+    pub language: Option<String>,
+    pub path: String,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
     pub keybindings: Option<Vec<ExtensionKeybinding>>,
     pub menus: Option<HashMap<String, Vec<ExtensionMenuItem>>>,
+    pub themes: Option<Vec<ExtensionTheme>>,
+    pub languages: Option<Vec<ExtensionLanguage>>,
+    pub grammars: Option<Vec<ExtensionGrammar>>,
+    pub snippets: Option<Vec<ExtensionSnippet>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -153,6 +188,7 @@ mod tests {
         assert_eq!(palette_menus[0].group, None);
         assert_eq!(palette_menus[0].alt, None);
 
+
         let dependencies = manifest.extension_dependencies.unwrap();
         assert_eq!(dependencies.len(), 1);
         assert_eq!(dependencies[0], "some.dependency");
@@ -161,6 +197,75 @@ mod tests {
         assert_eq!(pack.len(), 2);
         assert_eq!(pack[0], "some.pack1");
         assert_eq!(pack[1], "some.pack2");
+    }
+
+    #[test]
+    fn test_parse_themes_languages_grammars_snippets() {
+        let json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "themes": [
+                    {
+                        "label": "Synthetic Theme",
+                        "uiTheme": "vs-dark",
+                        "path": "./synthetic-theme.json"
+                    }
+                ],
+                "languages": [
+                    {
+                        "id": "synthetic",
+                        "aliases": ["Synthetic", "synth"],
+                        "extensions": [".synth"],
+                        "configuration": "./synthetic-language-configuration.json"
+                    }
+                ],
+                "grammars": [
+                    {
+                        "language": "synthetic",
+                        "scopeName": "source.synthetic",
+                        "path": "./synthetic-grammar.json"
+                    }
+                ],
+                "snippets": [
+                    {
+                        "language": "synthetic",
+                        "path": "./synthetic-snippets.json"
+                    }
+                ]
+            }
+        }"#;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        let contributes = manifest.contributes.unwrap();
+
+        let themes = contributes.themes.unwrap();
+        assert_eq!(themes.len(), 1);
+        assert_eq!(themes[0].label, Some("Synthetic Theme".to_string()));
+        assert_eq!(themes[0].ui_theme, Some("vs-dark".to_string()));
+        assert_eq!(themes[0].path, "./synthetic-theme.json");
+
+        let languages = contributes.languages.unwrap();
+        assert_eq!(languages.len(), 1);
+        assert_eq!(languages[0].id, "synthetic");
+        assert_eq!(languages[0].aliases, Some(vec!["Synthetic".to_string(), "synth".to_string()]));
+        assert_eq!(languages[0].extensions, Some(vec![".synth".to_string()]));
+        assert_eq!(languages[0].configuration, Some("./synthetic-language-configuration.json".to_string()));
+
+        let grammars = contributes.grammars.unwrap();
+        assert_eq!(grammars.len(), 1);
+        assert_eq!(grammars[0].language, Some("synthetic".to_string()));
+        assert_eq!(grammars[0].scope_name, Some("source.synthetic".to_string()));
+        assert_eq!(grammars[0].path, "./synthetic-grammar.json");
+
+        let snippets = contributes.snippets.unwrap();
+        assert_eq!(snippets.len(), 1);
+        assert_eq!(snippets[0].language, Some("synthetic".to_string()));
+        assert_eq!(snippets[0].path, "./synthetic-snippets.json");
     }
 
     #[test]
