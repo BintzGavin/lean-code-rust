@@ -71,6 +71,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Extended ExtensionContributes to parse configuration and keybindings."
+  },
+  {
+    "id": "extensions-006",
+    "plan": ".sys/plans/extensions/extensions-006-parse-contributes-menus.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
