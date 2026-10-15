@@ -63,3 +63,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### DESKTOP-PLANNER — blocked
+- **Result**: The role-local backlog already contains a `ready` entry (`desktop-005`).
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: `desktop-005` must be resolved before new planning can proceed.
+- **Question**: None
+- **Resolution evidence**: None
