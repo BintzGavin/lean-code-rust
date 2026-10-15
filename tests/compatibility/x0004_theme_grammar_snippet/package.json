@@ -1,0 +1,40 @@
+{
+  "name": "x0004-theme-grammar-snippet",
+  "displayName": "Synthetic Theme and Grammar",
+  "description": "Synthetic extension for theme, grammar, language, and snippet testing",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "main": "./extension.js",
+  "contributes": {
+    "themes": [
+      {
+        "label": "Synthetic Theme",
+        "uiTheme": "vs-dark",
+        "path": "./synthetic-theme.json"
+      }
+    ],
+    "languages": [
+      {
+        "id": "synthetic",
+        "aliases": ["Synthetic", "synth"],
+        "extensions": [".synth"],
+        "configuration": "./synthetic-language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "synthetic",
+        "scopeName": "source.synthetic",
+        "path": "./synthetic-grammar.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "synthetic",
+        "path": "./synthetic-snippets.json"
+      }
+    ]
+  }
+}

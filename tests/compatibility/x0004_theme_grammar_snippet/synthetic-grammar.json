@@ -1,0 +1,9 @@
+{
+  "scopeName": "source.synthetic",
+  "patterns": [
+    {
+      "match": "\\b(if|else|while)\\b",
+      "name": "keyword.control.synthetic"
+    }
+  ]
+}

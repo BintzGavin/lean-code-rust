@@ -1,0 +1,15 @@
+{
+  "name": "Synthetic Theme",
+  "type": "dark",
+  "colors": {
+    "editor.background": "#1e1e1e"
+  },
+  "tokenColors": [
+    {
+      "scope": "keyword",
+      "settings": {
+        "foreground": "#569cd6"
+      }
+    }
+  ]
+}
