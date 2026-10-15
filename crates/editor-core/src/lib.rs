@@ -127,7 +127,35 @@ impl Document {
     /// remain unchanged, and any temporary file created by this save is deleted.
     /// An existing temporary path causes an error without changing that entry.
     /// The data is synchronized to stable storage before rename to ensure crash durability.
+    #[doc(hidden)]
+    pub fn force_save_for_testing(&mut self) -> io::Result<()> {
+        let path = self.path.clone();
+        self.force_save_as_for_testing(&path)
+    }
+
+    #[doc(hidden)]
+    pub fn force_save_as_for_testing(&mut self, new_path: impl AsRef<Path>) -> io::Result<()> {
+        self.save_as_internal(new_path, false)
+    }
+
     pub fn save_as(&mut self, new_path: impl AsRef<Path>) -> io::Result<()> {
+        self.save_as_internal(new_path, true)
+    }
+
+    fn save_as_internal(
+        &mut self,
+        new_path: impl AsRef<Path>,
+        check_external: bool,
+    ) -> io::Result<()> {
+        let new_path_ref = new_path.as_ref();
+        let is_same_path = self.path == new_path_ref;
+        if check_external && is_same_path && self.has_external_changes().unwrap_or(true) {
+            return Err(io::Error::new(
+                io::ErrorKind::AlreadyExists,
+                "File has been modified externally since it was opened",
+            ));
+        }
+
         let new_path = new_path.as_ref().to_path_buf();
         static NEXT_TEMP_ID: AtomicU64 = AtomicU64::new(0);
         let parent = new_path.parent().unwrap_or_else(|| Path::new(""));
