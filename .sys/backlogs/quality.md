@@ -43,10 +43,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-002",
     "plan": ".sys/plans/quality/quality-002-x0002-document-workspace.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed implementation of X-0002 Document/workspace fixture. Verified successfully."
   }
 ]
 ```
