@@ -1,0 +1,26 @@
+{
+  "name": "x0001-node-host",
+  "displayName": "X-0001 Node Host Lifecycle",
+  "description": "Fixture for observing extension host lifecycle and activation.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0001.activate",
+    "onCommand:x0001.subsequentCommand"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0001.activate",
+        "title": "X-0001: Activate and read synthetic file"
+      },
+      {
+        "command": "x0001.subsequentCommand",
+        "title": "X-0001: Independent subsequent command"
+      }
+    ]
+  }
+}

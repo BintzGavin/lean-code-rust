@@ -1,0 +1,1 @@
+This is a synthetic file for testing X-0001 Node host lifecycle.
