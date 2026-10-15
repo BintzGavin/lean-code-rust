@@ -55,3 +55,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-004 — completed
+- **Result**: Added lean-editor-core dependency and integrated Document loading into App state.
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `bash tooling/validate_repo.sh`, `CARGO_BUILD_JOBS=1 cargo test --workspace`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
