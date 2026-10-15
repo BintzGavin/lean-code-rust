@@ -75,10 +75,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-006",
     "plan": ".sys/plans/integration/integration-006-release-profile.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed: Reduced desktop binary size by adding optimized release profile."
   }
 ]
 ```
