@@ -71,3 +71,11 @@ No work order has been completed yet.
 - **Dependency**: `desktop-005` must be resolved before new planning can proceed.
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-005 — completed
+- **Result**: Implemented Ctrl+S / Cmd+S shortcut to save the document.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

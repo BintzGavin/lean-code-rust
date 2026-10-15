@@ -25,7 +25,6 @@ pub struct ExtensionMenuItem {
     pub alt: Option<String>,
 }
 
-
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionTheme {
     pub label: Option<String>,
@@ -188,7 +187,6 @@ mod tests {
         assert_eq!(palette_menus[0].group, None);
         assert_eq!(palette_menus[0].alt, None);
 
-
         let dependencies = manifest.extension_dependencies.unwrap();
         assert_eq!(dependencies.len(), 1);
         assert_eq!(dependencies[0], "some.dependency");
@@ -252,9 +250,15 @@ mod tests {
         let languages = contributes.languages.unwrap();
         assert_eq!(languages.len(), 1);
         assert_eq!(languages[0].id, "synthetic");
-        assert_eq!(languages[0].aliases, Some(vec!["Synthetic".to_string(), "synth".to_string()]));
+        assert_eq!(
+            languages[0].aliases,
+            Some(vec!["Synthetic".to_string(), "synth".to_string()])
+        );
         assert_eq!(languages[0].extensions, Some(vec![".synth".to_string()]));
-        assert_eq!(languages[0].configuration, Some("./synthetic-language-configuration.json".to_string()));
+        assert_eq!(
+            languages[0].configuration,
+            Some("./synthetic-language-configuration.json".to_string())
+        );
 
         let grammars = contributes.grammars.unwrap();
         assert_eq!(grammars.len(), 1);
