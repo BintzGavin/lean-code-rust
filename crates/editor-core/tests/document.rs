@@ -320,3 +320,38 @@ fn reload_clears_undo_and_redo_history() {
     assert!(!document.undo());
     assert!(!document.redo());
 }
+
+#[test]
+fn save_as_updates_path_and_clears_dirty_state() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+    assert!(document.is_dirty());
+
+    let new_path = fixture.directory.join("new_file.txt");
+    document.save_as(&new_path).unwrap();
+
+    assert!(!document.is_dirty());
+    assert_eq!(document.path(), new_path);
+    assert_eq!(fs::read(&new_path).unwrap(), b"unsaved");
+    // Original file remains unchanged
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"original");
+}
+
+#[test]
+fn save_as_failure_retains_original_path_and_dirty_state() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+
+    let new_path = fixture.directory.join("new_dir");
+    fs::create_dir(&new_path).unwrap(); // Target is a directory, rename will fail
+
+    assert!(document.save_as(&new_path).is_err());
+
+    assert!(document.is_dirty());
+    assert_eq!(document.path(), fixture.file);
+    assert_eq!(document.text(), "unsaved");
+    // Original file remains unchanged
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"original");
+}

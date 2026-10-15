@@ -24,5 +24,11 @@
 - **Changed**: `crates/editor-core/src/lib.rs`, `crates/editor-core/tests/document.rs`, `crates/editor-core/README.md`
 - **Checks**: `CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/editor-core/Cargo.toml`, `cargo fmt --manifest-path crates/editor-core/Cargo.toml --check`, `python3 tooling/check_scaffold.py --role editor-core`
 
+
+### EDITOR-CORE-007 — completed
+- **Result**: Implemented save_as method on Document to save to a new path and update internal state. Modified save method to delegate to save_as. Added success and failure tests. Updated README. All tests and checks passed.
+- **Changed**: crates/editor-core/src/lib.rs, crates/editor-core/tests/document.rs, crates/editor-core/README.md
+- **Checks**: CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/editor-core/Cargo.toml, cargo fmt, check_scaffold.
+
 ### EDITOR-CORE-PLANNER — blocked
 - **Result**: Planning is blocked because the backlog already contains a ready entry (EDITOR-CORE-007).

@@ -81,9 +81,24 @@ impl Document {
     /// durability.
     /// Permission and metadata preservation are not promised.
     pub fn save(&mut self) -> io::Result<()> {
+        let path = self.path.clone();
+        self.save_as(&path)
+    }
+
+    /// Write current UTF-8 bytes to a new path and update the document's internal path
+    /// on success. The dirty state is cleared, and the internal saved snapshot is updated.
+    ///
+    /// Saves are performed by writing to a temporary file in the target directory
+    /// and then atomically renaming it to the target path. On failure before or
+    /// during the rename, the original target file and the document buffer
+    /// remain unchanged, and any temporary file created by this save is deleted.
+    /// An existing temporary path causes an error without changing that entry.
+    /// The data is synchronized to stable storage before rename to ensure crash durability.
+    pub fn save_as(&mut self, new_path: impl AsRef<Path>) -> io::Result<()> {
+        let new_path = new_path.as_ref().to_path_buf();
         static NEXT_TEMP_ID: AtomicU64 = AtomicU64::new(0);
-        let parent = self.path.parent().unwrap_or_else(|| Path::new(""));
-        let file_name = self.path.file_name().unwrap_or_default();
+        let parent = new_path.parent().unwrap_or_else(|| Path::new(""));
+        let file_name = new_path.file_name().unwrap_or_default();
 
         let temp_name = format!(
             ".{}.{}-{}.tmp",
@@ -116,11 +131,12 @@ impl Document {
 
         drop(file);
 
-        if let Err(e) = fs::rename(&temp_path, &self.path) {
+        if let Err(e) = fs::rename(&temp_path, &new_path) {
             let _ = fs::remove_file(&temp_path);
             return Err(e);
         }
 
+        self.path = new_path.clone();
         self.persisted_text.clone_from(&self.text);
         self.modified_time = fs::metadata(&self.path).and_then(|m| m.modified()).ok();
         Ok(())
