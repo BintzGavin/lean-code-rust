@@ -1,0 +1,43 @@
+{
+  "name": "x0005-tree-view",
+  "displayName": "Synthetic Tree View",
+  "description": "Synthetic extension for testing tree view provider, selection, and refresh",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onView:syntheticTreeView"
+  ],
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "syntheticTreeView",
+          "name": "Synthetic Tree"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "syntheticTreeView.refresh",
+        "title": "Refresh Synthetic Tree",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "syntheticTreeView.remove",
+        "title": "Remove Item"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "syntheticTreeView.refresh",
+          "when": "view == syntheticTreeView",
+          "group": "navigation"
+        }
+      ]
+    }
+  }
+}

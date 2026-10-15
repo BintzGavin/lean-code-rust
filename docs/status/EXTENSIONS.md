@@ -63,3 +63,9 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-006 — completed
+**Result:** Added parsing for contributes.menus
+**Changed files:** crates/extensions/src/manifest.rs
+**Checks:** `cargo test --manifest-path crates/extensions/Cargo.toml`
+**Dependencies:** none
