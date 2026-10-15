@@ -55,3 +55,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-005 — completed
+- **Result**: Extended ExtensionContributes to parse configuration and keybindings.
+- **Changed files**: crates/extensions/src/manifest.rs
+- **Checks**: cargo test --manifest-path crates/extensions/Cargo.toml, python3 tooling/check_scaffold.py --role extensions
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

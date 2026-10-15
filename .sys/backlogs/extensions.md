@@ -67,10 +67,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-005",
     "plan": ".sys/plans/extensions/extensions-005-parse-contributes-configuration-keybindings.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Extended ExtensionContributes to parse configuration and keybindings."
   }
 ]
 ```

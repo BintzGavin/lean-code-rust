@@ -8,8 +8,20 @@ pub struct ExtensionCommand {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionKeybinding {
+    pub command: String,
+    pub key: String,
+    pub mac: Option<String>,
+    pub linux: Option<String>,
+    pub win: Option<String>,
+    pub when: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
+    pub configuration: Option<serde_json::Value>,
+    pub keybindings: Option<Vec<ExtensionKeybinding>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -59,6 +71,24 @@ mod tests {
                         "command": "extension.helloWorld",
                         "title": "Hello World"
                     }
+                ],
+                "configuration": {
+                    "type": "object",
+                    "title": "My config",
+                    "properties": {
+                        "my.setting": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                },
+                "keybindings": [
+                    {
+                        "command": "extension.helloWorld",
+                        "key": "ctrl+f1",
+                        "mac": "cmd+f1",
+                        "when": "editorTextFocus"
+                    }
                 ]
             },
             "extensionDependencies": [
@@ -86,6 +116,16 @@ mod tests {
         assert_eq!(commands.len(), 1);
         assert_eq!(commands[0].command, "extension.helloWorld");
         assert_eq!(commands[0].title, "Hello World");
+
+        assert!(contributes.configuration.is_some());
+
+        let keybindings = contributes.keybindings.unwrap();
+        assert_eq!(keybindings.len(), 1);
+        assert_eq!(keybindings[0].command, "extension.helloWorld");
+        assert_eq!(keybindings[0].key, "ctrl+f1");
+        assert_eq!(keybindings[0].mac, Some("cmd+f1".to_string()));
+        assert_eq!(keybindings[0].when, Some("editorTextFocus".to_string()));
+        assert_eq!(keybindings[0].linux, None);
 
         let dependencies = manifest.extension_dependencies.unwrap();
         assert_eq!(dependencies.len(), 1);
