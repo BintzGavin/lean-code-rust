@@ -55,6 +55,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Extended ExtensionManifest to parse activationEvents and basic contributes.commands."
+  },
+  {
+    "id": "extensions-004",
+    "plan": ".sys/plans/extensions/extensions-004-parse-extension-dependencies.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
