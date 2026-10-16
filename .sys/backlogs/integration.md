@@ -91,10 +91,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-008",
     "plan": ".sys/plans/integration/integration-008-measure-startup.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed: Created measure_startup.sh script to measure desktop application startup time."
   }
 ]
 ```

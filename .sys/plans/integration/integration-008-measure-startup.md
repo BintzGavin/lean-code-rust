@@ -62,3 +62,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: The desktop application cannot be profiled automatically.
 
 ## 7. Result
+Completed: Created measure_startup.sh script to measure desktop application startup time.
