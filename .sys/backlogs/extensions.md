@@ -87,6 +87,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed themes, languages, grammars, and snippets from VS Code extension manifest package.json."
+  },
+  {
+    "id": "extensions-008",
+    "plan": ".sys/plans/extensions/extensions-008-parse-views-and-views-containers.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
