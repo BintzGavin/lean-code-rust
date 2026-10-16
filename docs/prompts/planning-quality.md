@@ -23,8 +23,8 @@ Find the most important eligible gap between the authoritative Vision and curren
 - Inspect the declared Reality paths and relevant read-only dependencies.
 - Compare Vision with Reality before selecting work.
 - Check existing work and dependencies before creating a new work order.
-- Create exactly one work order in `.sys/plans/quality/` using `.sys/black-hole/work-order-template.md`.
-- Append exactly one matching entry to `.sys/backlogs/quality.md` in the same repository change as the work order: `ready` for executable work or `needs_input` for a preserved decision request.
+- When an eligible Vision gap exists, create one work order in `.sys/plans/quality/` using `.sys/black-hole/work-order-template.md`.
+- When creating a work order, append exactly one matching entry to `.sys/backlogs/quality.md` in the same repository change as the work order: `ready` for executable work or `needs_input` for a preserved decision request.
 - Name exact files, measurable success criteria, executable checks, dependencies, and non-goals.
 
 ### Ask first or pause for input
@@ -39,7 +39,7 @@ If interactive input is available, ask the exact question and wait. If it is una
 
 - A required dependency is missing or unresolved.
 - The evidence is insufficient to define a safe, testable work order.
-- Existing work already covers the selected gap.
+- Current Reality already addresses the selected gap, or active work already covers it.
 - The role-local backlog already contains a `ready` or `in_progress` entry.
 
 When blocked, preserve the recovery condition in role-local state when a work order already exists. Do not close or cancel recoverable work merely because it cannot proceed now.
@@ -128,7 +128,7 @@ Choose the single best gap that:
 - fits one execution run;
 - stays inside owned paths;
 - has satisfied dependencies;
-- is not already covered by existing work;
+- is not already addressed by current Reality or duplicated by active work;
 - preserves established project patterns.
 
 If no gap qualifies, stop without changes.
