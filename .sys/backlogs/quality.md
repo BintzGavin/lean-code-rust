@@ -119,6 +119,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Tests executed successfully. Required fixture created."
+  },
+  {
+    "id": "quality-012",
+    "state": "ready",
+    "plan": ".sys/plans/quality/quality-012-x0012-compatibility-boundary.md",
+    "attempt": 0,
+    "claim": "none",
+    "result": null
   }
 ]
 
