@@ -87,6 +87,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed implementation of X-0007 Webview fixture. Verified S-0053 and S-0054 behavior flows successfully."
+  },
+  {
+    "id": "quality-008",
+    "plan": ".sys/plans/quality/quality-008-x0008-language-server.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
