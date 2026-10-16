@@ -99,10 +99,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-009",
     "plan": ".sys/plans/quality/quality-009-x0009-debug-adapter.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed implementation of X-0009 Debug adapter compatibility fixture. Verified S-0057 and S-0058 scenarios successfully."
   }
 ]
 ```
