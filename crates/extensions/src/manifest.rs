@@ -72,6 +72,21 @@ pub struct ExtensionViewContainer {
     pub icon: String,
 }
 
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionDebugger {
+    #[serde(rename = "type")]
+    pub debugger_type: String,
+    pub label: Option<String>,
+    pub program: Option<String>,
+    pub runtime: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionBreakpoint {
+    pub language: String,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
@@ -85,6 +100,8 @@ pub struct ExtensionContributes {
     pub views: Option<HashMap<String, Vec<ExtensionView>>>,
     #[serde(rename = "viewsContainers")]
     pub views_containers: Option<HashMap<String, Vec<ExtensionViewContainer>>>,
+    pub debuggers: Option<Vec<ExtensionDebugger>>,
+    pub breakpoints: Option<Vec<ExtensionBreakpoint>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -351,6 +368,39 @@ mod tests {
             explorer[0].contextual_title,
             Some("Package Explorer".to_string())
         );
+    }
+
+
+    #[test]
+    fn test_parse_debuggers_and_breakpoints() {
+        let json = r#"{
+            "debuggers": [
+                {
+                    "type": "node",
+                    "label": "Node Debug",
+                    "program": "./out/debugAdapter.js",
+                    "runtime": "node"
+                }
+            ],
+            "breakpoints": [
+                {
+                    "language": "javascript"
+                }
+            ]
+        }"#;
+
+        let contributes: ExtensionContributes = serde_json::from_str(json).unwrap();
+
+        let debuggers = contributes.debuggers.unwrap();
+        assert_eq!(debuggers.len(), 1);
+        assert_eq!(debuggers[0].debugger_type, "node");
+        assert_eq!(debuggers[0].label, Some("Node Debug".to_string()));
+        assert_eq!(debuggers[0].program, Some("./out/debugAdapter.js".to_string()));
+        assert_eq!(debuggers[0].runtime, Some("node".to_string()));
+
+        let breakpoints = contributes.breakpoints.unwrap();
+        assert_eq!(breakpoints.len(), 1);
+        assert_eq!(breakpoints[0].language, "javascript");
     }
 
     #[test]
