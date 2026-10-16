@@ -139,10 +139,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-014",
     "plan": ".sys/plans/extensions/extensions-014-parse-metadata-and-browser.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed metadata and browser entry point from package.json manifest."
   }
 ]
 ```
