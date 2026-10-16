@@ -519,9 +519,15 @@ mod tests {
 
         let capabilities = manifest.capabilities.unwrap();
         let untrusted = capabilities.get("untrustedWorkspaces").unwrap();
-        assert_eq!(untrusted.get("supported").unwrap().as_str().unwrap(), "limited");
+        assert_eq!(
+            untrusted.get("supported").unwrap().as_str().unwrap(),
+            "limited"
+        );
 
         let extension_kind = manifest.extension_kind.unwrap();
-        assert_eq!(extension_kind, vec!["ui".to_string(), "workspace".to_string()]);
+        assert_eq!(
+            extension_kind,
+            vec!["ui".to_string(), "workspace".to_string()]
+        );
     }
 }

@@ -129,3 +129,11 @@ No work order has been completed yet.
 - **Changed files**: `crates/desktop/src/main.rs`
 - **Checks run**: `cargo test`, `check_scaffold.py`, `validate_repo.sh`
 - **Result**: Successfully added text input handling.
+
+### desktop-010 — completed
+- **Result**: Successfully handled Backspace to remove last character from document.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check`, `cargo test`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
