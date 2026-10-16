@@ -151,3 +151,28 @@ Documentation accuracy follow-up: replaced pre-existing full crash-safety and
 cross-platform lock claims in the touched README/lib API comments with the
 observed `sync_data` → close → rename sequence and its unverified limits. No save
 implementation or durability scope was changed.
+
+### 2026-10-16 — full Cargo validation follow-up
+
+The dependency limitation above is resolved. Normal Cargo retrieval first hit
+sandbox DNS errors resolving `index.crates.io`; that retrying invocation was
+interrupted. The same command through normal permission review succeeded,
+downloading the existing locked `cfg-if 1.0.5`, `filetime 0.2.29` and
+`libc 0.2.190` dependencies from crates.io. No registry, security, dependency or
+lockfile settings were changed.
+
+`CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/editor-core/Cargo.toml --locked`
+passed all **48 integration tests**: 26 in `document.rs`, 20 in
+`recovery_safety.rs`, and one in each existing collision binary. There were zero
+unit/doc tests. After replaying the unpublished correction onto current main
+`ecbbdfa0dc8a57aac359881e65367f6b8158c326`, the same full suite also passed with
+`--offline --locked`. The new main change affects only the extension backlog
+and its new plan, with no overlap in this correction or the Vision expansion.
+
+The offline locked roundtrip example, core formatting, scaffold, all 23 tooling
+tests, spec package validation and whitespace checks also passed on that base.
+The compiler emitted sandbox temporary-directory warnings and used `/tmp`; these
+did not prevent compilation or testing. Resource preflight reported 45% free
+memory; compilation used one job. The earlier independent safety review remains
+applicable to the unchanged code, including its four extra passing probes.
+No GUI/full-editor build, publication, merge or automation change was performed.
