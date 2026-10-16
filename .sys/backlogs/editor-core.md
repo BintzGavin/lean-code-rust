@@ -115,10 +115,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-011",
     "plan": ".sys/plans/editor-core/editor-core-011-no-work.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Executed a safe no-op. No files modified. All checks passed."
   }
 ]
 ```
