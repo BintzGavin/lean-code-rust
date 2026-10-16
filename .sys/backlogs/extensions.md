@@ -127,6 +127,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed enabledApiProposals from package.json manifest."
+  },
+  {
+    "id": "extensions-013",
+    "plan": ".sys/plans/extensions/extensions-013-parse-contributes-problem-matchers.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
