@@ -59,3 +59,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: None
 
 ## 7. Result
+- Successfully added `capabilities` and `extension_kind` fields to `ExtensionManifest`.
+- Added and ran `test_parse_workspace_trust_capabilities_and_extension_kind` which passed successfully.

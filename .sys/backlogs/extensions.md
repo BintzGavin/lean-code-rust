@@ -115,10 +115,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-011",
     "plan": ".sys/plans/extensions/extensions-011-parse-workspace-trust-capabilities.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed workspace trust capabilities and extension kind."
   }
 ]
 ```
