@@ -1,0 +1,25 @@
+{
+  "name": "x0012-compatibility-boundary",
+  "displayName": "X-0012 Compatibility Boundary Fixture",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0012.triggerExcluded",
+    "onCommand:x0012.triggerStable"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0012.triggerExcluded",
+        "title": "X-0012: Trigger Excluded API"
+      },
+      {
+        "command": "x0012.triggerStable",
+        "title": "X-0012: Trigger Stable Control"
+      }
+    ]
+  }
+}
