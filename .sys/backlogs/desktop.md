@@ -103,6 +103,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully added text input handling to main.rs to append typed characters to the document."
+  },
+  {
+    "id": "desktop-010",
+    "plan": ".sys/plans/desktop/desktop-010-backspace-handling.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
