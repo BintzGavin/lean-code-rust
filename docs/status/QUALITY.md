@@ -89,3 +89,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### planner — blocked
+- **Result**: Planner is blocked because the role-local backlog already contains a ready entry (quality-009).
+- **Changed files**: None
+- **Checks**: None
+- **Dependency**: quality-009 must be executed or resolved before new planning can proceed.
+- **Question**: None
+- **Resolution evidence**: None
