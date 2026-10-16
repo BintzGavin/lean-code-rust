@@ -1,0 +1,30 @@
+{
+  "name": "x0011-trust-host-fault",
+  "displayName": "X-0011 Trust and Host Fault Fixture",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0011.controlledAction",
+    "onCommand:x0011.triggerFault"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0011.controlledAction",
+        "title": "X-0011: Controlled Action"
+      },
+      {
+        "command": "x0011.triggerFault",
+        "title": "X-0011: Trigger Host Fault"
+      }
+    ]
+  }
+}
