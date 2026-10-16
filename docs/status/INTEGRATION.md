@@ -98,3 +98,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-009 — completed
+- **Result**: Updated startup measurement to use xdotool.
+- **Changed files**: `tooling/measure_startup.sh`
+- **Checks**: `bash tooling/measure_startup.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
