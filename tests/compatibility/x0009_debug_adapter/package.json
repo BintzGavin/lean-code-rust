@@ -1,0 +1,20 @@
+{
+  "name": "x0009-debug-adapter",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onDebug"
+  ],
+  "contributes": {
+    "debuggers": [
+      {
+        "type": "mock-debug",
+        "label": "Mock Debug",
+        "program": "./adapter.js"
+      }
+    ]
+  }
+}
