@@ -123,10 +123,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-012",
     "plan": ".sys/plans/extensions/extensions-012-parse-api-proposals.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed enabledApiProposals from package.json manifest."
   }
 ]
 ```
