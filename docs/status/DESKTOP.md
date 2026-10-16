@@ -24,6 +24,14 @@ No work order has been completed yet.
 - **Resolution evidence**: [Recorded answer or dependency evidence, or “None”]
 ```
 
+### desktop-008 — completed
+- **Result**: Added dynamic window title indicating dirty document state.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
 ### desktop-001 — completed
 - **Result**: Completed successfully. Scaffolded desktop crate.
 - **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`
