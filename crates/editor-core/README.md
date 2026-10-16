@@ -36,11 +36,47 @@ directory, exercises the edit/cancel/save/reopen sequence, and removes only its
 own file and directory. Existing name collisions are skipped. Tests also use
 new synthetic directories; no personal input files or network are needed.
 
+## Manual recovery file safety
+
+`write_backup(path)` creates a **new, caller-owned file** containing the current
+UTF-8 buffer, calls `sync_data`, and closes it. It never truncates an existing
+entry: regular files, symlinks (including dangling ones), hardlinks, and earlier
+backups are rejected. Choose a fresh path for each snapshot. The current document
+destination is rejected even when missing, comparing canonical parent directories
+and the final filename to recognize lexical and directory aliases. If the document
+entry is missing, **all backup paths in its canonical directory are rejected**:
+portable filename comparison cannot rule out case or Unicode normalization aliases.
+Use a separate existing directory for recovery in that case. A dangling symlink
+at the document path causes backup writes to fail conservatively.
+
+`restore_backup(path)` reads UTF-8 into the buffer and clears undo/redo history
+only after a successful read. It leaves the persisted snapshot unchanged, so
+restoring identical text remains clean. Reading a file does not transfer ownership:
+**save, restore, reload, and drop never automatically delete recovery files**.
+This intentionally replaces the unsafe earlier behavior that deleted any supplied
+restore path after save, and that overwrote existing backup paths.
+
+A caller must decide when and how to dispose of retained recovery copies. An
+explicit `save_as(backup_path)` still means replace that destination with the
+current buffer, using the ordinary save contract; the saved destination remains
+present. Merely restoring a file does not authorize its deletion or overwrite.
+The 20 tests in `tests/recovery_safety.rs` cover collisions, borrowed sources,
+missing document destinations, aliases, replaced entries, and save-as-to-backup.
+
+This is manual snapshot storage, not a recovery registry or automatic journal.
+A failed backup write/sync may leave a partial newly created file; it is retained
+for caller inspection instead of removing a possibly replaced pathname. There is
+no guarantee against concurrent parent-directory renames or symlink retargeting
+between path comparison and creation, and no directory-sync or crash-recovery
+claim is added. Relative paths still require an unchanged working directory.
+
 ## Limits
 
 - Saves use a temporary file and atomic rename. Failure preserves the in-memory
   buffer and saved snapshot, and leaves the original file unchanged. Saves are
-  synchronized to stable storage (crash-safe) and handle cross-platform file locks properly.
+  written with `sync_data` and the temporary file is closed before rename.
+  Full crash durability and cross-platform file-lock behavior are not established;
+  there is no directory synchronization or executed crash test.
   Permission and metadata preservation are not promised.
 - Only valid UTF-8 is supported. Bytes within valid UTF-8, including newlines
   and a UTF-8 BOM if present, are not normalized. There is no encoding detection.

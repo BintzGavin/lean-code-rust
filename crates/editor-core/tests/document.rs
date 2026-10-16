@@ -461,9 +461,11 @@ fn backup_and_restore() {
     assert_eq!(new_doc.text(), "unsaved");
     assert!(new_doc.is_dirty());
 
-    // Save should clear the backup
-    new_doc.force_save_for_testing().unwrap();
-    assert!(!backup_path.exists());
+    // Restore only borrows the source; save leaves disposal to the caller.
+    new_doc.save().unwrap();
+    assert_eq!(fs::read(&fixture.file).unwrap(), b"unsaved");
+    assert_eq!(fs::read(&backup_path).unwrap(), b"unsaved");
+    fs::remove_file(&backup_path).unwrap();
 }
 
 #[test]

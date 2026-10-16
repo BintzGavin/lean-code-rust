@@ -25,7 +25,6 @@ pub struct Document {
     modified_time: Option<SystemTime>,
     undo_stack: Vec<String>,
     redo_stack: Vec<String>,
-    backup_path: Option<PathBuf>,
 }
 
 impl Document {
@@ -44,31 +43,66 @@ impl Document {
             modified_time,
             undo_stack: Vec::new(),
             redo_stack: Vec::new(),
-            backup_path: None,
         })
     }
 
-    /// Write the current document state to a backup file.
+    /// Write the current document state to a new, caller-owned backup file.
+    ///
+    /// Existing entries (including symlinks and earlier backups) are rejected.
+    /// The current document destination is also rejected when missing, using
+    /// canonical parent directories to recognize lexical and directory aliases.
+    /// If the document is missing, all backups in its directory are rejected:
+    /// portable filename comparison cannot rule out case/Unicode aliases.
+    /// No backup is automatically removed by save, restore, reload, or drop.
+    /// Failed writes may leave a partial new backup for the caller to inspect.
     pub fn write_backup(&mut self, backup_path: impl AsRef<Path>) -> io::Result<()> {
-        let backup_path = backup_path.as_ref().to_path_buf();
+        let backup_path = backup_path.as_ref();
+        let backup_location = destination_location(backup_path)?;
+        let document_location = destination_location(&self.path)?;
+        // An existing final symlink is rejected by create_new. Resolve the
+        // document's final symlink too: a dangling document link fails closed.
+        let document_target = match fs::symlink_metadata(&self.path) {
+            Ok(metadata) if metadata.file_type().is_symlink() => fs::canonicalize(&self.path)?,
+            Ok(_) => document_location.clone(),
+            Err(error) if error.kind() == io::ErrorKind::NotFound => {
+                // Without an existing entry, canonicalize cannot establish
+                // case/Unicode filename equivalence on this filesystem. Keep
+                // recovery possible in a different existing directory only.
+                if backup_location.parent() == document_location.parent() {
+                    return Err(io::Error::new(
+                        io::ErrorKind::InvalidInput,
+                        "A missing document requires a backup in another directory",
+                    ));
+                }
+                document_location.clone()
+            }
+            Err(error) => return Err(error),
+        };
+        if backup_location == document_location || backup_location == document_target {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "A backup must use a separate document destination",
+            ));
+        }
         let mut file = OpenOptions::new()
             .write(true)
-            .create(true)
-            .truncate(true)
-            .open(&backup_path)?;
+            .create_new(true)
+            .open(backup_path)?;
         file.write_all(self.text.as_bytes())?;
         file.sync_data()?;
-        self.backup_path = Some(backup_path);
+        drop(file);
         Ok(())
     }
 
-    /// Restore the document state from a backup file.
+    /// Read a UTF-8 recovery source into the buffer, without taking ownership.
+    ///
+    /// The source is never removed automatically, even if this document wrote
+    /// it earlier. Dirty state still compares against the last open/save text.
     pub fn restore_backup(&mut self, backup_path: impl AsRef<Path>) -> io::Result<()> {
         let backup_path_ref = backup_path.as_ref();
         let text = fs::read_to_string(backup_path_ref)?;
         self.text = text;
-        // Do not update persisted_text, so it remains dirty
-        self.backup_path = Some(backup_path_ref.to_path_buf());
+        // Keep the persisted snapshot; equal restored text remains clean.
         self.undo_stack.clear();
         self.redo_stack.clear();
         Ok(())
@@ -138,8 +172,8 @@ impl Document {
     /// during the rename, the original target file and the document buffer
     /// remain unchanged, and any temporary file created by this save is deleted.
     /// An existing temporary path causes an error without changing that entry.
-    /// The data is synchronized to stable storage before rename to ensure crash
-    /// durability.
+    /// The temporary file receives `sync_data` and is closed before rename.
+    /// Directory synchronization and full crash durability are not established.
     /// Permission and metadata preservation are not promised.
     pub fn save(&mut self) -> io::Result<()> {
         let path = self.path.clone();
@@ -154,7 +188,8 @@ impl Document {
     /// during the rename, the original target file and the document buffer
     /// remain unchanged, and any temporary file created by this save is deleted.
     /// An existing temporary path causes an error without changing that entry.
-    /// The data is synchronized to stable storage before rename to ensure crash durability.
+    /// The temporary file receives `sync_data` and is closed before rename.
+    /// Directory synchronization and full crash durability are not established.
     #[doc(hidden)]
     pub fn force_save_for_testing(&mut self) -> io::Result<()> {
         let path = self.path.clone();
@@ -225,11 +260,6 @@ impl Document {
         self.persisted_text.clone_from(&self.text);
         self.modified_time = fs::metadata(&self.path).and_then(|m| m.modified()).ok();
 
-        if let Some(backup) = &self.backup_path {
-            let _ = fs::remove_file(backup);
-            self.backup_path = None;
-        }
-
         Ok(())
     }
 
@@ -258,7 +288,6 @@ impl Document {
         self.modified_time = modified_time;
         self.undo_stack.clear();
         self.redo_stack.clear();
-        self.backup_path = None;
         Ok(())
     }
 
@@ -289,4 +318,18 @@ impl Document {
             CloseOutcome::Closed
         }
     }
+}
+
+// Resolve the directory independently so a missing final entry can still be
+// compared with the document destination. This does not lock directories
+// against concurrent renames or symlink retargeting.
+fn destination_location(path: &Path) -> io::Result<PathBuf> {
+    let name = path.file_name().ok_or_else(|| {
+        io::Error::new(io::ErrorKind::InvalidInput, "Expected a file destination")
+    })?;
+    let parent = path
+        .parent()
+        .filter(|parent| !parent.as_os_str().is_empty())
+        .unwrap_or_else(|| Path::new("."));
+    Ok(fs::canonicalize(parent)?.join(name))
 }
