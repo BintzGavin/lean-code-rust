@@ -106,3 +106,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-010 — completed
+- **Result**: Created measure_network.sh script to measure desktop idle network activity.
+- **Changed files**: `tooling/measure_network.sh`
+- **Checks**: `bash packaging/build_release.sh`, `bash tooling/measure_network.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
