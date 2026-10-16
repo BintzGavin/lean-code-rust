@@ -46,3 +46,6 @@
 **Checks:** `CARGO_BUILD_JOBS=1 cargo test --workspace`, `cargo fmt --all --check`
 **Dependency:** None
 **Question:** None
+
+### planner — blocked
+- **Result**: Planning is blocked because the backlog already contains a ready entry (EDITOR-CORE-010).
