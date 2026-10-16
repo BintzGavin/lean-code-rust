@@ -49,3 +49,8 @@
 
 ### planner — blocked
 - **Result**: Planning is blocked because the backlog already contains a ready entry (EDITOR-CORE-010).
+
+### EDITOR-CORE-011 — completed
+**Result:** Executed a safe no-op. No files modified. All checks passed.
+**Changed files:** None
+**Checks:** python3 tooling/check_scaffold.py --role editor-core, bash tooling/validate_repo.sh
