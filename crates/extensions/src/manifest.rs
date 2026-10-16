@@ -124,6 +124,9 @@ pub struct ExtensionManifest {
     #[serde(rename = "activationEvents")]
     pub activation_events: Option<Vec<String>>,
     pub contributes: Option<ExtensionContributes>,
+    pub capabilities: Option<serde_json::Value>,
+    #[serde(rename = "extensionKind")]
+    pub extension_kind: Option<Vec<String>>,
     #[serde(rename = "extensionDependencies")]
     pub extension_dependencies: Option<Vec<String>>,
     #[serde(rename = "extensionPack")]
@@ -491,5 +494,34 @@ mod tests {
 
         let result = ExtensionManifest::parse(json);
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_parse_workspace_trust_capabilities_and_extension_kind() {
+        let json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "capabilities": {
+                "untrustedWorkspaces": {
+                    "supported": "limited",
+                    "description": "Requires trusted workspace"
+                }
+            },
+            "extensionKind": ["ui", "workspace"]
+        }"#;
+
+        let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
+        assert_eq!(manifest.name, "my-extension");
+
+        let capabilities = manifest.capabilities.unwrap();
+        let untrusted = capabilities.get("untrustedWorkspaces").unwrap();
+        assert_eq!(untrusted.get("supported").unwrap().as_str().unwrap(), "limited");
+
+        let extension_kind = manifest.extension_kind.unwrap();
+        assert_eq!(extension_kind, vec!["ui".to_string(), "workspace".to_string()]);
     }
 }
