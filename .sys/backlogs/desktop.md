@@ -87,6 +87,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Application stays open when Escape is pressed or the window is closed if the document is dirty."
+  },
+  {
+    "id": "desktop-008",
+    "plan": ".sys/plans/desktop/desktop-008-dirty-title-indicator.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
