@@ -134,6 +134,23 @@ impl ApplicationHandler for App {
                     event_loop.exit();
                 }
             }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        text: Some(t),
+                        ..
+                    },
+                ..
+            } => {
+                if !self.modifiers.control_key() && !self.modifiers.super_key() {
+                    let text_str: &str = t.as_ref();
+                    if let Some(doc) = &mut self.document {
+                        let current_text = doc.text().to_string();
+                        doc.replace_text(format!("{}{}", current_text, text_str));
+                    }
+                }
+            }
             _ => (),
         }
         self.update_title();
