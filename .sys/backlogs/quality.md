@@ -115,10 +115,11 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-011",
     "plan": ".sys/plans/quality/quality-011-x0011-trust-host-fault.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Tests executed successfully. Required fixture created."
   }
 ]
+
 ```
