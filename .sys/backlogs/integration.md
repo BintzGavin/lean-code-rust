@@ -87,6 +87,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Created measure_memory.sh script to measure desktop memory usage."
+  },
+  {
+    "id": "integration-008",
+    "plan": ".sys/plans/integration/integration-008-measure-startup.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
