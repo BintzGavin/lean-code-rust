@@ -439,3 +439,39 @@ fn save_as_to_different_path_succeeds_even_with_external_changes_on_original() {
     assert_eq!(document.path(), new_path);
     assert_eq!(fs::read(&new_path).unwrap(), b"unsaved");
 }
+
+#[test]
+fn backup_and_restore() {
+    let fixture = Fixture::new(b"original");
+    let backup_path = fixture.directory.join("backup.tmp");
+
+    let mut document = Document::open(&fixture.file).unwrap();
+    document.replace_text("unsaved");
+
+    // Write backup
+    document.write_backup(&backup_path).unwrap();
+    assert!(backup_path.exists());
+    assert_eq!(std::fs::read_to_string(&backup_path).unwrap(), "unsaved");
+
+    // Create new document instance and restore
+    let mut new_doc = Document::open(&fixture.file).unwrap();
+    assert_eq!(new_doc.text(), "original");
+
+    new_doc.restore_backup(&backup_path).unwrap();
+    assert_eq!(new_doc.text(), "unsaved");
+    assert!(new_doc.is_dirty());
+
+    // Save should clear the backup
+    new_doc.force_save_for_testing().unwrap();
+    assert!(!backup_path.exists());
+}
+
+#[test]
+fn restore_non_existent_backup_fails() {
+    let fixture = Fixture::new(b"original");
+    let mut document = Document::open(&fixture.file).unwrap();
+    let backup_path = fixture.directory.join("missing_backup.tmp");
+
+    assert!(document.restore_backup(&backup_path).is_err());
+    assert_eq!(document.text(), "original");
+}

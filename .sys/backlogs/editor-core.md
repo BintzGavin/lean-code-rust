@@ -107,10 +107,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "EDITOR-CORE-010",
     "plan": ".sys/plans/editor-core/editor-core-010-recovery-journal.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Implemented write_backup and restore_backup methods. Backup file is cleared on successful save. Added tests for backup and restore functionality. Updated README to document the feature. All tests and checks passed."
   }
 ]
 ```
