@@ -123,3 +123,9 @@ No work order has been completed yet.
 - **Dependency**: `desktop-008` must be resolved before new planning can proceed.
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-009 — Text input handling
+- **Outcome**: Completed
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks run**: `cargo test`, `check_scaffold.py`, `validate_repo.sh`
+- **Result**: Successfully added text input handling.

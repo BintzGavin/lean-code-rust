@@ -99,10 +99,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-009",
     "plan": ".sys/plans/desktop/desktop-009-text-input.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Successfully added text input handling to main.rs to append typed characters to the document."
   }
 ]
 ```
