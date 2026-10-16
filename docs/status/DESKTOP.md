@@ -99,3 +99,11 @@ No work order has been completed yet.
 **Dependency:** none
 **Question:** none
 **Resolution:** none
+
+### desktop-007 — completed
+- **Result**: Application stays open when Escape is pressed or the window is closed if the document is dirty.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

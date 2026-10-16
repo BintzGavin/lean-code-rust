@@ -32,7 +32,14 @@ impl ApplicationHandler for App {
     ) {
         match event {
             WindowEvent::CloseRequested => {
-                event_loop.exit();
+                let should_close = self
+                    .document
+                    .as_ref()
+                    .map(|doc| doc.request_close() == lean_editor_core::CloseOutcome::Closed)
+                    .unwrap_or(true);
+                if should_close {
+                    event_loop.exit();
+                }
             }
             WindowEvent::ModifiersChanged(modifiers) => {
                 self.modifiers = modifiers.state();
@@ -100,7 +107,14 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
-                event_loop.exit();
+                let should_close = self
+                    .document
+                    .as_ref()
+                    .map(|doc| doc.request_close() == lean_editor_core::CloseOutcome::Closed)
+                    .unwrap_or(true);
+                if should_close {
+                    event_loop.exit();
+                }
             }
             _ => (),
         }

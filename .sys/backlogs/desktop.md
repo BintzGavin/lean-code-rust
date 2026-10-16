@@ -83,10 +83,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-007",
     "plan": ".sys/plans/desktop/desktop-007-prevent-dirty-close.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Application stays open when Escape is pressed or the window is closed if the document is dirty."
   }
 ]
 ```
