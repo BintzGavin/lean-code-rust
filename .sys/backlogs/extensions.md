@@ -107,10 +107,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-010",
     "plan": ".sys/plans/extensions/extensions-010-parse-contributes-task-definitions.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed contributes.taskDefinitions from package.json."
   }
 ]
 ```
