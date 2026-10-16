@@ -127,6 +127,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "attempt": 1,
     "claim": "none",
     "result": "Completed implementation of X-0012 Compatibility boundary fixture. Verified S-0063 and S-0064 scenarios successfully."
+  },
+  {
+    "id": "quality-013",
+    "plan": ".sys/plans/quality/quality-013-reference-measurements.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
