@@ -135,6 +135,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed contributes.problemMatchers and contributes.problemPatterns."
+  },
+  {
+    "id": "extensions-014",
+    "plan": ".sys/plans/extensions/extensions-014-parse-metadata-and-browser.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
