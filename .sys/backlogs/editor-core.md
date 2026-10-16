@@ -103,6 +103,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Modified `save_as` to check for external changes and return `io::ErrorKind::AlreadyExists` if concurrent changes are detected. Added `force_save_for_testing` to allow internal save tests to bypass external check. Updated README and tests."
+  },
+  {
+    "id": "EDITOR-CORE-010",
+    "plan": ".sys/plans/editor-core/editor-core-010-recovery-journal.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
