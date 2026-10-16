@@ -95,6 +95,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed implementation of X-0008 Language server fixture. Verified S-0055 and S-0056 flows successfully."
+  },
+  {
+    "id": "quality-009",
+    "plan": ".sys/plans/quality/quality-009-x0009-debug-adapter.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
