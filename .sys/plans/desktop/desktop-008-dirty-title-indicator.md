@@ -54,3 +54,5 @@
 - **Blocked when**: N/A.
 
 ## 7. Result
+
+Added dynamic window title indicating dirty document state.

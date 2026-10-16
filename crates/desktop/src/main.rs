@@ -15,12 +15,30 @@ struct App {
     modifiers: ModifiersState,
 }
 
+impl App {
+    fn update_title(&self) {
+        if let Some(window) = &self.window {
+            let is_dirty = self
+                .document
+                .as_ref()
+                .map(|doc| doc.is_dirty())
+                .unwrap_or(false);
+            if is_dirty {
+                window.set_title("Lean Editor *");
+            } else {
+                window.set_title("Lean Editor");
+            }
+        }
+    }
+}
+
 impl ApplicationHandler for App {
     fn resumed(&mut self, event_loop: &ActiveEventLoop) {
         if self.window.is_none() {
             let window_attributes = Window::default_attributes().with_title("Lean Editor");
             let window = event_loop.create_window(window_attributes).unwrap();
             self.window = Some(window);
+            self.update_title();
         }
     }
 
@@ -118,6 +136,7 @@ impl ApplicationHandler for App {
             }
             _ => (),
         }
+        self.update_title();
     }
 }
 
