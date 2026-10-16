@@ -1,0 +1,21 @@
+{
+  "name": "x0010-vsix-lifecycle",
+  "displayName": "X-0010 VSIX Lifecycle",
+  "description": "Synthetic extension to validate VSIX lifecycle behavior",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onCommand:x0010.invoke"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "x0010.invoke",
+        "title": "Invoke X-0010"
+      }
+    ]
+  }
+}
