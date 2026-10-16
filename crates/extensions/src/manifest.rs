@@ -72,7 +72,6 @@ pub struct ExtensionViewContainer {
     pub icon: String,
 }
 
-
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionDebugger {
     #[serde(rename = "type")]
@@ -85,6 +84,14 @@ pub struct ExtensionDebugger {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionBreakpoint {
     pub language: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionTaskDefinition {
+    #[serde(rename = "type")]
+    pub task_type: String,
+    pub required: Option<Vec<String>>,
+    pub properties: Option<serde_json::Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -102,6 +109,8 @@ pub struct ExtensionContributes {
     pub views_containers: Option<HashMap<String, Vec<ExtensionViewContainer>>>,
     pub debuggers: Option<Vec<ExtensionDebugger>>,
     pub breakpoints: Option<Vec<ExtensionBreakpoint>>,
+    #[serde(rename = "taskDefinitions")]
+    pub task_definitions: Option<Vec<ExtensionTaskDefinition>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -370,7 +379,6 @@ mod tests {
         );
     }
 
-
     #[test]
     fn test_parse_debuggers_and_breakpoints() {
         let json = r#"{
@@ -395,12 +403,45 @@ mod tests {
         assert_eq!(debuggers.len(), 1);
         assert_eq!(debuggers[0].debugger_type, "node");
         assert_eq!(debuggers[0].label, Some("Node Debug".to_string()));
-        assert_eq!(debuggers[0].program, Some("./out/debugAdapter.js".to_string()));
+        assert_eq!(
+            debuggers[0].program,
+            Some("./out/debugAdapter.js".to_string())
+        );
         assert_eq!(debuggers[0].runtime, Some("node".to_string()));
 
         let breakpoints = contributes.breakpoints.unwrap();
         assert_eq!(breakpoints.len(), 1);
         assert_eq!(breakpoints[0].language, "javascript");
+    }
+
+    #[test]
+    fn test_parse_task_definitions() {
+        let json = r#"{
+            "taskDefinitions": [
+                {
+                    "type": "npm",
+                    "required": [
+                        "script"
+                    ],
+                    "properties": {
+                        "script": {
+                            "type": "string",
+                            "description": "The npm script to customize or the custom task to run."
+                        },
+                        "path": {
+                            "type": "string",
+                            "description": "The path to the folder of the package.json file that provides the script. Can be omitted."
+                        }
+                    }
+                }
+            ]
+        }"#;
+        let contributes: ExtensionContributes = serde_json::from_str(json).unwrap();
+        let task_defs = contributes.task_definitions.unwrap();
+        assert_eq!(task_defs.len(), 1);
+        assert_eq!(task_defs[0].task_type, "npm");
+        assert_eq!(task_defs[0].required, Some(vec!["script".to_string()]));
+        assert!(task_defs[0].properties.is_some());
     }
 
     #[test]

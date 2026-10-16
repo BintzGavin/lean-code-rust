@@ -104,3 +104,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-010 — completed
+- **Result**: Parsed contributes.taskDefinitions from package.json.
+- **Changed files**: crates/extensions/src/manifest.rs
+- **Checks**: CARGO_BUILD_JOBS=1 cargo test --workspace, python3 tooling/check_scaffold.py --role extensions, bash tooling/validate_repo.sh
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
