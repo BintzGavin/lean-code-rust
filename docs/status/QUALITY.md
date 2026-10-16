@@ -90,10 +90,10 @@
 - **Question**: None
 - **Resolution evidence**: None
 
-### planner — blocked
-- **Result**: Planner is blocked because the role-local backlog already contains a ready entry (quality-009).
-- **Changed files**: None
-- **Checks**: None
-- **Dependency**: quality-009 must be executed or resolved before new planning can proceed.
+### quality-009 — completed
+- **Result**: Completed implementation of X-0009 Debug adapter compatibility fixture. Verified S-0057 and S-0058 scenarios successfully.
+- **Changed files**: tests/compatibility/x0009_debug_adapter/package.json, tests/compatibility/x0009_debug_adapter/extension.js, tests/compatibility/x0009_debug_adapter/adapter.js, tests/compatibility/x0009_debug_adapter/test.sh
+- **Checks**: bash tests/compatibility/x0009_debug_adapter/test.sh (Success), python3 tooling/check_scaffold.py --role quality (Success)
+- **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
