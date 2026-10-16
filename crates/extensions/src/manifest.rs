@@ -121,6 +121,13 @@ pub struct ExtensionContributes {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionManifest {
     pub name: String,
+    #[serde(rename = "displayName")]
+    pub display_name: Option<String>,
+    pub description: Option<String>,
+    pub icon: Option<String>,
+    pub categories: Option<Vec<String>>,
+    pub keywords: Option<Vec<String>>,
+    pub browser: Option<String>,
     pub publisher: String,
     pub version: String,
     pub engines: HashMap<String, String>,
@@ -603,6 +610,48 @@ mod tests {
         assert_eq!(
             extension_kind,
             vec!["ui".to_string(), "workspace".to_string()]
+        );
+    }
+
+    #[test]
+    fn test_parse_metadata_and_browser() {
+        let json = r#"{
+            "name": "my-extension",
+            "displayName": "My Extension",
+            "description": "An awesome extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "icon": "icon.png",
+            "categories": ["Programming Languages", "Snippets"],
+            "keywords": ["rust", "wasm"],
+            "browser": "./dist/web/extension.js"
+        }"#;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        assert_eq!(manifest.name, "my-extension");
+        assert_eq!(manifest.display_name, Some("My Extension".to_string()));
+        assert_eq!(
+            manifest.description,
+            Some("An awesome extension".to_string())
+        );
+        assert_eq!(manifest.icon, Some("icon.png".to_string()));
+        assert_eq!(
+            manifest.categories,
+            Some(vec![
+                "Programming Languages".to_string(),
+                "Snippets".to_string()
+            ])
+        );
+        assert_eq!(
+            manifest.keywords,
+            Some(vec!["rust".to_string(), "wasm".to_string()])
+        );
+        assert_eq!(
+            manifest.browser,
+            Some("./dist/web/extension.js".to_string())
         );
     }
 }
