@@ -522,9 +522,11 @@ mod tests {
         assert_eq!(manifest.name, "my-extension");
 
         let proposals = manifest.enabled_api_proposals.unwrap();
-        assert_eq!(proposals, vec!["proposedApi1".to_string(), "proposedApi2".to_string()]);
+        assert_eq!(
+            proposals,
+            vec!["proposedApi1".to_string(), "proposedApi2".to_string()]
+        );
     }
-
 
     #[test]
     fn test_parse_contributes_problem_matchers() {
@@ -556,11 +558,17 @@ mod tests {
 
         let matchers = contributes.problem_matchers.unwrap();
         assert_eq!(matchers.len(), 1);
-        assert_eq!(matchers[0].get("name").unwrap().as_str().unwrap(), "my-matcher");
+        assert_eq!(
+            matchers[0].get("name").unwrap().as_str().unwrap(),
+            "my-matcher"
+        );
 
         let patterns = contributes.problem_patterns.unwrap();
         assert_eq!(patterns.len(), 1);
-        assert_eq!(patterns[0].get("name").unwrap().as_str().unwrap(), "my-pattern");
+        assert_eq!(
+            patterns[0].get("name").unwrap().as_str().unwrap(),
+            "my-pattern"
+        );
     }
 
     #[test]

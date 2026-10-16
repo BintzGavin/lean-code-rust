@@ -153,6 +153,20 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::Enter),
+                        ..
+                    },
+                ..
+            } => {
+                if let Some(doc) = &mut self.document {
+                    let current_text = doc.text().to_string();
+                    doc.replace_text(format!("{}\n", current_text));
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
                         text: Some(t),
                         ..
                     },

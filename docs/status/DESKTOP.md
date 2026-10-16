@@ -137,3 +137,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-011 — completed
+- **Result**: Successfully added Enter key handling to insert newlines.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check`, `cargo test`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
