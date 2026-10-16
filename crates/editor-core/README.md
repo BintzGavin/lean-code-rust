@@ -49,7 +49,7 @@ new synthetic directories; no personal input files or network are needed.
   the process working directory to stay unchanged.
 - The whole text and saved snapshot are stored in memory; replacement and dirty
   comparison are whole-document operations. There is basic linear undo/redo,
-  but no incremental edit, autosave, recovery journal or large-file optimization.
+  but no incremental edit, autosave, or large-file optimization. It provides manual methods for a recovery journal (`write_backup`, `restore_backup`).
 - Interrupted processes can leave synthetic temp files; normal example cleanup
   is checked, and error cleanup is best effort.
 - Passing these synthetic tests establishes neither VS Code parity nor a

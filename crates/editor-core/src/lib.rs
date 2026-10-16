@@ -25,6 +25,7 @@ pub struct Document {
     modified_time: Option<SystemTime>,
     undo_stack: Vec<String>,
     redo_stack: Vec<String>,
+    backup_path: Option<PathBuf>,
 }
 
 impl Document {
@@ -43,7 +44,34 @@ impl Document {
             modified_time,
             undo_stack: Vec::new(),
             redo_stack: Vec::new(),
+            backup_path: None,
         })
+    }
+
+    /// Write the current document state to a backup file.
+    pub fn write_backup(&mut self, backup_path: impl AsRef<Path>) -> io::Result<()> {
+        let backup_path = backup_path.as_ref().to_path_buf();
+        let mut file = OpenOptions::new()
+            .write(true)
+            .create(true)
+            .truncate(true)
+            .open(&backup_path)?;
+        file.write_all(self.text.as_bytes())?;
+        file.sync_data()?;
+        self.backup_path = Some(backup_path);
+        Ok(())
+    }
+
+    /// Restore the document state from a backup file.
+    pub fn restore_backup(&mut self, backup_path: impl AsRef<Path>) -> io::Result<()> {
+        let backup_path_ref = backup_path.as_ref();
+        let text = fs::read_to_string(backup_path_ref)?;
+        self.text = text;
+        // Do not update persisted_text, so it remains dirty
+        self.backup_path = Some(backup_path_ref.to_path_buf());
+        self.undo_stack.clear();
+        self.redo_stack.clear();
+        Ok(())
     }
 
     pub fn path(&self) -> &Path {
@@ -196,6 +224,12 @@ impl Document {
         self.path = new_path.clone();
         self.persisted_text.clone_from(&self.text);
         self.modified_time = fs::metadata(&self.path).and_then(|m| m.modified()).ok();
+
+        if let Some(backup) = &self.backup_path {
+            let _ = fs::remove_file(backup);
+            self.backup_path = None;
+        }
+
         Ok(())
     }
 
@@ -224,6 +258,7 @@ impl Document {
         self.modified_time = modified_time;
         self.undo_stack.clear();
         self.redo_stack.clear();
+        self.backup_path = None;
         Ok(())
     }
 
