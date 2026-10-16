@@ -111,6 +111,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully handled Backspace to remove last character from document."
+  },
+  {
+    "id": "desktop-011",
+    "plan": ".sys/plans/desktop/desktop-011-enter-key-handling.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
