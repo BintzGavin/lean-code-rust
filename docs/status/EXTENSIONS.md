@@ -96,3 +96,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-009 — completed
+- **Result**: Parsed contributes.debuggers and contributes.breakpoints from package.json.
+- **Changed files**: crates/extensions/src/manifest.rs
+- **Checks**: cargo test --manifest-path crates/extensions/Cargo.toml, python3 tooling/check_scaffold.py --role extensions, bash tooling/validate_repo.sh
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
