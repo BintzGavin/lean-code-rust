@@ -111,6 +111,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed implementation of X-0010 VSIX lifecycle compatibility fixture. Verified S-0059 and S-0060 behaviors successfully."
+  },
+  {
+    "id": "quality-011",
+    "plan": ".sys/plans/quality/quality-011-x0011-trust-host-fault.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
