@@ -11,12 +11,12 @@ START=$(date +%s%3N)
 
 # Run the app under xvfb-run
 xvfb-run -a bash -c '
-    strace -e poll,epoll_wait,epoll_pwait -f -o strace_out.log ./dist/desktop &
+    ./dist/desktop &
     PID=$!
 
-    # Wait until the application reaches the event loop (indicated by epoll_wait/poll)
+    # Wait until the window is created
     while true; do
-        if grep -qE "epoll_wait|poll" strace_out.log 2>/dev/null; then
+        if xdotool search --onlyvisible --name "Lean Editor" >/dev/null 2>&1; then
             break
         fi
         # if the process died, exit loop
@@ -33,4 +33,3 @@ END=$(date +%s%3N)
 STARTUP_MS=$((END - START))
 
 echo "Startup time: $STARTUP_MS ms"
-rm -f strace_out.log
