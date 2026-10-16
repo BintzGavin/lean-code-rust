@@ -131,6 +131,8 @@ pub struct ExtensionManifest {
     pub extension_dependencies: Option<Vec<String>>,
     #[serde(rename = "extensionPack")]
     pub extension_pack: Option<Vec<String>>,
+    #[serde(rename = "enabledApiProposals")]
+    pub enabled_api_proposals: Option<Vec<String>>,
 }
 
 impl ExtensionManifest {
@@ -468,6 +470,7 @@ mod tests {
         assert_eq!(manifest.contributes, None);
         assert_eq!(manifest.extension_dependencies, None);
         assert_eq!(manifest.extension_pack, None);
+        assert_eq!(manifest.enabled_api_proposals, None);
     }
 
     #[test]
@@ -494,6 +497,28 @@ mod tests {
 
         let result = ExtensionManifest::parse(json);
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn test_parse_enabled_api_proposals() {
+        let json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "enabledApiProposals": [
+                "proposedApi1",
+                "proposedApi2"
+            ]
+        }"#;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        assert_eq!(manifest.name, "my-extension");
+
+        let proposals = manifest.enabled_api_proposals.unwrap();
+        assert_eq!(proposals, vec!["proposedApi1".to_string(), "proposedApi2".to_string()]);
     }
 
     #[test]
