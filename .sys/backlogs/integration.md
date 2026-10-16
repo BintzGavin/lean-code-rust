@@ -111,6 +111,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Created tooling/measure_network.sh to measure idle network activity."
+  },
+  {
+    "id": "integration-011",
+    "plan": ".sys/plans/integration/integration-011-measure-cpu.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
