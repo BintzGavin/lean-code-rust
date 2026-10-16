@@ -12,6 +12,15 @@
 
 ## Current state
 
+### quality-013 — completed
+- **Result**: Implemented reference measurement scripts (measure_startup.sh, measure_memory.sh, measure_network.sh). Verified successfully.
+- **Changed files**: tests/reference/measure_startup.sh, tests/reference/measure_memory.sh, tests/reference/measure_network.sh
+- **Checks**: bash tests/reference/measure_startup.sh --help (Success), python3 tooling/check_scaffold.py --role quality (Success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
+
 ### quality-008 — completed
 - **Result**: Completed implementation of X-0008 Language server fixture. Verified S-0055 and S-0056 flows successfully.
 - **Changed files**: tests/compatibility/x0008_language_server/package.json, tests/compatibility/x0008_language_server/extension.js, tests/compatibility/x0008_language_server/server.js, tests/compatibility/x0008_language_server/test.sh
