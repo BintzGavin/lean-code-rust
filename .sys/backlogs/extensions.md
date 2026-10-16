@@ -91,10 +91,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-008",
     "plan": ".sys/plans/extensions/extensions-008-parse-views-and-views-containers.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed contributes.views and contributes.viewsContainers"
   }
 ]
 ```

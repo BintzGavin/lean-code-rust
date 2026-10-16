@@ -72,7 +72,7 @@
 
 ### EXTENSIONS-PLANNER — blocked
 - **Result**: Blocked from planning due to existing ready work order.
-- **Changed files**: None
+- **Changed files**: crates/extensions/src/manifest.rs
 - **Checks**: None
 - **Dependency**: Existing ready entry extensions-007 in .sys/backlogs/extensions.md
 - **Question**: None
@@ -88,3 +88,11 @@
 - `cargo test --manifest-path crates/extensions/Cargo.toml`
 - `python3 tooling/check_scaffold.py --role extensions`
 - `bash tooling/validate_repo.sh`
+
+### extensions-008 — completed
+- **Result**: Parsed contributes.views and contributes.viewsContainers
+- **Changed files**: crates/extensions/src/manifest.rs
+- **Checks**: None
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
