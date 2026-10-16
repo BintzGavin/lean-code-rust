@@ -114,3 +114,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-011 — completed
+- **Result**: Created measure_cpu.sh script to measure desktop idle CPU usage.
+- **Changed files**: `tooling/measure_cpu.sh`
+- **Checks**: `bash packaging/build_release.sh`, `bash tooling/measure_cpu.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
