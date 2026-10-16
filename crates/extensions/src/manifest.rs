@@ -111,6 +111,10 @@ pub struct ExtensionContributes {
     pub breakpoints: Option<Vec<ExtensionBreakpoint>>,
     #[serde(rename = "taskDefinitions")]
     pub task_definitions: Option<Vec<ExtensionTaskDefinition>>,
+    #[serde(rename = "problemMatchers")]
+    pub problem_matchers: Option<Vec<serde_json::Value>>,
+    #[serde(rename = "problemPatterns")]
+    pub problem_patterns: Option<Vec<serde_json::Value>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -519,6 +523,44 @@ mod tests {
 
         let proposals = manifest.enabled_api_proposals.unwrap();
         assert_eq!(proposals, vec!["proposedApi1".to_string(), "proposedApi2".to_string()]);
+    }
+
+
+    #[test]
+    fn test_parse_contributes_problem_matchers() {
+        let json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "problemMatchers": [
+                    {
+                        "name": "my-matcher"
+                    }
+                ],
+                "problemPatterns": [
+                    {
+                        "name": "my-pattern"
+                    }
+                ]
+            }
+        }"#;
+
+        let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
+        assert_eq!(manifest.name, "my-extension");
+
+        let contributes = manifest.contributes.unwrap();
+
+        let matchers = contributes.problem_matchers.unwrap();
+        assert_eq!(matchers.len(), 1);
+        assert_eq!(matchers[0].get("name").unwrap().as_str().unwrap(), "my-matcher");
+
+        let patterns = contributes.problem_patterns.unwrap();
+        assert_eq!(patterns.len(), 1);
+        assert_eq!(patterns[0].get("name").unwrap().as_str().unwrap(), "my-pattern");
     }
 
     #[test]
