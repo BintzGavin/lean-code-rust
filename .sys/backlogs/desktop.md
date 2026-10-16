@@ -95,6 +95,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added dynamic window title indicating dirty document state."
+  },
+  {
+    "id": "desktop-009",
+    "plan": ".sys/plans/desktop/desktop-009-text-input.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
