@@ -99,10 +99,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-009",
     "plan": ".sys/plans/integration/integration-009-fix-startup-measurement.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed: Updated startup measurement to use xdotool."
   }
 ]
 ```
