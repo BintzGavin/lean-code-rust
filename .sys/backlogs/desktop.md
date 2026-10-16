@@ -115,10 +115,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-011",
     "plan": ".sys/plans/desktop/desktop-011-enter-key-handling.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Successfully added Enter key handling to insert newlines."
   }
 ]
 ```
