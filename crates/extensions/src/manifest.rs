@@ -56,6 +56,23 @@ pub struct ExtensionSnippet {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionView {
+    pub id: String,
+    pub name: String,
+    pub when: Option<String>,
+    pub icon: Option<String>,
+    #[serde(rename = "contextualTitle")]
+    pub contextual_title: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionViewContainer {
+    pub id: String,
+    pub title: String,
+    pub icon: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
@@ -65,6 +82,9 @@ pub struct ExtensionContributes {
     pub languages: Option<Vec<ExtensionLanguage>>,
     pub grammars: Option<Vec<ExtensionGrammar>>,
     pub snippets: Option<Vec<ExtensionSnippet>>,
+    pub views: Option<HashMap<String, Vec<ExtensionView>>>,
+    #[serde(rename = "viewsContainers")]
+    pub views_containers: Option<HashMap<String, Vec<ExtensionViewContainer>>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -270,6 +290,67 @@ mod tests {
         assert_eq!(snippets.len(), 1);
         assert_eq!(snippets[0].language, Some("synthetic".to_string()));
         assert_eq!(snippets[0].path, "./synthetic-snippets.json");
+    }
+
+    #[test]
+    fn test_parse_views_and_views_containers() {
+        let json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "viewsContainers": {
+                    "activitybar": [
+                        {
+                            "id": "package-explorer",
+                            "title": "Package Explorer",
+                            "icon": "media/dep.svg"
+                        }
+                    ]
+                },
+                "views": {
+                    "explorer": [
+                        {
+                            "id": "nodeDependencies",
+                            "name": "Node Dependencies",
+                            "when": "explorerResourceIsFolder",
+                            "icon": "media/dep.svg",
+                            "contextualTitle": "Package Explorer"
+                        }
+                    ]
+                }
+            }
+        }"#;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        let contributes = manifest.contributes.unwrap();
+
+        let views_containers = contributes.views_containers.unwrap();
+        assert_eq!(views_containers.len(), 1);
+        let activitybar = views_containers.get("activitybar").unwrap();
+        assert_eq!(activitybar.len(), 1);
+        assert_eq!(activitybar[0].id, "package-explorer");
+        assert_eq!(activitybar[0].title, "Package Explorer");
+        assert_eq!(activitybar[0].icon, "media/dep.svg");
+
+        let views = contributes.views.unwrap();
+        assert_eq!(views.len(), 1);
+        let explorer = views.get("explorer").unwrap();
+        assert_eq!(explorer.len(), 1);
+        assert_eq!(explorer[0].id, "nodeDependencies");
+        assert_eq!(explorer[0].name, "Node Dependencies");
+        assert_eq!(
+            explorer[0].when,
+            Some("explorerResourceIsFolder".to_string())
+        );
+        assert_eq!(explorer[0].icon, Some("media/dep.svg".to_string()));
+        assert_eq!(
+            explorer[0].contextual_title,
+            Some("Package Explorer".to_string())
+        );
     }
 
     #[test]
