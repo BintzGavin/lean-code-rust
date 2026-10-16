@@ -99,10 +99,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-009",
     "plan": ".sys/plans/extensions/extensions-009-parse-contributes-debuggers.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed contributes.debuggers and contributes.breakpoints from package.json."
   }
 ]
 ```
