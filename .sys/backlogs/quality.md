@@ -91,10 +91,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-008",
     "plan": ".sys/plans/quality/quality-008-x0008-language-server.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Completed implementation of X-0008 Language server fixture. Verified S-0055 and S-0056 flows successfully."
   }
 ]
 ```
