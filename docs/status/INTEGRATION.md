@@ -90,3 +90,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-008 — completed
+- **Result**: Created measure_startup.sh script to measure desktop startup time.
+- **Changed files**: `tooling/measure_startup.sh`
+- **Checks**: `bash packaging/build_release.sh`, `bash tooling/measure_startup.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
