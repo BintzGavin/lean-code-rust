@@ -151,6 +151,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully added text and cursor rendering using softbuffer and rusttype. Updated main.rs to trigger request_redraw on document changes. Handles typing, arrow keys, selections, and window resizing."
+  },
+  {
+    "id": "desktop-016",
+    "plan": ".sys/plans/desktop/desktop-016-clipboard.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
