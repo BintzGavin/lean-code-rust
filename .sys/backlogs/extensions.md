@@ -159,6 +159,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed contributes.submenus from package.json manifest."
+  },
+  {
+    "id": "extensions-017",
+    "plan": ".sys/plans/extensions/extensions-017-parse-missing-manifest-fields.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
