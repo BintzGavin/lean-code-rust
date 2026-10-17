@@ -54,3 +54,5 @@
 - **Blocked when**: None.
 
 ## 7. Result
+
+Implemented `install_vsix` which composes manifest reading and VSIX extraction to standard publisher.name-version directories.
