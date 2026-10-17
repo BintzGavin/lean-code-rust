@@ -171,10 +171,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-018",
     "plan": ".sys/plans/extensions/extensions-018-parse-vsix-archive.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Extracted and parsed extension/package.json from a VS Code .vsix archive."
   }
 ]
 ```
