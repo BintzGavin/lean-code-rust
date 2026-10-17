@@ -1,4 +1,3 @@
-
 fn get_line_col(text: &str, cursor_pos: usize) -> (usize, usize) {
     let mut line = 0;
     let mut col = 0;
@@ -54,12 +53,15 @@ struct App {
     document: Option<Document>,
     modifiers: ModifiersState,
     cursor_pos: usize,
+    selection_anchor: Option<usize>,
 }
 
 impl App {
-
     fn doc_char_count(&self) -> usize {
-        self.document.as_ref().map(|doc| doc.text().chars().count()).unwrap_or(0)
+        self.document
+            .as_ref()
+            .map(|doc| doc.text().chars().count())
+            .unwrap_or(0)
     }
 
     fn update_title(&self) {
@@ -219,7 +221,10 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
-                if !self.modifiers.control_key() && !self.modifiers.super_key() && !self.modifiers.alt_key() {
+                if !self.modifiers.control_key()
+                    && !self.modifiers.super_key()
+                    && !self.modifiers.alt_key()
+                {
                     let text_str: &str = t.as_ref();
                     if text_str.chars().any(|c| !c.is_control()) {
                         if let Some(doc) = &mut self.document {
@@ -239,6 +244,13 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
                 if self.cursor_pos > 0 {
                     self.cursor_pos -= 1;
                 }
@@ -252,6 +264,13 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
                 if self.cursor_pos < self.doc_char_count() {
                     self.cursor_pos += 1;
                 }
@@ -265,6 +284,13 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);
@@ -284,6 +310,13 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);

@@ -50,3 +50,4 @@
 - **Blocked when**: None.
 
 ## 7. Result
+Added selection_anchor to App state and updated arrow key handlers to track text selection bounds when Shift is pressed.
