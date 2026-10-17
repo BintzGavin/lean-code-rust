@@ -52,3 +52,6 @@
 - **Blocked when**: None.
 
 ## 7. Result
+
+Successfully parsed the missing manifest metadata fields into .
+Successfully parsed the missing manifest metadata fields into `ExtensionManifest`.
