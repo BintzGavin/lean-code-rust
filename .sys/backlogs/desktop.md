@@ -135,6 +135,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added selection_anchor to App state and updated arrow key handlers to track text selection bounds when Shift is pressed."
+  },
+  {
+    "id": "desktop-014",
+    "plan": ".sys/plans/desktop/desktop-014-edit-selection.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
