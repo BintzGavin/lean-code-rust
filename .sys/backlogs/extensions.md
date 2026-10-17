@@ -147,10 +147,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-015",
     "plan": ".sys/plans/extensions/extensions-015-parse-contributes-colors-and-defaults.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Parsed contributes.colors and contributes.configurationDefaults from package.json manifest."
   }
 ]
 ```

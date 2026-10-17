@@ -2,6 +2,13 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionColor {
+    pub id: String,
+    pub description: String,
+    pub defaults: serde_json::Value,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionCommand {
     pub command: String,
     pub title: String,
@@ -98,6 +105,9 @@ pub struct ExtensionTaskDefinition {
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
+    pub colors: Option<Vec<ExtensionColor>>,
+    #[serde(rename = "configurationDefaults")]
+    pub configuration_defaults: Option<serde_json::Value>,
     pub keybindings: Option<Vec<ExtensionKeybinding>>,
     pub menus: Option<HashMap<String, Vec<ExtensionMenuItem>>>,
     pub themes: Option<Vec<ExtensionTheme>>,
@@ -159,7 +169,7 @@ mod tests {
 
     #[test]
     fn test_parse_valid_manifest() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -211,7 +221,7 @@ mod tests {
                 "some.pack1",
                 "some.pack2"
             ]
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
@@ -261,7 +271,7 @@ mod tests {
 
     #[test]
     fn test_parse_themes_languages_grammars_snippets() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -298,7 +308,7 @@ mod tests {
                     }
                 ]
             }
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         let contributes = manifest.contributes.unwrap();
@@ -336,7 +346,7 @@ mod tests {
 
     #[test]
     fn test_parse_views_and_views_containers() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -365,7 +375,7 @@ mod tests {
                     ]
                 }
             }
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         let contributes = manifest.contributes.unwrap();
@@ -397,7 +407,7 @@ mod tests {
 
     #[test]
     fn test_parse_debuggers_and_breakpoints() {
-        let json = r#"{
+        let json = r##"{
             "debuggers": [
                 {
                     "type": "node",
@@ -411,7 +421,7 @@ mod tests {
                     "language": "javascript"
                 }
             ]
-        }"#;
+        }"##;
 
         let contributes: ExtensionContributes = serde_json::from_str(json).unwrap();
 
@@ -432,7 +442,7 @@ mod tests {
 
     #[test]
     fn test_parse_task_definitions() {
-        let json = r#"{
+        let json = r##"{
             "taskDefinitions": [
                 {
                     "type": "npm",
@@ -451,7 +461,7 @@ mod tests {
                     }
                 }
             ]
-        }"#;
+        }"##;
         let contributes: ExtensionContributes = serde_json::from_str(json).unwrap();
         let task_defs = contributes.task_definitions.unwrap();
         assert_eq!(task_defs.len(), 1);
@@ -461,15 +471,69 @@ mod tests {
     }
 
     #[test]
+    fn test_parse_colors_and_configuration_defaults() {
+        let json = r##"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "colors": [
+                    {
+                        "id": "my.color",
+                        "description": "My Custom Color",
+                        "defaults": {
+                            "dark": "#000000",
+                            "light": "#ffffff",
+                            "highContrast": "#ff0000"
+                        }
+                    }
+                ],
+                "configurationDefaults": {
+                    "[rust]": {
+                        "editor.formatOnSave": true
+                    }
+                }
+            }
+        }"##;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        let contributes = manifest.contributes.unwrap();
+
+        let colors = contributes.colors.unwrap();
+        assert_eq!(colors.len(), 1);
+        assert_eq!(colors[0].id, "my.color");
+        assert_eq!(colors[0].description, "My Custom Color");
+        assert_eq!(
+            colors[0].defaults.get("dark").unwrap().as_str().unwrap(),
+            "#000000"
+        );
+
+        let defaults = contributes.configuration_defaults.unwrap();
+        assert_eq!(
+            defaults
+                .get("[rust]")
+                .unwrap()
+                .get("editor.formatOnSave")
+                .unwrap()
+                .as_bool()
+                .unwrap(),
+            true
+        );
+    }
+
+    #[test]
     fn test_parse_missing_optional_fields() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
             "engines": {
                 "vscode": "^1.60.0"
             }
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
@@ -486,13 +550,13 @@ mod tests {
 
     #[test]
     fn test_parse_invalid_json() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
             "engines": {
                 "vscode": "^1.60.0"
-        }"#;
+        }"##;
 
         let result = ExtensionManifest::parse(json);
         assert!(result.is_err());
@@ -500,11 +564,11 @@ mod tests {
 
     #[test]
     fn test_parse_missing_required_fields() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0"
-        }"#; // Missing engines
+        }"##; // Missing engines
 
         let result = ExtensionManifest::parse(json);
         assert!(result.is_err());
@@ -512,7 +576,7 @@ mod tests {
 
     #[test]
     fn test_parse_enabled_api_proposals() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -523,7 +587,7 @@ mod tests {
                 "proposedApi1",
                 "proposedApi2"
             ]
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
@@ -537,7 +601,7 @@ mod tests {
 
     #[test]
     fn test_parse_contributes_problem_matchers() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -556,7 +620,7 @@ mod tests {
                     }
                 ]
             }
-        }"#;
+        }"##;
 
         let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
@@ -580,7 +644,7 @@ mod tests {
 
     #[test]
     fn test_parse_workspace_trust_capabilities_and_extension_kind() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "publisher": "my-publisher",
             "version": "1.0.0",
@@ -594,7 +658,7 @@ mod tests {
                 }
             },
             "extensionKind": ["ui", "workspace"]
-        }"#;
+        }"##;
 
         let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
@@ -615,7 +679,7 @@ mod tests {
 
     #[test]
     fn test_parse_metadata_and_browser() {
-        let json = r#"{
+        let json = r##"{
             "name": "my-extension",
             "displayName": "My Extension",
             "description": "An awesome extension",
@@ -628,7 +692,7 @@ mod tests {
             "categories": ["Programming Languages", "Snippets"],
             "keywords": ["rust", "wasm"],
             "browser": "./dist/web/extension.js"
-        }"#;
+        }"##;
 
         let manifest = ExtensionManifest::parse(json).unwrap();
         assert_eq!(manifest.name, "my-extension");
