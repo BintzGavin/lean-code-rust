@@ -144,3 +144,9 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-015
+**Status:** Completed
+**Files Changed:** `crates/extensions/src/manifest.rs`
+**Checks Run:** `cargo test --manifest-path crates/extensions/Cargo.toml`, `cargo fmt --all`, `python3 tooling/check_scaffold.py --role extensions`
+**Result:** Parsed contributes.colors and contributes.configurationDefaults from package.json.

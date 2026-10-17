@@ -95,6 +95,13 @@ pub struct ExtensionTaskDefinition {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionColor {
+    pub id: String,
+    pub description: String,
+    pub defaults: Option<serde_json::Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
@@ -113,8 +120,12 @@ pub struct ExtensionContributes {
     pub task_definitions: Option<Vec<ExtensionTaskDefinition>>,
     #[serde(rename = "problemMatchers")]
     pub problem_matchers: Option<Vec<serde_json::Value>>,
+
     #[serde(rename = "problemPatterns")]
     pub problem_patterns: Option<Vec<serde_json::Value>>,
+    pub colors: Option<Vec<ExtensionColor>>,
+    #[serde(rename = "configurationDefaults")]
+    pub configuration_defaults: Option<serde_json::Value>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -652,6 +663,56 @@ mod tests {
         assert_eq!(
             manifest.browser,
             Some("./dist/web/extension.js".to_string())
+        );
+    }
+
+    #[test]
+    fn test_parse_colors_and_configuration_defaults() {
+        let json = r###"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "colors": [
+                    {
+                        "id": "supermacro.testColor",
+                        "description": "Test color for Supermacro.",
+                        "defaults": {
+                            "dark": "#ff0000",
+                            "light": "#00ff00",
+                            "highContrast": "#0000ff"
+                        }
+                    }
+                ],
+                "configurationDefaults": {
+                    "[markdown]": {
+                        "editor.wordWrap": "on"
+                    }
+                }
+            }
+        }"###;
+        let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
+        let contributes = manifest.contributes.unwrap();
+
+        let colors = contributes.colors.unwrap();
+        assert_eq!(colors.len(), 1);
+        assert_eq!(colors[0].id, "supermacro.testColor");
+        assert_eq!(colors[0].description, "Test color for Supermacro.");
+        let defaults = colors[0].defaults.as_ref().unwrap();
+        assert_eq!(defaults.get("dark").unwrap().as_str().unwrap(), "#ff0000");
+
+        let config_defaults = contributes.configuration_defaults.unwrap();
+        let markdown_defaults = config_defaults.get("[markdown]").unwrap();
+        assert_eq!(
+            markdown_defaults
+                .get("editor.wordWrap")
+                .unwrap()
+                .as_str()
+                .unwrap(),
+            "on"
         );
     }
 }
