@@ -163,11 +163,13 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-017",
     "plan": ".sys/plans/quality/quality-017-github-theme-qualification.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed setting up the GitHub Theme qualification fixture. Downloaded VSIX and created an offline project for testing."
   }
 ]
+
+
 
 ```
