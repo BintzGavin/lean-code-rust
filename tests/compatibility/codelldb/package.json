@@ -1,0 +1,6 @@
+{
+  "name": "codelldb-qualification",
+  "version": "1.0.0",
+  "description": "Qualification fixture for CodeLLDB existing native debugger extension",
+  "private": true
+}
