@@ -143,6 +143,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed metadata and browser entry point from package.json manifest."
+  },
+  {
+    "id": "extensions-015",
+    "plan": ".sys/plans/extensions/extensions-015-parse-contributes-colors-and-defaults.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
