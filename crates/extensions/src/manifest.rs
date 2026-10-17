@@ -814,20 +814,32 @@ mod tests {
         assert_eq!(manifest.homepage, Some("https://home.link".to_string()));
 
         let gallery_banner = manifest.gallery_banner.unwrap();
-        assert_eq!(gallery_banner.get("color").unwrap().as_str().unwrap(), "#C80000");
+        assert_eq!(
+            gallery_banner.get("color").unwrap().as_str().unwrap(),
+            "#C80000"
+        );
 
         let badges = manifest.badges.unwrap();
         assert_eq!(badges.len(), 1);
-        assert_eq!(badges[0].get("url").unwrap().as_str().unwrap(), "https://badge.build");
+        assert_eq!(
+            badges[0].get("url").unwrap().as_str().unwrap(),
+            "https://badge.build"
+        );
 
         let qna = manifest.qna.unwrap();
         assert_eq!(qna.as_str().unwrap(), "https://qna.link");
 
         let sponsor = manifest.sponsor.unwrap();
-        assert_eq!(sponsor.get("url").unwrap().as_str().unwrap(), "https://sponsor.link");
+        assert_eq!(
+            sponsor.get("url").unwrap().as_str().unwrap(),
+            "https://sponsor.link"
+        );
 
         let bugs = manifest.bugs.unwrap();
-        assert_eq!(bugs.get("url").unwrap().as_str().unwrap(), "https://bugs.link");
+        assert_eq!(
+            bugs.get("url").unwrap().as_str().unwrap(),
+            "https://bugs.link"
+        );
 
         let repo = manifest.repository.unwrap();
         assert_eq!(repo.get("type").unwrap().as_str().unwrap(), "git");
