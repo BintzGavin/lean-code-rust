@@ -155,11 +155,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-016",
     "plan": ".sys/plans/quality/quality-016-codelldb-qualification.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed setting up the CodeLLDB qualification fixture. Downloaded VSIX and created a synthetic offline project for testing."
   }
 ]
-
 ```

@@ -12,6 +12,14 @@
 
 ## Current state
 
+### quality-016 — completed
+- **Result**: Completed setting up the CodeLLDB qualification fixture. Downloaded VSIX and created a synthetic offline project for testing.
+- **Changed files**: tests/compatibility/codelldb/package.json, tests/compatibility/codelldb/test.sh, tests/compatibility/codelldb/.gitignore
+- **Checks**: bash tests/compatibility/codelldb/test.sh (Success), python3 tooling/check_scaffold.py --role quality (Success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
 ### quality-015 — completed
 - **Result**: Completed setting up the ESLint qualification fixture. Downloaded VSIX and created a synthetic offline project for testing.
 - **Changed files**: tests/compatibility/eslint/package.json, tests/compatibility/eslint/test.sh
