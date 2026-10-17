@@ -183,6 +183,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully implemented extract_vsix"
+  },
+  {
+    "id": "extensions-020",
+    "plan": ".sys/plans/extensions/extensions-020-install-vsix.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
