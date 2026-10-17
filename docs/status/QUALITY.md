@@ -12,6 +12,14 @@
 
 ## Current state
 
+### quality-017 — completed
+- **Result**: Completed setting up the GitHub Theme qualification fixture. Downloaded VSIX and created an offline project for testing.
+- **Changed files**: tests/compatibility/github_theme/package.json, tests/compatibility/github_theme/test.sh, tests/compatibility/github_theme/.gitignore
+- **Checks**: bash tests/compatibility/github_theme/test.sh (Success), python3 tooling/check_scaffold.py --role quality (Success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
 ### quality-016 — completed
 - **Result**: Completed setting up the CodeLLDB qualification fixture. Downloaded VSIX and created a synthetic offline project for testing.
 - **Changed files**: tests/compatibility/codelldb/package.json, tests/compatibility/codelldb/test.sh, tests/compatibility/codelldb/.gitignore

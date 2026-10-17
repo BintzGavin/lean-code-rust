@@ -1,0 +1,6 @@
+{
+  "name": "github-theme-fixture",
+  "version": "1.0.0",
+  "description": "Fixture for testing GitHub Theme compatibility",
+  "private": true
+}
