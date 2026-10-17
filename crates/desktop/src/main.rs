@@ -9,6 +9,7 @@ use winit::{
     window::{Window, WindowId},
 };
 
+use arboard::Clipboard;
 mod render;
 use render::Renderer;
 
@@ -20,6 +21,7 @@ struct App {
     modifiers: ModifiersState,
     cursor_pos: usize,
     selection_anchor: Option<usize>,
+    clipboard: Option<Clipboard>,
 }
 
 fn get_line_col(text: &str, cursor_pos: usize) -> (usize, usize) {
@@ -100,6 +102,10 @@ impl ApplicationHandler for App {
             self.renderer = Some(Renderer::new(window).unwrap());
             self.update_title();
             self.request_redraw();
+            match Clipboard::new() {
+                Ok(cb) => self.clipboard = Some(cb),
+                Err(e) => eprintln!("Failed to initialize clipboard: {e}"),
+            }
         }
     }
 
@@ -200,6 +206,64 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
+                        logical_key: Key::Character(c),
+                        ..
+                    },
+                ..
+            } if (c == "c" || c == "C")
+                && (self.modifiers.control_key() || self.modifiers.super_key()) =>
+            {
+                if let (Some(doc), Some(cb)) = (&self.document, &mut self.clipboard) {
+                    if let Some(anchor) = self.selection_anchor {
+                        let start = std::cmp::min(self.cursor_pos, anchor);
+                        let end = std::cmp::max(self.cursor_pos, anchor);
+                        if start < end {
+                            let text = doc.text();
+                            let selected_text: String =
+                                text.chars().skip(start).take(end - start).collect();
+                            if let Err(e) = cb.set_text(selected_text) {
+                                eprintln!("Failed to copy to clipboard: {}", e);
+                            }
+                        }
+                    }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Character(c),
+                        ..
+                    },
+                ..
+            } if (c == "x" || c == "X")
+                && (self.modifiers.control_key() || self.modifiers.super_key()) =>
+            {
+                if let (Some(doc), Some(cb)) = (&mut self.document, &mut self.clipboard) {
+                    if let Some(anchor) = self.selection_anchor {
+                        let start = std::cmp::min(self.cursor_pos, anchor);
+                        let end = std::cmp::max(self.cursor_pos, anchor);
+                        if start < end {
+                            let text = doc.text();
+                            let selected_text: String =
+                                text.chars().skip(start).take(end - start).collect();
+                            if let Err(e) = cb.set_text(selected_text) {
+                                eprintln!("Failed to copy to clipboard: {}", e);
+                            }
+
+                            doc.edit_range(start, end, "");
+                            self.cursor_pos = start;
+                            self.selection_anchor = None;
+                            needs_redraw = true;
+                            self.update_title();
+                        }
+                    }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
                         logical_key: Key::Named(NamedKey::Escape),
                         ..
                     },
@@ -266,6 +330,36 @@ impl ApplicationHandler for App {
                     self.selection_anchor = None;
                     needs_redraw = true;
                     self.update_title();
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Character(c),
+                        ..
+                    },
+                ..
+            } if (c == "v" || c == "V")
+                && (self.modifiers.control_key() || self.modifiers.super_key()) =>
+            {
+                if let (Some(doc), Some(cb)) = (&mut self.document, &mut self.clipboard) {
+                    if let Ok(text_to_paste) = cb.get_text() {
+                        let (start, end) = if let Some(anchor) = self.selection_anchor {
+                            (
+                                std::cmp::min(self.cursor_pos, anchor),
+                                std::cmp::max(self.cursor_pos, anchor),
+                            )
+                        } else {
+                            (self.cursor_pos, self.cursor_pos)
+                        };
+                        let char_count = text_to_paste.chars().count();
+                        doc.edit_range(start, end, &text_to_paste);
+                        self.cursor_pos = start + char_count;
+                        self.selection_anchor = None;
+                        needs_redraw = true;
+                        self.update_title();
+                    }
                 }
             }
             WindowEvent::KeyboardInput {

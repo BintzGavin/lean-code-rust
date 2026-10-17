@@ -8,3 +8,4 @@ winit = "0.30.13"
 lean-editor-core = { path = "../editor-core" }
 softbuffer = "0.4"
 rusttype = "0.9"
+arboard = "3.7.0"
