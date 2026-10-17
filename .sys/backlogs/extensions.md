@@ -175,6 +175,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Extracted and parsed extension/package.json from a VS Code .vsix archive."
+  },
+  {
+    "id": "extensions-019",
+    "plan": ".sys/plans/extensions/extensions-019-extract-vsix-archive.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
