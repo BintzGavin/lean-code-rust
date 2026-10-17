@@ -151,6 +151,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Parsed contributes.colors and contributes.configurationDefaults from package.json."
+  },
+  {
+    "id": "extensions-016",
+    "plan": ".sys/plans/extensions/extensions-016-parse-contributes-submenus.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
