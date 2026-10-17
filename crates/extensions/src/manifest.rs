@@ -102,6 +102,13 @@ pub struct ExtensionColor {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+pub struct ExtensionSubmenu {
+    pub id: String,
+    pub label: String,
+    pub icon: Option<String>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionContributes {
     pub commands: Option<Vec<ExtensionCommand>>,
     pub configuration: Option<serde_json::Value>,
@@ -126,6 +133,7 @@ pub struct ExtensionContributes {
     pub colors: Option<Vec<ExtensionColor>>,
     #[serde(rename = "configurationDefaults")]
     pub configuration_defaults: Option<serde_json::Value>,
+    pub submenus: Option<Vec<ExtensionSubmenu>>,
 }
 
 /// Represents a VS Code extension manifest (`package.json`).
@@ -664,6 +672,41 @@ mod tests {
             manifest.browser,
             Some("./dist/web/extension.js".to_string())
         );
+    }
+
+    #[test]
+    fn test_parse_submenus() {
+        let json = r###"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "contributes": {
+                "submenus": [
+                    {
+                        "id": "mySubmenu",
+                        "label": "My Submenu",
+                        "icon": "$(gear)"
+                    },
+                    {
+                        "id": "myOtherSubmenu",
+                        "label": "My Other Submenu"
+                    }
+                ]
+            }
+        }"###;
+        let manifest: ExtensionManifest = serde_json::from_str(json).unwrap();
+        let contributes = manifest.contributes.unwrap();
+        let submenus = contributes.submenus.unwrap();
+        assert_eq!(submenus.len(), 2);
+        assert_eq!(submenus[0].id, "mySubmenu");
+        assert_eq!(submenus[0].label, "My Submenu");
+        assert_eq!(submenus[0].icon, Some("$(gear)".to_string()));
+        assert_eq!(submenus[1].id, "myOtherSubmenu");
+        assert_eq!(submenus[1].label, "My Other Submenu");
+        assert_eq!(submenus[1].icon, None);
     }
 
     #[test]
