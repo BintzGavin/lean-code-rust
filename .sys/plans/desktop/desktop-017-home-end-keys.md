@@ -58,3 +58,4 @@
 - **Blocked when**: N/A.
 
 ## 7. Result
+Implemented Home and End keys for jumping to the start and end of lines, including support for Shift-based text selection.
