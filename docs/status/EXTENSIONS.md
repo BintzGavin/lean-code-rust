@@ -150,3 +150,12 @@
 **Files Changed:** `crates/extensions/src/manifest.rs`
 **Checks Run:** `cargo test --manifest-path crates/extensions/Cargo.toml`, `cargo fmt --all`, `python3 tooling/check_scaffold.py --role extensions`
 **Result:** Parsed contributes.colors and contributes.configurationDefaults from package.json.
+
+## extensions-016
+**Status:** completed
+**Result:** Parsed contributes.submenus from package.json manifest.
+**Files:**
+- crates/extensions/src/manifest.rs
+**Checks:**
+- cargo test --manifest-path crates/extensions/Cargo.toml
+- python3 tooling/check_scaffold.py --role extensions

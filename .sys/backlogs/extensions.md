@@ -155,10 +155,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-016",
     "plan": ".sys/plans/extensions/extensions-016-parse-contributes-submenus.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Parsed contributes.submenus from package.json manifest."
   }
 ]
 ```
