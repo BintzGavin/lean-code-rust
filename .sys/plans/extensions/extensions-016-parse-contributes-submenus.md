@@ -59,3 +59,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: None
 
 ## 7. Result
+Parsed contributes.submenus from package.json manifest.
