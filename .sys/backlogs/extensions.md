@@ -191,6 +191,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented install_vsix to extract extensions into standard canonical paths."
+  },
+  {
+    "id": "extensions-021",
+    "plan": ".sys/plans/extensions/extensions-021-uninstall-vsix.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
