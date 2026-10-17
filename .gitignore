@@ -8,3 +8,7 @@ dist/
 tests/compatibility/rust_analyzer/extracted_vsix/
 tests/compatibility/rust_analyzer/rust-analyzer.vsix
 tests/compatibility/rust_analyzer/offline_project/
+
+tests/compatibility/eslint/eslint.vsix
+tests/compatibility/eslint/extracted_vsix/
+tests/compatibility/eslint/offline_project/

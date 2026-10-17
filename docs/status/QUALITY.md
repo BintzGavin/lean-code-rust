@@ -12,6 +12,15 @@
 
 ## Current state
 
+### quality-015 — completed
+- **Result**: Completed setting up the ESLint qualification fixture. Downloaded VSIX and created a synthetic offline project for testing.
+- **Changed files**: tests/compatibility/eslint/package.json, tests/compatibility/eslint/test.sh
+- **Checks**: bash tests/compatibility/eslint/test.sh (Success)
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
+
 ### quality-013 — completed
 - **Result**: Implemented reference measurement scripts (measure_startup.sh, measure_memory.sh, measure_network.sh). Verified successfully.
 - **Changed files**: tests/reference/measure_startup.sh, tests/reference/measure_memory.sh, tests/reference/measure_network.sh

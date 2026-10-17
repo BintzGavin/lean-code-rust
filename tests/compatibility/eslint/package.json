@@ -1,0 +1,11 @@
+{
+  "name": "eslint-qualification",
+  "version": "1.0.0",
+  "description": "Qualification fixture for VS Code ESLint",
+  "engines": {
+    "vscode": "^1.133.0"
+  },
+  "extensionDependencies": [
+    "dbaeumer.vscode-eslint"
+  ]
+}
