@@ -155,10 +155,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-016",
     "plan": ".sys/plans/desktop/desktop-016-clipboard.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
     "attempt": 0,
-    "result": ""
+    "result": "Added arboard dependency and wired Cmd/Ctrl+C, X, and V for clipboard operations."
   }
 ]
 ```
