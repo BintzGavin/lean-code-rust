@@ -159,3 +159,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-013 — completed
+- **Result**: Added selection_anchor to App state and updated arrow key handlers to track text selection bounds when Shift is pressed.
+- **Changed files**: crates/desktop/src/main.rs
+- **Checks**: cargo check --manifest-path crates/desktop/Cargo.toml, cargo test --manifest-path crates/desktop/Cargo.toml
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
