@@ -52,3 +52,5 @@
 - **Blocked when**: N/A
 
 ## 7. Result
+
+Parsed contributes.colors and contributes.configurationDefaults from package.json.
