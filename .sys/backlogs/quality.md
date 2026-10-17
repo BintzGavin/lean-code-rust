@@ -135,6 +135,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented reference measurement scripts (measure_startup.sh, measure_memory.sh, measure_network.sh). Verified successfully."
+  },
+  {
+    "id": "quality-014",
+    "plan": ".sys/plans/quality/quality-014-rust-analyzer-qualification.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": null
   }
 ]
 ```
