@@ -400,6 +400,53 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::Home),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, _) = get_line_col(text, self.cursor_pos);
+                    self.cursor_pos = get_pos_from_line_col(text, line, 0);
+                }
+                needs_redraw = true;
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::End),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, _) = get_line_col(text, self.cursor_pos);
+                    let start_pos = get_pos_from_line_col(text, line, 0);
+                    self.cursor_pos = start_pos + text[start_pos..].find('\n').unwrap_or(text[start_pos..].len());
+                }
+                needs_redraw = true;
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
                         logical_key: Key::Named(NamedKey::ArrowLeft),
                         ..
                     },

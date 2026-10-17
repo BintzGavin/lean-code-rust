@@ -163,10 +163,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-017",
     "plan": ".sys/plans/desktop/desktop-017-home-end-keys.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented Home and End keys for jumping to the start and end of lines, including support for Shift-based text selection."
   }
 ]
 ```

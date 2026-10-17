@@ -188,3 +188,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-017 — completed
+- **Result**: Implemented Home and End keys for jumping to the start and end of lines, including support for Shift-based text selection.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
