@@ -1,0 +1,11 @@
+{
+  "name": "rust-analyzer-qualification",
+  "version": "1.0.0",
+  "description": "Qualification fixture for rust-analyzer",
+  "engines": {
+    "vscode": "^1.133.0"
+  },
+  "extensionDependencies": [
+    "rust-lang.rust-analyzer"
+  ]
+}

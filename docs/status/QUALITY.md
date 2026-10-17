@@ -131,3 +131,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### quality-014
+**Title:** Rust analyzer qualification
+**Result:** Completed setting up the rust-analyzer qualification fixture.
+**Files Changed:**
+- `tests/compatibility/rust_analyzer/package.json`
+- `tests/compatibility/rust_analyzer/test.sh`
+**Checks Run:** `bash tests/compatibility/rust_analyzer/test.sh`, `python3 tooling/check_scaffold.py --role quality`
