@@ -1,3 +1,43 @@
+
+fn get_line_col(text: &str, cursor_pos: usize) -> (usize, usize) {
+    let mut line = 0;
+    let mut col = 0;
+    for (i, c) in text.chars().enumerate() {
+        if i == cursor_pos {
+            break;
+        }
+        if c == '\n' {
+            line += 1;
+            col = 0;
+        } else {
+            col += 1;
+        }
+    }
+    (line, col)
+}
+
+fn get_pos_from_line_col(text: &str, target_line: usize, target_col: usize) -> usize {
+    let mut line = 0;
+    let mut col = 0;
+    let mut pos = 0;
+    for c in text.chars() {
+        if line == target_line && col == target_col {
+            break;
+        }
+        if c == '\n' {
+            if line == target_line {
+                break;
+            }
+            line += 1;
+            col = 0;
+        } else {
+            col += 1;
+        }
+        pos += 1;
+    }
+    pos
+}
+
 use lean_editor_core::Document;
 use std::env;
 use winit::{
@@ -13,9 +53,15 @@ struct App {
     window: Option<Window>,
     document: Option<Document>,
     modifiers: ModifiersState,
+    cursor_pos: usize,
 }
 
 impl App {
+
+    fn doc_char_count(&self) -> usize {
+        self.document.as_ref().map(|doc| doc.text().chars().count()).unwrap_or(0)
+    }
+
     fn update_title(&self) {
         if let Some(window) = &self.window {
             let is_dirty = self
@@ -143,10 +189,11 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
-                if let Some(doc) = &mut self.document {
-                    let mut current_text = doc.text().to_string();
-                    current_text.pop();
-                    doc.replace_text(current_text);
+                if self.cursor_pos > 0 {
+                    if let Some(doc) = &mut self.document {
+                        doc.edit_range(self.cursor_pos - 1, self.cursor_pos, "");
+                        self.cursor_pos -= 1;
+                    }
                 }
             }
             WindowEvent::KeyboardInput {
@@ -159,8 +206,8 @@ impl ApplicationHandler for App {
                 ..
             } => {
                 if let Some(doc) = &mut self.document {
-                    let current_text = doc.text().to_string();
-                    doc.replace_text(format!("{}\n", current_text));
+                    doc.edit_range(self.cursor_pos, self.cursor_pos, "\n");
+                    self.cursor_pos += 1;
                 }
             }
             WindowEvent::KeyboardInput {
@@ -172,12 +219,75 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
-                if !self.modifiers.control_key() && !self.modifiers.super_key() {
+                if !self.modifiers.control_key() && !self.modifiers.super_key() && !self.modifiers.alt_key() {
                     let text_str: &str = t.as_ref();
-                    if let Some(doc) = &mut self.document {
-                        let current_text = doc.text().to_string();
-                        doc.replace_text(format!("{}{}", current_text, text_str));
+                    if text_str.chars().any(|c| !c.is_control()) {
+                        if let Some(doc) = &mut self.document {
+                            let char_count = text_str.chars().count();
+                            doc.edit_range(self.cursor_pos, self.cursor_pos, text_str);
+                            self.cursor_pos += char_count;
+                        }
                     }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::ArrowLeft),
+                        ..
+                    },
+                ..
+            } => {
+                if self.cursor_pos > 0 {
+                    self.cursor_pos -= 1;
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::ArrowRight),
+                        ..
+                    },
+                ..
+            } => {
+                if self.cursor_pos < self.doc_char_count() {
+                    self.cursor_pos += 1;
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::ArrowUp),
+                        ..
+                    },
+                ..
+            } => {
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, col) = get_line_col(text, self.cursor_pos);
+                    if line > 0 {
+                        self.cursor_pos = get_pos_from_line_col(text, line - 1, col);
+                    } else {
+                        self.cursor_pos = 0;
+                    }
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::ArrowDown),
+                        ..
+                    },
+                ..
+            } => {
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, col) = get_line_col(text, self.cursor_pos);
+                    self.cursor_pos = get_pos_from_line_col(text, line + 1, col);
                 }
             }
             _ => (),
@@ -195,7 +305,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     if args.len() > 1 {
         match Document::open(&args[1]) {
-            Ok(doc) => app.document = Some(doc),
+            Ok(doc) => {
+                let char_count = doc.text().chars().count();
+                app.document = Some(doc);
+                app.cursor_pos = char_count;
+            }
             Err(e) => eprintln!("Failed to load document: {}", e),
         }
     }

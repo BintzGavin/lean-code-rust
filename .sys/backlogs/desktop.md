@@ -123,10 +123,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-012",
     "plan": ".sys/plans/desktop/desktop-012-arrow-keys-navigation.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": null
+    "attempt": 1,
+    "result": "Implemented basic cursor navigation using arrow keys (Left, Right, Up, Down) and integrated insertion/deletion at cursor."
   }
 ]
 ```

@@ -54,3 +54,5 @@
 - **Blocked when**: N/A
 
 ## 7. Result
+
+Implemented basic cursor navigation using arrow keys (Left, Right, Up, Down) and integrated insertion/deletion at cursor.
