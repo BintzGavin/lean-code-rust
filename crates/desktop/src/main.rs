@@ -1,3 +1,27 @@
+use lean_editor_core::Document;
+use std::env;
+use std::rc::Rc;
+use winit::{
+    application::ApplicationHandler,
+    event::{ElementState, KeyEvent, WindowEvent},
+    event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
+    keyboard::{Key, KeyCode, ModifiersState, NamedKey, PhysicalKey},
+    window::{Window, WindowId},
+};
+
+mod render;
+use render::Renderer;
+
+#[derive(Default)]
+struct App {
+    window: Option<Rc<Window>>,
+    renderer: Option<Renderer>,
+    document: Option<Document>,
+    modifiers: ModifiersState,
+    cursor_pos: usize,
+    selection_anchor: Option<usize>,
+}
+
 fn get_line_col(text: &str, cursor_pos: usize) -> (usize, usize) {
     let mut line = 0;
     let mut col = 0;
@@ -37,25 +61,6 @@ fn get_pos_from_line_col(text: &str, target_line: usize, target_col: usize) -> u
     pos
 }
 
-use lean_editor_core::Document;
-use std::env;
-use winit::{
-    application::ApplicationHandler,
-    event::{ElementState, KeyEvent, WindowEvent},
-    event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
-    keyboard::{Key, KeyCode, ModifiersState, NamedKey, PhysicalKey},
-    window::{Window, WindowId},
-};
-
-#[derive(Default)]
-struct App {
-    window: Option<Window>,
-    document: Option<Document>,
-    modifiers: ModifiersState,
-    cursor_pos: usize,
-    selection_anchor: Option<usize>,
-}
-
 impl App {
     fn doc_char_count(&self) -> usize {
         self.document
@@ -78,15 +83,23 @@ impl App {
             }
         }
     }
+
+    fn request_redraw(&self) {
+        if let Some(window) = &self.window {
+            window.request_redraw();
+        }
+    }
 }
 
 impl ApplicationHandler for App {
     fn resumed(&mut self, event_loop: &ActiveEventLoop) {
         if self.window.is_none() {
             let window_attributes = Window::default_attributes().with_title("Lean Editor");
-            let window = event_loop.create_window(window_attributes).unwrap();
-            self.window = Some(window);
+            let window = Rc::new(event_loop.create_window(window_attributes).unwrap());
+            self.window = Some(window.clone());
+            self.renderer = Some(Renderer::new(window).unwrap());
             self.update_title();
+            self.request_redraw();
         }
     }
 
@@ -96,6 +109,8 @@ impl ApplicationHandler for App {
         _window_id: WindowId,
         event: WindowEvent,
     ) {
+        let mut needs_redraw = false;
+
         match event {
             WindowEvent::CloseRequested => {
                 let should_close = self
@@ -107,6 +122,18 @@ impl ApplicationHandler for App {
                     event_loop.exit();
                 }
             }
+            WindowEvent::Resized(size) => {
+                if let Some(renderer) = &mut self.renderer {
+                    renderer.resize(size.width, size.height);
+                    needs_redraw = true;
+                }
+            }
+            WindowEvent::RedrawRequested => {
+                if let Some(renderer) = &mut self.renderer {
+                    let text = self.document.as_ref().map(|d| d.text()).unwrap_or("");
+                    renderer.draw(text, self.cursor_pos, self.selection_anchor);
+                }
+            }
             WindowEvent::ModifiersChanged(modifiers) => {
                 self.modifiers = modifiers.state();
             }
@@ -114,16 +141,17 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
-                        physical_key: PhysicalKey::Code(KeyCode::KeyS),
+                        logical_key: Key::Character(c),
                         ..
                     },
                 ..
-            } => {
+            } if c == "s" || c == "S" => {
                 if self.modifiers.control_key() || self.modifiers.super_key() {
                     if let Some(doc) = &mut self.document {
                         if let Err(e) = doc.save() {
                             eprintln!("Failed to save document: {}", e);
                         }
+                        self.update_title();
                     }
                 }
             }
@@ -146,6 +174,8 @@ impl ApplicationHandler for App {
                         } else {
                             doc.undo();
                         }
+                        needs_redraw = true;
+                        self.update_title();
                     }
                 }
             }
@@ -161,6 +191,8 @@ impl ApplicationHandler for App {
                 if self.modifiers.control_key() || self.modifiers.super_key() {
                     if let Some(doc) = &mut self.document {
                         doc.redo();
+                        needs_redraw = true;
+                        self.update_title();
                     }
                 }
             }
@@ -207,6 +239,8 @@ impl ApplicationHandler for App {
                         doc.edit_range(self.cursor_pos - 1, self.cursor_pos, "");
                         self.cursor_pos -= 1;
                     }
+                    needs_redraw = true;
+                    self.update_title();
                 }
             }
             WindowEvent::KeyboardInput {
@@ -230,6 +264,8 @@ impl ApplicationHandler for App {
                     doc.edit_range(start, end, "\n");
                     self.cursor_pos = start + 1;
                     self.selection_anchor = None;
+                    needs_redraw = true;
+                    self.update_title();
                 }
             }
             WindowEvent::KeyboardInput {
@@ -260,6 +296,8 @@ impl ApplicationHandler for App {
                             doc.edit_range(start, end, text_str);
                             self.cursor_pos = start + char_count;
                             self.selection_anchor = None;
+                            needs_redraw = true;
+                            self.update_title();
                         }
                     }
                 }
@@ -283,6 +321,7 @@ impl ApplicationHandler for App {
                 if self.cursor_pos > 0 {
                     self.cursor_pos -= 1;
                 }
+                needs_redraw = true;
             }
             WindowEvent::KeyboardInput {
                 event:
@@ -303,6 +342,7 @@ impl ApplicationHandler for App {
                 if self.cursor_pos < self.doc_char_count() {
                     self.cursor_pos += 1;
                 }
+                needs_redraw = true;
             }
             WindowEvent::KeyboardInput {
                 event:
@@ -329,6 +369,7 @@ impl ApplicationHandler for App {
                         self.cursor_pos = 0;
                     }
                 }
+                needs_redraw = true;
             }
             WindowEvent::KeyboardInput {
                 event:
@@ -351,10 +392,14 @@ impl ApplicationHandler for App {
                     let (line, col) = get_line_col(text, self.cursor_pos);
                     self.cursor_pos = get_pos_from_line_col(text, line + 1, col);
                 }
+                needs_redraw = true;
             }
             _ => (),
         }
-        self.update_title();
+
+        if needs_redraw {
+            self.request_redraw();
+        }
     }
 }
 
@@ -373,6 +418,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 app.cursor_pos = char_count;
             }
             Err(e) => eprintln!("Failed to load document: {}", e),
+        }
+    } else {
+        // Create empty document by default if none provided
+        let temp_dir = std::env::temp_dir();
+        let temp_file = temp_dir.join("untitled.txt");
+        if !temp_file.exists() {
+            std::fs::write(&temp_file, "").unwrap();
+        }
+        match Document::open(temp_file.to_str().unwrap()) {
+            Ok(doc) => {
+                app.document = Some(doc);
+                app.cursor_pos = 0;
+            }
+            Err(e) => eprintln!("Failed to load default document: {}", e),
         }
     }
 

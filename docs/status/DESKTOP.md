@@ -175,3 +175,8 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-015
+- **Outcome**: completed
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`, `crates/desktop/src/render.rs`
+- **Checks run**: `cargo check`, `cargo test`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
