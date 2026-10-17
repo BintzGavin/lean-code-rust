@@ -167,6 +167,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully parsed the missing manifest metadata fields into ExtensionManifest."
+  },
+  {
+    "id": "extensions-018",
+    "plan": ".sys/plans/extensions/extensions-018-parse-vsix-archive.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
