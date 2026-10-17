@@ -180,3 +180,11 @@ No work order has been completed yet.
 - **Outcome**: completed
 - **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`, `crates/desktop/src/render.rs`
 - **Checks run**: `cargo check`, `cargo test`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
+
+### desktop-016 — completed
+- **Result**: Added arboard dependency and wired Cmd/Ctrl+C, X, and V to support copy, cut, and paste clipboard operations for single selections.
+- **Changed files**: `crates/desktop/Cargo.toml`, `crates/desktop/src/main.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
