@@ -139,10 +139,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-014",
     "plan": ".sys/plans/desktop/desktop-014-edit-selection.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented replacing text selection on Backspace, Enter, and Text input."
   }
 ]
 ```

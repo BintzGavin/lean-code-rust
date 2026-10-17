@@ -53,3 +53,5 @@
 - **Blocked when**: None.
 
 ## 7. Result
+- **Outcome**: Completed successfully.
+- **Details**: Updated `crates/desktop/src/main.rs` to handle selection deletion and replacement. `Backspace` deletes selected text or a single character if no selection. `Enter` replaces selected text with a newline or inserts a newline at the cursor. Text input replaces selected text with the typed string or inserts at the cursor. The anchor is reset to `None` after operations on a selection, and `cursor_pos` is updated properly.
