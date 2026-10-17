@@ -439,7 +439,10 @@ impl ApplicationHandler for App {
                     let text = doc.text();
                     let (line, _) = get_line_col(text, self.cursor_pos);
                     let start_pos = get_pos_from_line_col(text, line, 0);
-                    self.cursor_pos = start_pos + text[start_pos..].find('\n').unwrap_or(text[start_pos..].len());
+                    self.cursor_pos = start_pos
+                        + text[start_pos..]
+                            .find('\n')
+                            .unwrap_or(text[start_pos..].len());
                 }
                 needs_redraw = true;
             }

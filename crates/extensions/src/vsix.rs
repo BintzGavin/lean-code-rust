@@ -51,6 +51,25 @@ pub fn install_vsix<P: AsRef<std::path::Path>, D: AsRef<std::path::Path>>(
     Ok(dest_path)
 }
 
+pub fn uninstall_vsix<D: AsRef<Path>>(
+    publisher: &str,
+    name: &str,
+    version: &str,
+    extensions_dir: D,
+) -> Result<(), VsixError> {
+    let dir_name = format!("{}.{}-{}", publisher, name, version);
+    let target_dir = extensions_dir.as_ref().join(dir_name);
+
+    if target_dir.exists() {
+        if let Err(e) = std::fs::remove_dir_all(&target_dir) {
+            if e.kind() != std::io::ErrorKind::NotFound {
+                return Err(VsixError::Io(e));
+            }
+        }
+    }
+    Ok(())
+}
+
 pub fn extract_vsix<P: AsRef<Path>, D: AsRef<Path>>(
     archive_path: P,
     target_dir: D,
@@ -246,5 +265,44 @@ mod tests {
         // The zip::ZipArchive explicitly provides `enclosed_name()` which is documented
         // to prevent Zip Slip and handles resolving `..` components.
         // The implementation uses `enclosed_name()` directly which skips escaping files.
+    }
+
+    #[test]
+    fn test_uninstall_vsix() {
+        let manifest_json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            }
+        }"#;
+
+        let mut buf = Vec::new();
+        {
+            let mut zip = zip::ZipWriter::new(Cursor::new(&mut buf));
+            let options =
+                SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored);
+            zip.start_file("extension/package.json", options).unwrap();
+            zip.write_all(manifest_json.as_bytes()).unwrap();
+            zip.finish().unwrap();
+        }
+
+        let mut temp_file = NamedTempFile::new().unwrap();
+        temp_file.write_all(&buf).unwrap();
+
+        let target_dir = tempfile::tempdir().unwrap();
+        let installed_path = install_vsix(temp_file.path(), target_dir.path()).unwrap();
+        assert!(installed_path.exists());
+
+        uninstall_vsix("my-publisher", "my-extension", "1.0.0", target_dir.path()).unwrap();
+        assert!(!installed_path.exists());
+    }
+
+    #[test]
+    fn test_uninstall_vsix_non_existent() {
+        let target_dir = tempfile::tempdir().unwrap();
+        let result = uninstall_vsix("some-publisher", "missing-ext", "2.0.0", target_dir.path());
+        assert!(result.is_ok());
     }
 }

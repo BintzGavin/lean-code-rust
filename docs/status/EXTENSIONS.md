@@ -183,3 +183,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-021 — completed
+- **Result**: Implemented `uninstall_vsix` to remove canonical extension directories.
+- **Changed files**: `crates/extensions/src/vsix.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
