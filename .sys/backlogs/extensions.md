@@ -163,10 +163,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-017",
     "plan": ".sys/plans/extensions/extensions-017-parse-missing-manifest-fields.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Successfully parsed the missing manifest metadata fields into ExtensionManifest."
   }
 ]
 ```

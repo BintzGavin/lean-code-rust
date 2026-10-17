@@ -139,6 +139,17 @@ pub struct ExtensionContributes {
 /// Represents a VS Code extension manifest (`package.json`).
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct ExtensionManifest {
+    pub license: Option<String>,
+    #[serde(rename = "galleryBanner")]
+    pub gallery_banner: Option<serde_json::Value>,
+    pub preview: Option<bool>,
+    pub badges: Option<Vec<serde_json::Value>>,
+    pub qna: Option<serde_json::Value>,
+    pub sponsor: Option<serde_json::Value>,
+    pub pricing: Option<String>,
+    pub bugs: Option<serde_json::Value>,
+    pub repository: Option<serde_json::Value>,
+    pub homepage: Option<String>,
     pub name: String,
     #[serde(rename = "displayName")]
     pub display_name: Option<String>,
@@ -757,5 +768,68 @@ mod tests {
                 .unwrap(),
             "on"
         );
+    }
+
+    #[test]
+    fn test_parse_missing_manifest_fields() {
+        let json = r##"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            },
+            "license": "MIT",
+            "galleryBanner": {
+                "color": "#C80000",
+                "theme": "dark"
+            },
+            "preview": true,
+            "badges": [
+                {
+                    "url": "https://badge.build",
+                    "href": "https://build.link",
+                    "description": "Build Status"
+                }
+            ],
+            "qna": "https://qna.link",
+            "sponsor": {
+                "url": "https://sponsor.link"
+            },
+            "pricing": "Free",
+            "bugs": {
+                "url": "https://bugs.link"
+            },
+            "repository": {
+                "type": "git",
+                "url": "https://repo.link"
+            },
+            "homepage": "https://home.link"
+        }"##;
+
+        let manifest = ExtensionManifest::parse(json).unwrap();
+        assert_eq!(manifest.license, Some("MIT".to_string()));
+        assert_eq!(manifest.preview, Some(true));
+        assert_eq!(manifest.pricing, Some("Free".to_string()));
+        assert_eq!(manifest.homepage, Some("https://home.link".to_string()));
+
+        let gallery_banner = manifest.gallery_banner.unwrap();
+        assert_eq!(gallery_banner.get("color").unwrap().as_str().unwrap(), "#C80000");
+
+        let badges = manifest.badges.unwrap();
+        assert_eq!(badges.len(), 1);
+        assert_eq!(badges[0].get("url").unwrap().as_str().unwrap(), "https://badge.build");
+
+        let qna = manifest.qna.unwrap();
+        assert_eq!(qna.as_str().unwrap(), "https://qna.link");
+
+        let sponsor = manifest.sponsor.unwrap();
+        assert_eq!(sponsor.get("url").unwrap().as_str().unwrap(), "https://sponsor.link");
+
+        let bugs = manifest.bugs.unwrap();
+        assert_eq!(bugs.get("url").unwrap().as_str().unwrap(), "https://bugs.link");
+
+        let repo = manifest.repository.unwrap();
+        assert_eq!(repo.get("type").unwrap().as_str().unwrap(), "git");
     }
 }

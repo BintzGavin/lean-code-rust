@@ -159,3 +159,11 @@
 **Checks:**
 - cargo test --manifest-path crates/extensions/Cargo.toml
 - python3 tooling/check_scaffold.py --role extensions
+
+### extensions-017 — completed
+- **Result**: Successfully parsed the missing manifest metadata fields into ExtensionManifest.
+- **Changed files**: `crates/extensions/src/manifest.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
