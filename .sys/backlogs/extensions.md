@@ -187,10 +187,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-020",
     "plan": ".sys/plans/extensions/extensions-020-install-vsix.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented install_vsix to extract extensions into standard canonical paths."
   }
 ]
 ```

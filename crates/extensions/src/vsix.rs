@@ -32,6 +32,25 @@ impl From<serde_json::Error> for VsixError {
     }
 }
 
+pub fn install_vsix<P: AsRef<std::path::Path>, D: AsRef<std::path::Path>>(
+    archive_path: P,
+    extensions_dir: D,
+) -> Result<std::path::PathBuf, VsixError> {
+    let archive_path = archive_path.as_ref();
+    let extensions_dir = extensions_dir.as_ref();
+
+    let manifest = read_manifest(archive_path)?;
+    let dir_name = format!(
+        "{}.{}-{}",
+        manifest.publisher, manifest.name, manifest.version
+    );
+    let dest_path = extensions_dir.join(dir_name);
+
+    extract_vsix(archive_path, &dest_path)?;
+
+    Ok(dest_path)
+}
+
 pub fn extract_vsix<P: AsRef<Path>, D: AsRef<Path>>(
     archive_path: P,
     target_dir: D,
@@ -180,6 +199,44 @@ mod tests {
 
         let ignored_path = target_dir.path().join("[Content_Types].xml");
         assert!(!ignored_path.exists());
+    }
+
+    #[test]
+    fn test_install_vsix() {
+        let manifest_json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            }
+        }"#;
+
+        let mut buf = Vec::new();
+        {
+            let mut zip = zip::ZipWriter::new(Cursor::new(&mut buf));
+            let options =
+                SimpleFileOptions::default().compression_method(zip::CompressionMethod::Stored);
+            zip.start_file("extension/package.json", options).unwrap();
+            zip.write_all(manifest_json.as_bytes()).unwrap();
+            zip.start_file("extension/out/main.js", options).unwrap();
+            zip.write_all(b"console.log('hello');").unwrap();
+            zip.finish().unwrap();
+        }
+
+        let mut temp_file = NamedTempFile::new().unwrap();
+        temp_file.write_all(&buf).unwrap();
+
+        let target_dir = tempfile::tempdir().unwrap();
+        let installed_path = install_vsix(temp_file.path(), target_dir.path()).unwrap();
+
+        assert_eq!(
+            installed_path,
+            target_dir.path().join("my-publisher.my-extension-1.0.0")
+        );
+        assert!(installed_path.exists());
+        assert!(installed_path.join("package.json").exists());
+        assert!(installed_path.join("out/main.js").exists());
     }
 
     #[test]

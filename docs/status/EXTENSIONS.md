@@ -175,3 +175,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-020 — completed
+- **Result**: Implemented `install_vsix` to extract extensions into standard canonical paths.
+- **Changed files**: `crates/extensions/src/vsix.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
