@@ -191,8 +191,19 @@ impl ApplicationHandler for App {
                     },
                 ..
             } => {
-                if self.cursor_pos > 0 {
-                    if let Some(doc) = &mut self.document {
+                if let Some(doc) = &mut self.document {
+                    if let Some(anchor) = self.selection_anchor {
+                        let start = std::cmp::min(self.cursor_pos, anchor);
+                        let end = std::cmp::max(self.cursor_pos, anchor);
+                        if start < end {
+                            doc.edit_range(start, end, "");
+                            self.cursor_pos = start;
+                        } else if self.cursor_pos > 0 {
+                            doc.edit_range(self.cursor_pos - 1, self.cursor_pos, "");
+                            self.cursor_pos -= 1;
+                        }
+                        self.selection_anchor = None;
+                    } else if self.cursor_pos > 0 {
                         doc.edit_range(self.cursor_pos - 1, self.cursor_pos, "");
                         self.cursor_pos -= 1;
                     }
@@ -208,8 +219,17 @@ impl ApplicationHandler for App {
                 ..
             } => {
                 if let Some(doc) = &mut self.document {
-                    doc.edit_range(self.cursor_pos, self.cursor_pos, "\n");
-                    self.cursor_pos += 1;
+                    let (start, end) = if let Some(anchor) = self.selection_anchor {
+                        (
+                            std::cmp::min(self.cursor_pos, anchor),
+                            std::cmp::max(self.cursor_pos, anchor),
+                        )
+                    } else {
+                        (self.cursor_pos, self.cursor_pos)
+                    };
+                    doc.edit_range(start, end, "\n");
+                    self.cursor_pos = start + 1;
+                    self.selection_anchor = None;
                 }
             }
             WindowEvent::KeyboardInput {
@@ -228,9 +248,18 @@ impl ApplicationHandler for App {
                     let text_str: &str = t.as_ref();
                     if text_str.chars().any(|c| !c.is_control()) {
                         if let Some(doc) = &mut self.document {
+                            let (start, end) = if let Some(anchor) = self.selection_anchor {
+                                (
+                                    std::cmp::min(self.cursor_pos, anchor),
+                                    std::cmp::max(self.cursor_pos, anchor),
+                                )
+                            } else {
+                                (self.cursor_pos, self.cursor_pos)
+                            };
                             let char_count = text_str.chars().count();
-                            doc.edit_range(self.cursor_pos, self.cursor_pos, text_str);
-                            self.cursor_pos += char_count;
+                            doc.edit_range(start, end, text_str);
+                            self.cursor_pos = start + char_count;
+                            self.selection_anchor = None;
                         }
                     }
                 }
