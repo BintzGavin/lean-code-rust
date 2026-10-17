@@ -127,6 +127,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented basic cursor navigation using arrow keys (Left, Right, Up, Down) and integrated insertion/deletion at cursor."
+  },
+  {
+    "id": "desktop-013",
+    "plan": ".sys/plans/desktop/desktop-013-text-selection.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
