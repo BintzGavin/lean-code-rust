@@ -6,3 +6,5 @@ edition = "2021"
 [dependencies]
 winit = "0.30.13"
 lean-editor-core = { path = "../editor-core" }
+softbuffer = "0.4"
+rusttype = "0.9"

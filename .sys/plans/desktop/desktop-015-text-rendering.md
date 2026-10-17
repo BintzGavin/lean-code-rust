@@ -54,3 +54,5 @@
 - **Blocked when**: N/A.
 
 ## 7. Result
+## 7. Result
+Successfully added text and cursor rendering using `softbuffer` and `rusttype`. A new `Renderer` handles drawing the document text, cursor, and text selections to the window. Triggered `request_redraw` on state changes to maintain an up-to-date visual feedback loop.
