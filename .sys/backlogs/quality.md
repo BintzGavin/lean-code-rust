@@ -159,6 +159,15 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed setting up the CodeLLDB qualification fixture. Downloaded VSIX and created a synthetic offline project for testing."
+  },
+  {
+    "id": "quality-017",
+    "plan": ".sys/plans/quality/quality-017-github-theme-qualification.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
+
 ```
