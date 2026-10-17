@@ -167,3 +167,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-019 — completed
+- **Result**: Implemented extract_vsix function to extract extension contents from vsix archives.
+- **Changed files**: `crates/extensions/src/vsix.rs`
+- **Checks**: `cargo test --workspace`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
