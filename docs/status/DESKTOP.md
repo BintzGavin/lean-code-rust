@@ -145,3 +145,9 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+## desktop-012
+**Outcome:** Completed
+**Changed files:** `crates/desktop/src/main.rs`
+**Checks run:** `cargo test --manifest-path crates/desktop/Cargo.toml`, `cargo build --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`
+**Result:** Implemented basic cursor navigation using arrow keys (Left, Right, Up, Down) and integrated insertion/deletion at cursor.
