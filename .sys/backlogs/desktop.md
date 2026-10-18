@@ -191,6 +191,15 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully handled Tab key to insert 4 spaces and updated document properly."
+  },
+  {
+    "id": "desktop-021",
+    "plan": ".sys/plans/desktop/desktop-021-viewport-scrolling.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
+
 ```
