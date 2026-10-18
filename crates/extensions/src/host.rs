@@ -1,20 +1,50 @@
-use std::io;
+use std::io::{self, Write, BufRead, BufReader};
 use std::path::Path;
-use std::process::{Child, Command, ExitStatus, Stdio};
+use std::process::{Child, Command, ExitStatus, Stdio, ChildStdout};
 
 pub struct ExtensionHost {
     child: Child,
+    stdout_reader: BufReader<ChildStdout>,
 }
 
 impl ExtensionHost {
     pub fn spawn(entry_point_path: &Path) -> io::Result<Self> {
-        let child = Command::new("node")
+        let mut child = Command::new("node")
             .arg(entry_point_path)
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
             .spawn()?;
-        Ok(Self { child })
+
+        let stdout = child.stdout.take().ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Could not capture stdout"))?;
+        let stdout_reader = BufReader::new(stdout);
+
+        Ok(Self { child, stdout_reader })
+    }
+
+    pub fn send_message(&mut self, message: &str) -> io::Result<()> {
+        if let Some(stdin) = self.child.stdin.as_mut() {
+            writeln!(stdin, "{}", message)?;
+            stdin.flush()?;
+            Ok(())
+        } else {
+            Err(io::Error::new(io::ErrorKind::Other, "Could not access stdin"))
+        }
+    }
+
+    pub fn read_message(&mut self) -> io::Result<String> {
+        let mut line = String::new();
+        let bytes_read = self.stdout_reader.read_line(&mut line)?;
+        if bytes_read == 0 {
+            return Err(io::Error::new(io::ErrorKind::UnexpectedEof, "Stream closed"));
+        }
+        if line.ends_with('\n') {
+            line.pop();
+            if line.ends_with('\r') {
+                line.pop();
+            }
+        }
+        Ok(line)
     }
 
     pub fn kill(&mut self) -> io::Result<()> {
@@ -46,12 +76,34 @@ mod tests {
     #[test]
     fn test_spawn_missing_script() {
         let result = ExtensionHost::spawn(Path::new("/does/not/exist.js"));
-        // Spawn might succeed on Unix if `node` is found, but wait/kill would show exit 1.
-        // We only assert it returns a result, we don't strictly require is_err().
-        // If it does succeed, it will exit immediately with an error status.
         if let Ok(mut host) = result {
             let status = host.wait().expect("wait failed");
             assert!(!status.success());
         }
+    }
+
+    #[test]
+    fn test_ipc_communication() {
+        let mut file = NamedTempFile::new().unwrap();
+        writeln!(file, r#"
+            const readline = require('readline');
+            const rl = readline.createInterface({{
+                input: process.stdin,
+                output: process.stdout,
+                terminal: false
+            }});
+            rl.on('line', (line) => {{
+                console.log("echo: " + line);
+            }});
+        "#).unwrap();
+
+        let mut host = ExtensionHost::spawn(file.path()).expect("Failed to spawn node");
+
+        host.send_message("hello ipc").expect("Failed to send message");
+
+        let reply = host.read_message().expect("Failed to read message");
+        assert_eq!(reply, "echo: hello ipc");
+
+        host.kill().expect("Failed to kill node");
     }
 }

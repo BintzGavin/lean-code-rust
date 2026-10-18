@@ -219,10 +219,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-024",
     "plan": ".sys/plans/extensions/extensions-024-node-host-ipc.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented basic IPC for ExtensionHost using stdin and stdout."
   }
 ]
 ```
