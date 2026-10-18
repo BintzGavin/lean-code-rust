@@ -191,3 +191,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-022 — completed
+- **Result**: Implemented list_installed_extensions to discover extensions from disk.
+- **Changed files**: `crates/extensions/src/vsix.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
