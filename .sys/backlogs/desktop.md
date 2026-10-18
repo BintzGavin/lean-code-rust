@@ -171,11 +171,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-018",
     "plan": ".sys/plans/desktop/desktop-018-delete-key.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Added forward delete handling for Key::Named(NamedKey::Delete)"
   }
 ]
-
 ```

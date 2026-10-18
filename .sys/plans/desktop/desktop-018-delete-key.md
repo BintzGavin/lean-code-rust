@@ -56,3 +56,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: None.
 
 ## 7. Result
+
+Completed successfully. Added forward delete handling for Key::Named(NamedKey::Delete) in crates/desktop/src/main.rs.
