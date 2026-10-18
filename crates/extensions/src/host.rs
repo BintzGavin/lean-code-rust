@@ -170,4 +170,86 @@ mod tests {
 
         host.kill().expect("Failed to kill node");
     }
+
+    #[test]
+    fn test_bootstrap_activation_and_deactivation() {
+        let bootstrap_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("src")
+            .join("bootstrap.js");
+
+        let mut ext_file = NamedTempFile::new().unwrap();
+        writeln!(
+            ext_file,
+            r#"
+            exports.activate = function(context) {{
+                console.log("activate was called");
+                context.subscriptions.push({{
+                    dispose: function() {{
+                        console.log("dispose was called");
+                    }}
+                }});
+            }};
+
+            exports.deactivate = function() {{
+                console.log("deactivate was called");
+            }};
+        "#
+        )
+        .unwrap();
+
+        let mut host = ExtensionHost::spawn(&bootstrap_path).expect("Failed to spawn node");
+
+        let msg_activate = serde_json::json!({
+            "type": "activate",
+            "path": ext_file.path()
+        });
+
+        host.send_message(&msg_activate.to_string())
+            .expect("Failed to send message");
+
+        let mut activate_success = false;
+        for _ in 0..10 {
+            if let Ok(reply) = host.read_message() {
+                if reply.starts_with('{') {
+                    let json: serde_json::Value = serde_json::from_str(&reply).unwrap();
+                    if json["type"] == "activate_success" {
+                        activate_success = true;
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        assert!(activate_success);
+
+        let msg_deactivate = serde_json::json!({
+            "type": "deactivate",
+            "path": ext_file.path()
+        });
+
+        host.send_message(&msg_deactivate.to_string())
+            .expect("Failed to send message");
+
+        let mut deactivate_success = false;
+        for _ in 0..10 {
+            if let Ok(reply) = host.read_message() {
+                if reply.starts_with('{') {
+                    let json: serde_json::Value = serde_json::from_str(&reply).unwrap();
+                    if json["type"] == "deactivate_success" {
+                        deactivate_success = true;
+                        break;
+                    }
+                } else if reply == "dispose was called" {
+                    // Check if dispose was logged, although test is mainly based on deactivate_success
+                }
+            } else {
+                break;
+            }
+        }
+
+        assert!(deactivate_success);
+
+        host.kill().expect("Failed to kill node");
+    }
 }

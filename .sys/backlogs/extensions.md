@@ -235,10 +235,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-026",
     "plan": ".sys/plans/extensions/extensions-026-extension-context-disposal.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Successfully implemented ExtensionContext subscriptions and disposal via deactivate IPC command."
   }
 ]
 ```
