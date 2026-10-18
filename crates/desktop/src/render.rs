@@ -9,6 +9,7 @@ pub struct Renderer {
     font: Font<'static>,
     width: u32,
     height: u32,
+    scroll_y: f32,
 }
 
 impl Renderer {
@@ -24,6 +25,7 @@ impl Renderer {
             font,
             width: 0,
             height: 0,
+            scroll_y: 0.0,
         })
     }
 
@@ -53,8 +55,31 @@ impl Renderer {
 
         let scale = Scale::uniform(24.0);
         let v_metrics = self.font.v_metrics(scale);
+        let line_height = v_metrics.ascent - v_metrics.descent + v_metrics.line_gap;
 
-        let mut y = 20.0 + v_metrics.ascent;
+        let mut cursor_doc_y = 20.0;
+        let mut doc_char_count = 0;
+        for c in text.chars() {
+            if doc_char_count == cursor_pos {
+                break;
+            }
+            if c == '\n' {
+                cursor_doc_y += line_height;
+            }
+            doc_char_count += 1;
+        }
+
+        let margin_top = 20.0;
+        let margin_bottom = 20.0;
+
+        if cursor_doc_y < self.scroll_y + margin_top {
+            self.scroll_y = (cursor_doc_y - margin_top).max(0.0);
+        }
+        if cursor_doc_y + line_height > self.scroll_y + (self.height as f32) - margin_bottom {
+            self.scroll_y = cursor_doc_y + line_height - (self.height as f32) + margin_bottom;
+        }
+
+        let mut y = 20.0 + v_metrics.ascent - self.scroll_y;
         let mut x = 20.0;
         let mut cursor_x = 20.0;
         let mut cursor_y = 20.0;

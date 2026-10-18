@@ -195,10 +195,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-021",
     "plan": ".sys/plans/desktop/desktop-021-viewport-scrolling.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Added scroll_y to Renderer, updating it to follow the cursor vertically."
   }
 ]
 
