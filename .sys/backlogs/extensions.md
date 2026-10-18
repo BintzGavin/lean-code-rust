@@ -207,6 +207,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 2,
     "result": "Implemented list_installed_extensions to discover extensions from disk."
+  },
+  {
+    "id": "extensions-023",
+    "plan": ".sys/plans/extensions/extensions-023-extension-host-process.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
