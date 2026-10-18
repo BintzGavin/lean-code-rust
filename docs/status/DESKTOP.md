@@ -203,3 +203,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-019 — completed
+- **Result**: Successfully implemented Select All with Cmd/Ctrl+A.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check`, `cargo test`, `check_scaffold.py`, `validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
