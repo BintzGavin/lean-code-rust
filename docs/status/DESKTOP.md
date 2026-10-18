@@ -196,3 +196,10 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+### desktop-018 — completed
+- **Result**: Added forward delete handling for Key::Named(NamedKey::Delete).
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo test`, `python3 tooling/check_scaffold.py`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
