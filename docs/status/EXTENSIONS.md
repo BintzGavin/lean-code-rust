@@ -199,3 +199,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-023 — completed
+- **Result**: Implemented the ExtensionHost process manager for isolated Node hosts.
+- **Changed files**: `crates/extensions/src/host.rs`, `crates/extensions/src/lib.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
