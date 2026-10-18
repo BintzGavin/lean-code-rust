@@ -18,13 +18,10 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 {
   "id": "extensions-027",
   "role": "extensions",
-  "create": [
-    ".sys/plans/extensions/extensions-027-inject-vscode-module.md"
-  ],
+  "create": [],
   "modify": [
     "crates/extensions/src/bootstrap.js",
-    "crates/extensions/src/host.rs",
-    ".sys/backlogs/extensions.md"
+    "crates/extensions/src/host.rs"
   ],
   "read_only": [
     "spec/extension-compatibility.md"

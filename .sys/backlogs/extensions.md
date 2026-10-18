@@ -243,10 +243,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-027",
     "plan": ".sys/plans/extensions/extensions-027-inject-vscode-module.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 2,
+    "result": "Successfully injected synthetic vscode module into Node host."
   }
 ]
 ```

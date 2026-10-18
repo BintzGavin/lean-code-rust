@@ -231,3 +231,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-027 — completed
+- **Result**: Successfully injected synthetic vscode module into Node host.
+- **Changed files**: `crates/extensions/src/bootstrap.js`, `crates/extensions/src/host.rs`
+- **Checks**: `CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
