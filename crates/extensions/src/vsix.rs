@@ -123,6 +123,36 @@ pub fn read_manifest<P: AsRef<Path>>(archive_path: P) -> Result<ExtensionManifes
     ExtensionManifest::parse(&contents).map_err(VsixError::from)
 }
 
+pub fn list_installed_extensions<D: AsRef<std::path::Path>>(
+    extensions_dir: D,
+) -> Result<Vec<ExtensionManifest>, VsixError> {
+    let extensions_dir = extensions_dir.as_ref();
+    if !extensions_dir.exists() {
+        return Ok(Vec::new());
+    }
+
+    let mut manifests = Vec::new();
+    if let Ok(entries) = std::fs::read_dir(extensions_dir) {
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                let manifest_path = path.join("package.json");
+                if manifest_path.exists() {
+                    if let Ok(mut file) = std::fs::File::open(&manifest_path) {
+                        let mut contents = String::new();
+                        if std::io::Read::read_to_string(&mut file, &mut contents).is_ok() {
+                            if let Ok(manifest) = ExtensionManifest::parse(&contents) {
+                                manifests.push(manifest);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Ok(manifests)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -304,5 +334,47 @@ mod tests {
         let target_dir = tempfile::tempdir().unwrap();
         let result = uninstall_vsix("some-publisher", "missing-ext", "2.0.0", target_dir.path());
         assert!(result.is_ok());
+    }
+
+    #[test]
+    fn test_list_installed_extensions() {
+        let target_dir = tempfile::tempdir().unwrap();
+
+        // Empty directory
+        let manifests = super::list_installed_extensions(target_dir.path()).unwrap();
+        assert_eq!(manifests.len(), 0);
+
+        // Missing directory
+        let manifests =
+            super::list_installed_extensions(target_dir.path().join("missing")).unwrap();
+        assert_eq!(manifests.len(), 0);
+
+        // Valid extension
+        let ext_dir = target_dir.path().join("my-ext");
+        std::fs::create_dir_all(&ext_dir).unwrap();
+        let manifest_json = r#"{
+            "name": "my-extension",
+            "publisher": "my-publisher",
+            "version": "1.0.0",
+            "engines": {
+                "vscode": "^1.60.0"
+            }
+        }"#;
+        std::fs::write(ext_dir.join("package.json"), manifest_json).unwrap();
+
+        // Invalid extension
+        let invalid_dir = target_dir.path().join("invalid-ext");
+        std::fs::create_dir_all(&invalid_dir).unwrap();
+        std::fs::write(invalid_dir.join("package.json"), "invalid json").unwrap();
+
+        // Missing package.json
+        let missing_pkg_dir = target_dir.path().join("missing-pkg");
+        std::fs::create_dir_all(&missing_pkg_dir).unwrap();
+
+        let manifests = super::list_installed_extensions(target_dir.path()).unwrap();
+        assert_eq!(manifests.len(), 1);
+        assert_eq!(manifests[0].name, "my-extension");
+        assert_eq!(manifests[0].publisher, "my-publisher");
+        assert_eq!(manifests[0].version, "1.0.0");
     }
 }
