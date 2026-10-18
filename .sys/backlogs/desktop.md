@@ -183,6 +183,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully implemented Select All with Cmd/Ctrl+A."
+  },
+  {
+    "id": "desktop-020",
+    "plan": ".sys/plans/desktop/desktop-020-tab-key.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
