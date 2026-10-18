@@ -203,10 +203,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-022",
     "plan": ".sys/plans/extensions/extensions-022-list-installed-extensions.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 2,
+    "result": "Implemented list_installed_extensions to discover extensions from disk."
   }
 ]
 ```
