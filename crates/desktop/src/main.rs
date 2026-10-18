@@ -151,14 +151,29 @@ impl ApplicationHandler for App {
                         ..
                     },
                 ..
-            } if c == "s" || c == "S" => {
-                if self.modifiers.control_key() || self.modifiers.super_key() {
-                    if let Some(doc) = &mut self.document {
-                        if let Err(e) = doc.save() {
-                            eprintln!("Failed to save document: {}", e);
-                        }
-                        self.update_title();
+            } if (c == "a" || c == "A")
+                && (self.modifiers.control_key() || self.modifiers.super_key()) =>
+            {
+                self.selection_anchor = Some(0);
+                self.cursor_pos = self.doc_char_count();
+                needs_redraw = true;
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Character(c),
+                        ..
+                    },
+                ..
+            } if (c == "s" || c == "S")
+                && (self.modifiers.control_key() || self.modifiers.super_key()) =>
+            {
+                if let Some(doc) = &mut self.document {
+                    if let Err(e) = doc.save() {
+                        eprintln!("Failed to save document: {}", e);
                     }
+                    self.update_title();
                 }
             }
             WindowEvent::KeyboardInput {
