@@ -211,3 +211,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-020 — completed
+- **Result**: Successfully implemented Tab key handling.
+- **Changed files**: `crates/desktop/src/main.rs`
+- **Checks**: `cargo check`, `cargo test`, `check_scaffold.py`, `validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

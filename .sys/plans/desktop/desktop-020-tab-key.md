@@ -50,3 +50,5 @@
 - **Blocked when**: None.
 
 ## 7. Result
+
+Completed successfully. Tab key now inserts 4 spaces.
