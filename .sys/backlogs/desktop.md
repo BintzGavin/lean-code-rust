@@ -187,10 +187,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "desktop-020",
     "plan": ".sys/plans/desktop/desktop-020-tab-key.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Successfully handled Tab key to insert 4 spaces and updated document properly."
   }
 ]
 ```
