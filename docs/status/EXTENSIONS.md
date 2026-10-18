@@ -207,3 +207,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-024 — completed
+- **Result**: Successfully implemented basic IPC for ExtensionHost.
+- **Changed files**: `crates/extensions/src/host.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
