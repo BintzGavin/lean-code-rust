@@ -199,6 +199,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented uninstall_vsix to remove canonical extension directories."
+  },
+  {
+    "id": "extensions-022",
+    "plan": ".sys/plans/extensions/extensions-022-list-installed-extensions.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
