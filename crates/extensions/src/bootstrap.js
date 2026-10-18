@@ -1,3 +1,21 @@
+const Module = require('module');
+
+const syntheticVscode = {
+    window: {},
+    workspace: {},
+    commands: {},
+    languages: {},
+    env: {}
+};
+
+const originalLoad = Module._load;
+Module._load = function(request, parent, isMain) {
+    if (request === 'vscode') {
+        return syntheticVscode;
+    }
+    return originalLoad.apply(this, arguments);
+};
+
 const readline = require('readline');
 
 const rl = readline.createInterface({
