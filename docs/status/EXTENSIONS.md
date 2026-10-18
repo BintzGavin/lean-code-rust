@@ -223,3 +223,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-026 — completed
+- **Result**: Successfully implemented ExtensionContext subscriptions and disposal via deactivate IPC command.
+- **Changed files**: `crates/extensions/src/bootstrap.js`, `crates/extensions/src/host.rs`
+- **Checks**: `cargo test --manifest-path crates/extensions/Cargo.toml`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
