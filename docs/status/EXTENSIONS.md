@@ -215,3 +215,11 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-025 — completed
+- **Result**: Implemented a Node bootstrap shim to allow ExtensionHost to dynamically load and activate extensions via IPC.
+- **Changed files**: `crates/extensions/src/host.rs`, `crates/extensions/src/bootstrap.js`
+- **Checks**: `cargo test --workspace`, `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
