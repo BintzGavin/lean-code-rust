@@ -231,6 +231,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented a Node bootstrap shim to allow ExtensionHost to dynamically load and activate extensions via IPC."
+  },
+  {
+    "id": "extensions-026",
+    "plan": ".sys/plans/extensions/extensions-026-extension-context-disposal.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
