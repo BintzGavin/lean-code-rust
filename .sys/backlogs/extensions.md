@@ -211,10 +211,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-023",
     "plan": ".sys/plans/extensions/extensions-023-extension-host-process.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Successfully implemented the ExtensionHost process manager for isolated Node hosts."
   }
 ]
 ```
