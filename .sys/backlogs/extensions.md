@@ -239,6 +239,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully implemented ExtensionContext subscriptions and disposal via deactivate IPC command."
+  },
+  {
+    "id": "extensions-027",
+    "plan": ".sys/plans/extensions/extensions-027-inject-vscode-module.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
