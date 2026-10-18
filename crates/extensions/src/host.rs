@@ -1,6 +1,6 @@
-use std::process::{Child, Command, Stdio, ExitStatus};
-use std::path::Path;
 use std::io;
+use std::path::Path;
+use std::process::{Child, Command, ExitStatus, Stdio};
 
 pub struct ExtensionHost {
     child: Child,
