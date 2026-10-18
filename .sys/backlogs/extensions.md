@@ -215,6 +215,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully implemented the ExtensionHost process manager for isolated Node hosts."
+  },
+  {
+    "id": "extensions-024",
+    "plan": ".sys/plans/extensions/extensions-024-node-host-ipc.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
