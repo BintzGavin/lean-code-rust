@@ -167,6 +167,15 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented Home and End keys for jumping to the start and end of lines, including support for Shift-based text selection."
+  },
+  {
+    "id": "desktop-018",
+    "plan": ".sys/plans/desktop/desktop-018-delete-key.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
+
 ```
