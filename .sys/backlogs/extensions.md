@@ -227,10 +227,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-025",
     "plan": ".sys/plans/extensions/extensions-025-node-host-bootstrap.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented a Node bootstrap shim to allow ExtensionHost to dynamically load and activate extensions via IPC."
   }
 ]
 ```

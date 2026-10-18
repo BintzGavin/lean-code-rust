@@ -1,6 +1,6 @@
-use std::io::{self, Write, BufRead, BufReader};
+use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
-use std::process::{Child, Command, ExitStatus, Stdio, ChildStdout};
+use std::process::{Child, ChildStdout, Command, ExitStatus, Stdio};
 
 pub struct ExtensionHost {
     child: Child,
@@ -16,10 +16,16 @@ impl ExtensionHost {
             .stderr(Stdio::piped())
             .spawn()?;
 
-        let stdout = child.stdout.take().ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Could not capture stdout"))?;
+        let stdout = child
+            .stdout
+            .take()
+            .ok_or_else(|| io::Error::new(io::ErrorKind::Other, "Could not capture stdout"))?;
         let stdout_reader = BufReader::new(stdout);
 
-        Ok(Self { child, stdout_reader })
+        Ok(Self {
+            child,
+            stdout_reader,
+        })
     }
 
     pub fn send_message(&mut self, message: &str) -> io::Result<()> {
@@ -28,7 +34,10 @@ impl ExtensionHost {
             stdin.flush()?;
             Ok(())
         } else {
-            Err(io::Error::new(io::ErrorKind::Other, "Could not access stdin"))
+            Err(io::Error::new(
+                io::ErrorKind::Other,
+                "Could not access stdin",
+            ))
         }
     }
 
@@ -36,7 +45,10 @@ impl ExtensionHost {
         let mut line = String::new();
         let bytes_read = self.stdout_reader.read_line(&mut line)?;
         if bytes_read == 0 {
-            return Err(io::Error::new(io::ErrorKind::UnexpectedEof, "Stream closed"));
+            return Err(io::Error::new(
+                io::ErrorKind::UnexpectedEof,
+                "Stream closed",
+            ));
         }
         if line.ends_with('\n') {
             line.pop();
@@ -85,7 +97,9 @@ mod tests {
     #[test]
     fn test_ipc_communication() {
         let mut file = NamedTempFile::new().unwrap();
-        writeln!(file, r#"
+        writeln!(
+            file,
+            r#"
             const readline = require('readline');
             const rl = readline.createInterface({{
                 input: process.stdin,
@@ -95,14 +109,64 @@ mod tests {
             rl.on('line', (line) => {{
                 console.log("echo: " + line);
             }});
-        "#).unwrap();
+        "#
+        )
+        .unwrap();
 
         let mut host = ExtensionHost::spawn(file.path()).expect("Failed to spawn node");
 
-        host.send_message("hello ipc").expect("Failed to send message");
+        host.send_message("hello ipc")
+            .expect("Failed to send message");
 
         let reply = host.read_message().expect("Failed to read message");
         assert_eq!(reply, "echo: hello ipc");
+
+        host.kill().expect("Failed to kill node");
+    }
+
+    #[test]
+    fn test_bootstrap_activation() {
+        let bootstrap_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("src")
+            .join("bootstrap.js");
+
+        let mut ext_file = NamedTempFile::new().unwrap();
+        writeln!(
+            ext_file,
+            r#"
+            exports.activate = function() {{
+                console.log("activate was called");
+            }};
+        "#
+        )
+        .unwrap();
+
+        let mut host = ExtensionHost::spawn(&bootstrap_path).expect("Failed to spawn node");
+
+        let msg = serde_json::json!({
+            "type": "activate",
+            "path": ext_file.path()
+        });
+
+        host.send_message(&msg.to_string())
+            .expect("Failed to send message");
+
+        let mut success = false;
+        for _ in 0..10 {
+            if let Ok(reply) = host.read_message() {
+                if reply.starts_with('{') {
+                    let json: serde_json::Value = serde_json::from_str(&reply).unwrap();
+                    if json["type"] == "activate_success" {
+                        success = true;
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+
+        assert!(success);
 
         host.kill().expect("Failed to kill node");
     }
