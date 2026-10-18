@@ -57,3 +57,4 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: None.
 
 ## 7. Result
+- Implemented basic Inter-Process Communication (IPC) for `ExtensionHost`. We added a `BufReader` around `stdout` to process messages sequentially line-by-line. Exposed `send_message` and `read_message` to interact with the spawned node process. Added an integration test `test_ipc_communication` that proves sending and receiving strings between Rust and a spawned JS script works correctly.
