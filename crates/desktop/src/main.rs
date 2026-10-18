@@ -311,6 +311,34 @@ impl ApplicationHandler for App {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::Delete),
+                        ..
+                    },
+                ..
+            } => {
+                if let Some(doc) = &mut self.document {
+                    let char_count = doc.text().chars().count();
+                    if let Some(anchor) = self.selection_anchor {
+                        let start = std::cmp::min(self.cursor_pos, anchor);
+                        let end = std::cmp::max(self.cursor_pos, anchor);
+                        if start < end {
+                            doc.edit_range(start, end, "");
+                            self.cursor_pos = start;
+                        } else if self.cursor_pos < char_count {
+                            doc.edit_range(self.cursor_pos, self.cursor_pos + 1, "");
+                        }
+                        self.selection_anchor = None;
+                    } else if self.cursor_pos < char_count {
+                        doc.edit_range(self.cursor_pos, self.cursor_pos + 1, "");
+                    }
+                    needs_redraw = true;
+                    self.update_title();
+                }
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
                         logical_key: Key::Named(NamedKey::Enter),
                         ..
                     },
