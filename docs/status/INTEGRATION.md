@@ -130,3 +130,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-014 — completed
+- **Result**: Measured memory after 60 seconds.
+- **Changed files**: `tooling/measure_memory.sh`
+- **Checks**: `bash tooling/measure_memory.sh`, `bash tooling/validate_repo.sh`, `python3 tooling/check_scaffold.py --role integration`, `cargo test --workspace`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
