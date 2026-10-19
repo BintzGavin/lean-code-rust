@@ -123,10 +123,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-012",
     "plan": ".sys/plans/integration/integration-012-private-memory-measurement.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Updated measure_memory.sh to report process-tree private memory instead of RSS."
   }
 ]
 ```

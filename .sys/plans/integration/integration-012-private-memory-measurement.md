@@ -54,3 +54,4 @@
 - **Blocked when**: Linux kernel does not expose `smaps` and no standard utility can measure private memory accurately.
 
 ## 7. Result
+- Completed: Updated measure_memory.sh to report process-tree private memory instead of RSS.

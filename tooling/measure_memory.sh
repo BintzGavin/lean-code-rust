@@ -18,18 +18,24 @@ if ! kill -0 $PID 2>/dev/null; then
     exit 1
 fi
 
-# Use pgrep and ps to get the total RSS of the process and its children
+# Use pgrep and smaps to get the total private memory of the process and its children
 PIDS=$(pgrep -P $PID)
 ALL_PIDS="$PID $PIDS"
 
-TOTAL_RSS=0
+TOTAL_PRIVATE=0
 for p in $ALL_PIDS; do
-    RSS=$(ps -o rss= -p $p 2>/dev/null || echo 0)
-    TOTAL_RSS=$((TOTAL_RSS + RSS))
+    if [ -f "/proc/$p/smaps" ]; then
+        PRIVATE=$(awk '/^Private_/ {sum += $2} END {if (sum == "") print 0; else print sum}' "/proc/$p/smaps" 2>/dev/null || echo 0)
+        TOTAL_PRIVATE=$((TOTAL_PRIVATE + PRIVATE))
+    else
+        RSS=$(ps -o rss= -p $p 2>/dev/null || echo 0)
+        TOTAL_PRIVATE=$((TOTAL_PRIVATE + RSS))
+    fi
+
 done
 
 # Convert KB to MB
-TOTAL_MB=$(awk "BEGIN {printf \"%.2f\", $TOTAL_RSS / 1024}")
+TOTAL_MB=$(awk "BEGIN {printf \"%.2f\",  $TOTAL_PRIVATE / 1024}")
 echo "Memory: $TOTAL_MB MB"
 
 # Clean up
