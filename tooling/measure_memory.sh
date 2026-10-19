@@ -11,7 +11,7 @@ xvfb-run -a dist/desktop &
 PID=$!
 
 # Wait for process to settle
-sleep 2
+sleep 60
 
 if ! kill -0 $PID 2>/dev/null; then
     echo "Error: Process $PID crashed."
