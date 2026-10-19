@@ -57,3 +57,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: `desktop` binary cannot be built.
 
 ## 7. Result
+
+Completed: Measured memory after 60 seconds.

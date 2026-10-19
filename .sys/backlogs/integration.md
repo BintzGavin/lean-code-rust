@@ -139,10 +139,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-014",
     "plan": ".sys/plans/integration/integration-014-memory-settle-time.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Measured memory after 60 seconds."
   }
 ]
 ```
