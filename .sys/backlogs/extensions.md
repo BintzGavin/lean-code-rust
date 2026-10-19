@@ -251,10 +251,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-028",
     "plan": ".sys/plans/extensions/extensions-028-node-host-commands.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Implemented vscode.commands.registerCommand and executeCommand in Node host, and added IPC for invoke_command from Rust."
   }
 ]
 ```
