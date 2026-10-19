@@ -131,10 +131,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-013",
     "plan": ".sys/plans/integration/integration-013-cpu-median-measurement.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Modified tooling/measure_cpu.sh to sample over five minutes (300 samples) and calculate the median CPU usage."
   }
 ]
 ```

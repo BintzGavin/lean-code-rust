@@ -57,3 +57,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: `desktop` binary cannot be built.
 
 ## 7. Result
+
+Completed: Modified tooling/measure_cpu.sh to sample over five minutes (300 samples) and calculate the median CPU usage.
