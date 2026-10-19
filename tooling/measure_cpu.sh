@@ -26,8 +26,8 @@ fi
 
 echo "Found desktop process: $DESKTOP_PID"
 
-echo "Sampling CPU for 5 seconds..."
-top -b -n 5 -d 1 -p $DESKTOP_PID > top_output.txt
+echo "Sampling CPU for 300 seconds (5 minutes)..."
+top -b -n 300 -d 1 -p $DESKTOP_PID > top_output.txt
 
 kill $XVFB_PID
 wait $XVFB_PID 2>/dev/null || true
@@ -37,8 +37,8 @@ killall desktop 2>/dev/null || true
 awk -v pid="$DESKTOP_PID" '$1 == pid {print $9}' top_output.txt > cpu_samples.txt
 
 if [ -s cpu_samples.txt ]; then
-    AVG_CPU=$(awk '{ sum += $1; n++ } END { if (n > 0) print sum / n; else print 0 }' cpu_samples.txt)
-    echo "Average Idle CPU usage: $AVG_CPU%"
+    MEDIAN_CPU=$(sort -n cpu_samples.txt | awk '{ arr[NR] = $1 } END { if (NR == 0) { print 0 } else { if (NR % 2 == 1) { print arr[(NR+1)/2] } else { print (arr[NR/2] + arr[(NR/2)+1])/2.0 } } }')
+    echo "Median Idle CPU usage: $MEDIAN_CPU%"
 else
     echo "Could not collect CPU samples."
 fi

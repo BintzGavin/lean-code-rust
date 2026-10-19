@@ -122,3 +122,11 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-013 — completed
+- **Result**: Modified tooling/measure_cpu.sh to sample over five minutes (300 samples) and calculate the median CPU usage.
+- **Changed files**: `tooling/measure_cpu.sh`
+- **Checks**: `bash tooling/measure_cpu.sh`, `python3 tooling/check_scaffold.py --role integration`, `bash tooling/validate_repo.sh`, `cargo test --workspace`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
