@@ -29,6 +29,50 @@ impl Renderer {
         })
     }
 
+    pub fn hit_test(&self, text: &str, target_x: f32, target_y: f32) -> usize {
+        if self.width == 0 || self.height == 0 {
+            return 0;
+        }
+        let scale = Scale::uniform(24.0);
+        let v_metrics = self.font.v_metrics(scale);
+        let line_height = v_metrics.ascent - v_metrics.descent + v_metrics.line_gap;
+
+        let mut y = 20.0 + v_metrics.ascent - self.scroll_y;
+        let mut x = 20.0;
+
+        let mut char_count = 0;
+
+        for c in text.chars() {
+            let advance = if c == '\n' {
+                0.0
+            } else {
+                self.font.glyph(c).scaled(scale).h_metrics().advance_width
+            };
+
+            let line_bottom = y - v_metrics.ascent + line_height;
+
+            if target_y <= line_bottom {
+                // Click is on this line
+                if target_x <= x + (advance / 2.0) {
+                    return char_count;
+                }
+                if c == '\n' {
+                    return char_count;
+                }
+            }
+
+            if c == '\n' {
+                x = 20.0;
+                y += line_height;
+            } else {
+                x += advance;
+            }
+            char_count += 1;
+        }
+
+        char_count
+    }
+
     pub fn resize(&mut self, width: u32, height: u32) {
         self.width = width;
         self.height = height;
