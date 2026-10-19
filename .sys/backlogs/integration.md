@@ -127,6 +127,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Updated measure_memory.sh to report process-tree private memory instead of RSS."
+  },
+  {
+    "id": "integration-013",
+    "plan": ".sys/plans/integration/integration-013-cpu-median-measurement.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
