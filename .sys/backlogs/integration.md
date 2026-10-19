@@ -119,6 +119,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Created measure_cpu.sh script to measure desktop idle CPU usage."
+  },
+  {
+    "id": "integration-012",
+    "plan": ".sys/plans/integration/integration-012-private-memory-measurement.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
