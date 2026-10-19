@@ -255,6 +255,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Implemented vscode.commands.registerCommand and executeCommand in Node host, and added IPC for invoke_command from Rust."
+  },
+  {
+    "id": "extensions-029",
+    "plan": ".sys/plans/extensions/extensions-029-synthetic-vscode-types.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```

@@ -70,11 +70,11 @@
 **Checks:** `cargo test --manifest-path crates/extensions/Cargo.toml`
 **Dependencies:** none
 
-### EXTENSIONS-PLANNER — blocked
-- **Result**: Blocked from planning due to existing ready work order.
-- **Changed files**: crates/extensions/src/manifest.rs
-- **Checks**: None
-- **Dependency**: Existing ready entry extensions-007 in .sys/backlogs/extensions.md
+### EXTENSIONS-PLANNER — completed
+- **Result**: Created work order `extensions-029-synthetic-vscode-types.md` and appended to backlog.
+- **Changed files**: `.sys/backlogs/extensions.md`, `.sys/plans/extensions/extensions-029-synthetic-vscode-types.md`
+- **Checks**: `python3 tooling/check_scaffold.py --role extensions`, `bash tooling/validate_repo.sh`, `cargo fmt --all --check`, `CARGO_BUILD_JOBS=1 cargo test --workspace`
+- **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
 
