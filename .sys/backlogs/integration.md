@@ -143,6 +143,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Measured memory after 60 seconds."
+  },
+  {
+    "id": "integration-015",
+    "plan": ".sys/plans/integration/integration-015-startup-percentiles.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
