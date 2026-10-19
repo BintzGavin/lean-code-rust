@@ -61,3 +61,4 @@
 - **Blocked when**: None.
 
 ## 7. Result
+Successfully implemented mouse click to place cursor.

@@ -219,3 +219,11 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### desktop-022 — completed
+- **Result**: Successfully implemented mouse click to place cursor.
+- **Changed files**: `crates/desktop/src/main.rs`, `crates/desktop/src/render.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`, `bash tooling/validate_repo.sh`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
