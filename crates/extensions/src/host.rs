@@ -395,4 +395,73 @@ mod tests {
 
         host.kill().expect("Failed to kill node");
     }
+
+    #[test]
+    fn test_synthetic_vscode_types() {
+        let bootstrap_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("src")
+            .join("bootstrap.js");
+
+        let mut ext_file = NamedTempFile::new().unwrap();
+        writeln!(
+            ext_file,
+            r#"
+            const vscode = require('vscode');
+            exports.activate = function(context) {{
+                let disposable = vscode.commands.registerCommand('myExtension.testTypes', function() {{
+                    const uri = vscode.Uri.file('/test/path');
+                    const emitter = new vscode.EventEmitter();
+                    let receivedUri = null;
+                    const listenerDisposable = emitter.event(e => {{
+                        receivedUri = e;
+                    }});
+                    emitter.fire(uri);
+                    listenerDisposable.dispose();
+                    emitter.dispose();
+
+                    if (receivedUri && receivedUri.fsPath === '/test/path') {{
+                        return "types_ok";
+                    }}
+                    return "types_fail";
+                }});
+                context.subscriptions.push(disposable);
+            }};
+        "#
+        )
+        .unwrap();
+
+        let mut host = ExtensionHost::spawn(&bootstrap_path).expect("Failed to spawn node");
+
+        let msg_activate = serde_json::json!({
+            "type": "activate",
+            "path": ext_file.path()
+        });
+
+        host.send_message(&msg_activate.to_string())
+            .expect("Failed to send message");
+
+        let mut activate_success = false;
+        for _ in 0..10 {
+            if let Ok(reply) = host.read_message() {
+                if reply.starts_with('{') {
+                    let json: serde_json::Value = serde_json::from_str(&reply).unwrap();
+                    if json["type"] == "activate_success" {
+                        activate_success = true;
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        assert!(activate_success);
+
+        let result = host
+            .invoke_command("myExtension.testTypes", None)
+            .expect("Failed to invoke command");
+
+        assert_eq!(result.as_str().unwrap(), "types_ok");
+
+        host.kill().expect("Failed to kill node");
+    }
 }
