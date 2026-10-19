@@ -3,7 +3,23 @@ const Module = require('module');
 const syntheticVscode = {
     window: {},
     workspace: {},
-    commands: {},
+    commands: {
+        registerCommand(command, callback, thisArg) {
+            commandRegistry.set(command, { callback, thisArg });
+            return {
+                dispose() {
+                    commandRegistry.delete(command);
+                }
+            };
+        },
+        executeCommand(command, ...rest) {
+            const record = commandRegistry.get(command);
+            if (record) {
+                return Promise.resolve(record.callback.apply(record.thisArg, rest));
+            }
+            return Promise.reject(new Error("Command not found: " + command));
+        }
+    },
     languages: {},
     env: {}
 };
@@ -25,6 +41,7 @@ const rl = readline.createInterface({
 });
 
 const activatedExtensions = new Map();
+const commandRegistry = new Map();
 
 rl.on('line', (line) => {
     try {
@@ -94,6 +111,18 @@ rl.on('line', (line) => {
                 }
             } catch (err) {
                 console.log(JSON.stringify({ type: 'deactivate_error', path: msg.path, error: err.toString() }));
+            }
+        } else if (msg.type === 'invoke_command') {
+            const record = commandRegistry.get(msg.command);
+            if (record) {
+                const args = msg.args || [];
+                Promise.resolve(record.callback.apply(record.thisArg, args)).then(result => {
+                    console.log(JSON.stringify({ type: 'command_success', result }));
+                }).catch(err => {
+                    console.log(JSON.stringify({ type: 'command_error', error: err.toString() }));
+                });
+            } else {
+                console.log(JSON.stringify({ type: 'command_error', error: 'Command not found' }));
             }
         } else {
             console.log(JSON.stringify({ type: 'error', error: 'Unknown command type: ' + msg.type }));

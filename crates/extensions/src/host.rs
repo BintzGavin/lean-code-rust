@@ -66,6 +66,44 @@ impl ExtensionHost {
     pub fn wait(&mut self) -> io::Result<ExitStatus> {
         self.child.wait()
     }
+
+    pub fn invoke_command(
+        &mut self,
+        command: &str,
+        args: Option<serde_json::Value>,
+    ) -> io::Result<serde_json::Value> {
+        let msg = serde_json::json!({
+            "type": "invoke_command",
+            "command": command,
+            "args": args.unwrap_or(serde_json::Value::Array(vec![]))
+        });
+        self.send_message(&msg.to_string())?;
+
+        let reply = self.read_message()?;
+        if reply.starts_with('{') {
+            let json: serde_json::Value = serde_json::from_str(&reply)
+                .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+            if json["type"] == "command_success" {
+                Ok(json["result"].clone())
+            } else if json["type"] == "command_error" {
+                Err(io::Error::new(
+                    io::ErrorKind::Other,
+                    json["error"].as_str().unwrap_or("Unknown error"),
+                ))
+            } else {
+                Err(io::Error::new(
+                    io::ErrorKind::InvalidData,
+                    "Unexpected response type",
+                ))
+            }
+        } else {
+            Err(io::Error::new(
+                io::ErrorKind::InvalidData,
+                "Invalid JSON response",
+            ))
+        }
+    }
 }
 
 #[cfg(test)]
@@ -297,6 +335,63 @@ mod tests {
             }
         }
         assert!(activate_success);
+
+        host.kill().expect("Failed to kill node");
+    }
+
+    #[test]
+    fn test_register_and_invoke_command() {
+        let bootstrap_path = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("src")
+            .join("bootstrap.js");
+
+        let mut ext_file = NamedTempFile::new().unwrap();
+        writeln!(
+            ext_file,
+            r#"
+            const vscode = require('vscode');
+            exports.activate = function(context) {{
+                let disposable = vscode.commands.registerCommand('myExtension.sayHello', function(arg1, arg2) {{
+                    return "Hello " + arg1 + " and " + arg2;
+                }});
+                context.subscriptions.push(disposable);
+            }};
+        "#
+        )
+        .unwrap();
+
+        let mut host = ExtensionHost::spawn(&bootstrap_path).expect("Failed to spawn node");
+
+        let msg_activate = serde_json::json!({
+            "type": "activate",
+            "path": ext_file.path()
+        });
+
+        host.send_message(&msg_activate.to_string())
+            .expect("Failed to send message");
+
+        let mut activate_success = false;
+        for _ in 0..10 {
+            if let Ok(reply) = host.read_message() {
+                if reply.starts_with('{') {
+                    let json: serde_json::Value = serde_json::from_str(&reply).unwrap();
+                    if json["type"] == "activate_success" {
+                        activate_success = true;
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+        assert!(activate_success);
+
+        let args = serde_json::json!(["Alice", "Bob"]);
+        let result = host
+            .invoke_command("myExtension.sayHello", Some(args))
+            .expect("Failed to invoke command");
+
+        assert_eq!(result.as_str().unwrap(), "Hello Alice and Bob");
 
         host.kill().expect("Failed to kill node");
     }
