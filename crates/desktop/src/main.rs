@@ -3,7 +3,7 @@ use std::env;
 use std::rc::Rc;
 use winit::{
     application::ApplicationHandler,
-    event::{ElementState, KeyEvent, WindowEvent},
+    event::{ElementState, KeyEvent, MouseButton, WindowEvent},
     event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
     keyboard::{Key, KeyCode, ModifiersState, NamedKey, PhysicalKey},
     window::{Window, WindowId},
@@ -22,6 +22,7 @@ struct App {
     cursor_pos: usize,
     selection_anchor: Option<usize>,
     clipboard: Option<Clipboard>,
+    mouse_pos: (f32, f32),
 }
 
 fn get_line_col(text: &str, cursor_pos: usize) -> (usize, usize) {
@@ -138,6 +139,34 @@ impl ApplicationHandler for App {
                 if let Some(renderer) = &mut self.renderer {
                     let text = self.document.as_ref().map(|d| d.text()).unwrap_or("");
                     renderer.draw(text, self.cursor_pos, self.selection_anchor);
+                }
+            }
+            WindowEvent::CursorMoved { position, .. } => {
+                self.mouse_pos = (position.x as f32, position.y as f32);
+            }
+            WindowEvent::MouseInput {
+                state: ElementState::Pressed,
+                button: MouseButton::Left,
+                ..
+            } => {
+                if let (Some(renderer), Some(doc)) = (&self.renderer, &self.document) {
+                    let clicked_pos =
+                        renderer.hit_test(doc.text(), self.mouse_pos.0, self.mouse_pos.1);
+                    if self.modifiers.shift_key() {
+                        if self.selection_anchor.is_none() {
+                            self.selection_anchor = Some(self.cursor_pos);
+                        }
+                    } else {
+                        self.selection_anchor = None;
+                    }
+                    self.cursor_pos = clicked_pos;
+                    needs_redraw = true;
+                } else if let Some(renderer) = &self.renderer {
+                    // Handle empty doc (no doc loaded)
+                    let clicked_pos = renderer.hit_test("", self.mouse_pos.0, self.mouse_pos.1);
+                    self.cursor_pos = clicked_pos;
+                    self.selection_anchor = None;
+                    needs_redraw = true;
                 }
             }
             WindowEvent::ModifiersChanged(modifiers) => {
