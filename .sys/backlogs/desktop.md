@@ -199,7 +199,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Added scroll_y to Renderer, updating it to follow the cursor vertically."
+  },
+  {
+    "id": "desktop-022",
+    "plan": ".sys/plans/desktop/desktop-022-mouse-click.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
-
 ```
