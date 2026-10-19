@@ -135,6 +135,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Modified tooling/measure_cpu.sh to sample over five minutes (300 samples) and calculate the median CPU usage."
+  },
+  {
+    "id": "integration-014",
+    "plan": ".sys/plans/integration/integration-014-memory-settle-time.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
