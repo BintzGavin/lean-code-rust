@@ -247,6 +247,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 2,
     "result": "Successfully injected synthetic vscode module into Node host."
+  },
+  {
+    "id": "extensions-028",
+    "plan": ".sys/plans/extensions/extensions-028-node-host-commands.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
