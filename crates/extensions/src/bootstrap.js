@@ -1,8 +1,95 @@
 const Module = require('module');
 
+class Disposable {
+    constructor(callOnDispose) {
+        this._callOnDispose = callOnDispose;
+    }
+    dispose() {
+        if (this._callOnDispose) {
+            this._callOnDispose();
+            this._callOnDispose = undefined;
+        }
+    }
+    static from(...disposables) {
+        return new Disposable(() => {
+            for (const disposable of disposables) {
+                if (disposable && typeof disposable.dispose === 'function') {
+                    disposable.dispose();
+                }
+            }
+        });
+    }
+}
+
+class EventEmitter {
+    constructor() {
+        this._listeners = [];
+    }
+    get event() {
+        if (!this._event) {
+            this._event = (listener, thisArgs, disposables) => {
+                const record = { listener, thisArgs };
+                this._listeners.push(record);
+                const disposable = new Disposable(() => {
+                    const index = this._listeners.indexOf(record);
+                    if (index > -1) {
+                        this._listeners.splice(index, 1);
+                    }
+                });
+                if (Array.isArray(disposables)) {
+                    disposables.push(disposable);
+                }
+                return disposable;
+            };
+        }
+        return this._event;
+    }
+    fire(data) {
+        const listeners = this._listeners.slice();
+        for (const record of listeners) {
+            record.listener.call(record.thisArgs, data);
+        }
+    }
+    dispose() {
+        this._listeners = [];
+    }
+}
+
+class Uri {
+    constructor(scheme, authority, path, query, fragment) {
+        this.scheme = scheme || '';
+        this.authority = authority || '';
+        this.path = path || '';
+        this.query = query || '';
+        this.fragment = fragment || '';
+    }
+    get fsPath() {
+        return this.path;
+    }
+    static file(path) {
+        return new Uri('file', '', path, '', '');
+    }
+    static parse(value) {
+        let scheme = '';
+        let path = value || '';
+        const schemeMatch = /^([a-zA-Z][a-zA-Z0-9+.-]*):/.exec(value);
+        if (schemeMatch) {
+            scheme = schemeMatch[1];
+            path = value.substring(schemeMatch[0].length);
+        }
+        if (path.startsWith('//')) {
+            path = path.substring(2);
+        }
+        return new Uri(scheme, '', path, '', '');
+    }
+}
+
 const syntheticVscode = {
     window: {},
     workspace: {},
+    Disposable,
+    EventEmitter,
+    Uri,
     commands: {
         registerCommand(command, callback, thisArg) {
             commandRegistry.set(command, { callback, thisArg });
