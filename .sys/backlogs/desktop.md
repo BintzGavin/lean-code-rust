@@ -207,6 +207,15 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully implemented mouse click to place cursor."
+  },
+  {
+    "id": "desktop-023",
+    "plan": ".sys/plans/desktop/desktop-023-mouse-wheel-scrolling.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
+
 ```
