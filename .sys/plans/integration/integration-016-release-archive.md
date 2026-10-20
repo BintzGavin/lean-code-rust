@@ -58,3 +58,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: The release build fails.
 
 ## 7. Result
+
+Completed: Created a compressed release archive desktop.tar.gz and reported its size.

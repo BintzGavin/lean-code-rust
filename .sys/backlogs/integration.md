@@ -155,10 +155,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-016",
     "plan": ".sys/plans/integration/integration-016-release-archive.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Created a compressed release archive desktop.tar.gz and reported its size."
   }
 ]
 ```
