@@ -154,3 +154,10 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+### integration-016 — completed
+- **Result**: Created a compressed release archive `desktop.tar.gz` and reported its size.
+- **Changed files**: `packaging/build_release.sh`
+- **Checks**: `bash packaging/build_release.sh`, `python3 tooling/check_scaffold.py --role integration`, `python3 -m unittest discover -s tooling -p 'test_*.py'`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
