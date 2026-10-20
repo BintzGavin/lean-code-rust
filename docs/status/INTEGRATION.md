@@ -138,3 +138,19 @@ Work orders have been completed.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### integration-015 — completed
+- **Result**: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples.
+- **Changed files**: `tooling/measure_startup.sh`
+- **Checks**: `bash tooling/measure_startup.sh`, `python3 tooling/check_scaffold.py --role integration`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
+### integration-015 — completed
+- **Result**: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples.
+- **Changed files**: `tooling/measure_startup.sh`
+- **Checks**: `bash tooling/measure_startup.sh`, `python3 tooling/check_scaffold.py --role integration`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None

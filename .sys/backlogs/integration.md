@@ -147,10 +147,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "integration-015",
     "plan": ".sys/plans/integration/integration-015-startup-percentiles.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples."
   }
 ]
 ```
