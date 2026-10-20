@@ -151,6 +151,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples."
+  },
+  {
+    "id": "integration-016",
+    "plan": ".sys/plans/integration/integration-016-release-archive.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
