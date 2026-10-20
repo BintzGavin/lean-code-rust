@@ -3,7 +3,7 @@ use std::env;
 use std::rc::Rc;
 use winit::{
     application::ApplicationHandler,
-    event::{ElementState, KeyEvent, MouseButton, WindowEvent},
+    event::{ElementState, KeyEvent, MouseButton, MouseScrollDelta, WindowEvent},
     event_loop::{ActiveEventLoop, ControlFlow, EventLoop},
     keyboard::{Key, KeyCode, ModifiersState, NamedKey, PhysicalKey},
     window::{Window, WindowId},
@@ -635,7 +635,18 @@ impl ApplicationHandler for App {
                 }
                 needs_redraw = true;
             }
+            WindowEvent::MouseWheel { delta, .. } => {
+                if let Some(renderer) = &mut self.renderer {
+                    let scroll_amount = match delta {
+                        MouseScrollDelta::LineDelta(_, y) => y * 20.0,
+                        MouseScrollDelta::PixelDelta(pos) => pos.y as f32,
+                    };
+                    renderer.scroll(scroll_amount);
+                    needs_redraw = true;
+                }
+            }
             _ => (),
+
         }
 
         if needs_redraw {

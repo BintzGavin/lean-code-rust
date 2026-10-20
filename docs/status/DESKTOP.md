@@ -220,6 +220,14 @@ No work order has been completed yet.
 - **Question**: None
 - **Resolution evidence**: None
 
+### desktop-023 — completed
+- **Result**: Successfully handled MouseWheel event to scroll viewport vertically.
+- **Changed files**: `crates/desktop/src/main.rs`, `crates/desktop/src/render.rs`
+- **Checks**: `cargo check --manifest-path crates/desktop/Cargo.toml`, `cargo test --manifest-path crates/desktop/Cargo.toml`, `python3 tooling/check_scaffold.py --role desktop`
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
 ### desktop-022 — completed
 - **Result**: Successfully implemented mouse click to place cursor.
 - **Changed files**: `crates/desktop/src/main.rs`, `crates/desktop/src/render.rs`

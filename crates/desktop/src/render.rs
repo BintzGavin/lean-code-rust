@@ -73,6 +73,11 @@ impl Renderer {
         char_count
     }
 
+
+    pub fn scroll(&mut self, delta: f32) {
+        self.scroll_y = (self.scroll_y - delta).max(0.0);
+    }
+
     pub fn resize(&mut self, width: u32, height: u32) {
         self.width = width;
         self.height = height;
