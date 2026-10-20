@@ -57,3 +57,7 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: `desktop` binary cannot be built.
 
 ## 7. Result
+
+Completed: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples.
+
+Completed: Measured and reported startup time p50 and p95 across 20 warm and 5 cold samples.
