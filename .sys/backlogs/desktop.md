@@ -215,6 +215,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Successfully handled MouseWheel event to scroll viewport vertically."
+  },
+  {
+    "id": "desktop-024",
+    "plan": ".sys/plans/desktop/desktop-024-page-up-down.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
