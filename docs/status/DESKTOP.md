@@ -235,3 +235,12 @@ No work order has been completed yet.
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+## desktop-024
+**Outcome**: Completed
+**Changed Files**:
+- crates/desktop/src/main.rs
+- crates/desktop/src/render.rs
+**Checks Run**:
+- `CARGO_BUILD_JOBS=1 cargo test --manifest-path crates/desktop/Cargo.toml`
+- `python3 tooling/check_scaffold.py --role desktop`
