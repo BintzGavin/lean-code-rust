@@ -654,8 +654,8 @@ impl ApplicationHandler for App {
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);
-                    // Approximate a page as 20 lines
-                    let new_line = line.saturating_sub(20);
+                    let page_lines = self.renderer.as_ref().map(|r| r.lines_per_page()).unwrap_or(20);
+                    let new_line = line.saturating_sub(page_lines.saturating_sub(1).max(1));
                     self.cursor_pos = get_pos_from_line_col(text, new_line, col);
                 }
                 needs_redraw = true;
@@ -679,8 +679,8 @@ impl ApplicationHandler for App {
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);
-                    // Approximate a page as 20 lines
-                    let new_line = line + 20;
+                    let page_lines = self.renderer.as_ref().map(|r| r.lines_per_page()).unwrap_or(20);
+                    let new_line = line + page_lines.saturating_sub(1).max(1);
                     self.cursor_pos = get_pos_from_line_col(text, new_line, col);
                 }
                 needs_redraw = true;

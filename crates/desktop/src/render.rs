@@ -74,6 +74,18 @@ impl Renderer {
     }
 
 
+
+    pub fn lines_per_page(&self) -> usize {
+        let scale = Scale::uniform(24.0);
+        let v_metrics = self.font.v_metrics(scale);
+        let line_height = v_metrics.ascent - v_metrics.descent + v_metrics.line_gap;
+        if line_height > 0.0 {
+            (self.height as f32 / line_height).floor() as usize
+        } else {
+            20
+        }
+    }
+
     pub fn scroll(&mut self, delta: f32) {
         self.scroll_y = (self.scroll_y - delta).max(0.0);
     }
