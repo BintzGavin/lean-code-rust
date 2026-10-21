@@ -635,6 +635,56 @@ impl ApplicationHandler for App {
                 }
                 needs_redraw = true;
             }
+                        WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::PageUp),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, col) = get_line_col(text, self.cursor_pos);
+                    // Approximate a page as 20 lines
+                    let new_line = line.saturating_sub(20);
+                    self.cursor_pos = get_pos_from_line_col(text, new_line, col);
+                }
+                needs_redraw = true;
+            }
+            WindowEvent::KeyboardInput {
+                event:
+                    KeyEvent {
+                        state: ElementState::Pressed,
+                        logical_key: Key::Named(NamedKey::PageDown),
+                        ..
+                    },
+                ..
+            } => {
+                if self.modifiers.shift_key() {
+                    if self.selection_anchor.is_none() {
+                        self.selection_anchor = Some(self.cursor_pos);
+                    }
+                } else {
+                    self.selection_anchor = None;
+                }
+                if let Some(doc) = &self.document {
+                    let text = doc.text();
+                    let (line, col) = get_line_col(text, self.cursor_pos);
+                    // Approximate a page as 20 lines
+                    let new_line = line + 20;
+                    self.cursor_pos = get_pos_from_line_col(text, new_line, col);
+                }
+                needs_redraw = true;
+            }
             WindowEvent::MouseWheel { delta, .. } => {
                 if let Some(renderer) = &mut self.renderer {
                     let scroll_amount = match delta {
