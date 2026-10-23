@@ -167,9 +167,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "Completed setting up the GitHub Theme qualification fixture. Downloaded VSIX and created an offline project for testing."
+  },
+  {
+    "id": "quality-018",
+    "plan": ".sys/plans/quality/quality-018-b0001-open-edit-save.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
-
-
-
 ```
