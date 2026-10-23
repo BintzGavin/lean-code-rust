@@ -164,3 +164,8 @@
 - `tests/compatibility/rust_analyzer/package.json`
 - `tests/compatibility/rust_analyzer/test.sh`
 **Checks Run:** `bash tests/compatibility/rust_analyzer/test.sh`, `python3 tooling/check_scaffold.py --role quality`
+
+## quality-018
+- **Outcome**: Completed
+- **Changed files**: tests/reference/b0001_open_edit_save/test.sh
+- **Checks run**: bash tests/reference/b0001_open_edit_save/test.sh, python3 tooling/check_scaffold.py --role quality

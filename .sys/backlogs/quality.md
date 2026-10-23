@@ -171,10 +171,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "quality-018",
     "plan": ".sys/plans/quality/quality-018-b0001-open-edit-save.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "Completed implementation of B-0001 Open, edit, save text document. Verified test script runs successfully."
   }
 ]
 ```

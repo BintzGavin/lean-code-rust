@@ -57,3 +57,5 @@ The role-local backlog owns lifecycle state. The planner freezes Sections 1–6 
 - **Blocked when**: N/A.
 
 ## 7. Result
+
+Completed implementation of test script for B-0001. Test verifies that opening, replacing text and saving behaves as expected using lean-editor-core. Verified script executes correctly and scaffold check passes.
