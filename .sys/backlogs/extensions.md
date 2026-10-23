@@ -259,10 +259,10 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
   {
     "id": "extensions-029",
     "plan": ".sys/plans/extensions/extensions-029-synthetic-vscode-types.md",
-    "state": "ready",
+    "state": "completed",
     "claim": "none",
-    "attempt": 0,
-    "result": ""
+    "attempt": 1,
+    "result": "The core vscode types (Disposable, EventEmitter, Uri) were already implemented in bootstrap.js and tested in host.rs. Verified everything works correctly."
   }
 ]
 ```
