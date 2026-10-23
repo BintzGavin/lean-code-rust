@@ -239,3 +239,19 @@
 - **Dependency**: None
 - **Question**: None
 - **Resolution evidence**: None
+
+### extensions-028 — completed
+- **Result**: Implemented vscode.commands.registerCommand and executeCommand.
+- **Changed files**: crates/extensions/src/bootstrap.js, crates/extensions/src/host.rs
+- **Checks**: cargo test
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
+
+### extensions-029 — completed
+- **Result**: The core vscode types (Disposable, EventEmitter, Uri) were already implemented and tested. Verified everything works correctly.
+- **Changed files**: None
+- **Checks**: cargo test
+- **Dependency**: None
+- **Question**: None
+- **Resolution evidence**: None
