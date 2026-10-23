@@ -263,6 +263,14 @@ The following JSON block is the sole entry data; do not duplicate lifecycle stat
     "claim": "none",
     "attempt": 1,
     "result": "The core vscode types (Disposable, EventEmitter, Uri) were already implemented in bootstrap.js and tested in host.rs. Verified everything works correctly."
+  },
+  {
+    "id": "extensions-030",
+    "plan": ".sys/plans/extensions/extensions-030-synthetic-workspace.md",
+    "state": "ready",
+    "claim": "none",
+    "attempt": 0,
+    "result": ""
   }
 ]
 ```
