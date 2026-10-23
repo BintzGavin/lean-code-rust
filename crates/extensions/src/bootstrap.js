@@ -85,8 +85,17 @@ class Uri {
 }
 
 const syntheticVscode = {
-    window: {},
-    workspace: {},
+    window: {
+        activeTextEditor: undefined,
+        visibleTextEditors: [],
+    },
+    workspace: {
+        workspaceFolders: undefined,
+        name: undefined,
+        textDocuments: [],
+        workspaceFile: undefined,
+        getConfiguration: () => ({ get: () => undefined }),
+    },
     Disposable,
     EventEmitter,
     Uri,
