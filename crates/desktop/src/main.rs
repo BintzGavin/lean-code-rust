@@ -635,7 +635,7 @@ impl ApplicationHandler for App {
                 }
                 needs_redraw = true;
             }
-                        WindowEvent::KeyboardInput {
+            WindowEvent::KeyboardInput {
                 event:
                     KeyEvent {
                         state: ElementState::Pressed,
@@ -654,7 +654,11 @@ impl ApplicationHandler for App {
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);
-                    let page_lines = self.renderer.as_ref().map(|r| r.lines_per_page()).unwrap_or(20);
+                    let page_lines = self
+                        .renderer
+                        .as_ref()
+                        .map(|r| r.lines_per_page())
+                        .unwrap_or(20);
                     let new_line = line.saturating_sub(page_lines.saturating_sub(1).max(1));
                     self.cursor_pos = get_pos_from_line_col(text, new_line, col);
                 }
@@ -679,7 +683,11 @@ impl ApplicationHandler for App {
                 if let Some(doc) = &self.document {
                     let text = doc.text();
                     let (line, col) = get_line_col(text, self.cursor_pos);
-                    let page_lines = self.renderer.as_ref().map(|r| r.lines_per_page()).unwrap_or(20);
+                    let page_lines = self
+                        .renderer
+                        .as_ref()
+                        .map(|r| r.lines_per_page())
+                        .unwrap_or(20);
                     let new_line = line + page_lines.saturating_sub(1).max(1);
                     self.cursor_pos = get_pos_from_line_col(text, new_line, col);
                 }
@@ -696,7 +704,6 @@ impl ApplicationHandler for App {
                 }
             }
             _ => (),
-
         }
 
         if needs_redraw {

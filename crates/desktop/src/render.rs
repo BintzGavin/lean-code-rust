@@ -73,8 +73,6 @@ impl Renderer {
         char_count
     }
 
-
-
     pub fn lines_per_page(&self) -> usize {
         let scale = Scale::uniform(24.0);
         let v_metrics = self.font.v_metrics(scale);
